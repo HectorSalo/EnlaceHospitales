@@ -4,39 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.databinding.FragmentHomeBinding
+import com.skysam.enlacehospitales.ui.common.DatePicker
+import com.skysam.enlacehospitales.ui.common.OnClickDateTime
+import com.skysam.enlacehospitales.ui.common.TimePicker
+import java.util.Calendar
+import java.util.Date
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnClickDateTime {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var dateSelected: Date
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.textHome.setOnClickListener {
+            val datePicker = DatePicker(requireActivity(), this)
+            datePicker.viewCalendar()
         }
-        return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun dateSelected(date: Date) {
+        dateSelected = date
+        val timePicker = TimePicker(requireActivity(), this)
+        timePicker.viewTimer()
+    }
+
+    override fun timeSelected(hour: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
+        calendar .time = dateSelected
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        dateSelected = calendar.time
+        binding.textHome.text = Utils.convertDateTimeToString(dateSelected)
     }
 }
