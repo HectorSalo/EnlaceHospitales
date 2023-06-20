@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "955716269664",
+    "project_id": "enlacehospitales-c8111",
+    "storage_bucket": "enlacehospitales-c8111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955716269664:android:b99aba11612466d655f505",
+        "android_client_info": {
+          "package_name": "com.skysam.enlacehospitales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955716269664-jo3aug3metsh6sfu8c1q8edvr5at0olq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK0xcX5Hp3q7mn3ptrrwJbxmJ5umkbi40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955716269664-jo3aug3metsh6sfu8c1q8edvr5at0olq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

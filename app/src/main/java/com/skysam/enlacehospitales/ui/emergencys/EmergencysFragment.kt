@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.skysam.enlacehospitales.databinding.FragmentDashboardBinding
+import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
 
 class EmergencysFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentEmergencysBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class EmergencysFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val emergencys =
-            ViewModelProvider(this).get(Emergencys::class.java)
+        val emergencysViewModel =
+            ViewModelProvider(this).get(EmergencysViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentEmergencysBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        emergencys.text.observe(viewLifecycleOwner) {
+        emergencysViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

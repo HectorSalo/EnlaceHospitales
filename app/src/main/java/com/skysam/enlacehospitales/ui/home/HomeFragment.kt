@@ -1,5 +1,6 @@
 package com.skysam.enlacehospitales.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.databinding.FragmentHomeBinding
-import com.skysam.enlacehospitales.ui.common.DatePicker
 import com.skysam.enlacehospitales.ui.common.OnClickDateTime
 import com.skysam.enlacehospitales.ui.common.TimePicker
+import com.skysam.enlacehospitales.ui.hlc.NewHlcActivity
 import java.util.Calendar
 import java.util.Date
 
@@ -30,9 +31,8 @@ class HomeFragment : Fragment(), OnClickDateTime {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textHome.setOnClickListener {
-            val datePicker = DatePicker(requireActivity(), this)
-            datePicker.viewCalendar()
+        binding.button.setOnClickListener {
+            startActivity(Intent(requireContext(), NewHlcActivity::class.java))
         }
     }
 

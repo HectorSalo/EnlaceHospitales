@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="steps">
+        <item>Notificación</item>
+        <item>Paciente</item>
+        <item>Hospital</item>
+        <item>Problema</item>
+        <!--<item>Resultados</item>
+        <item>Médico</item>
+        <item>Tratamiento</item>
+        <item>Alternativas</item>
+        <item>Artículos</item>
+        <item>Consultas</item>
+        <item>Traslado</item>
+        <item>Seguimiento</item>-->
+    </string-array>
+
+</resources>

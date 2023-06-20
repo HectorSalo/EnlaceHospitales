@@ -3,6 +3,7 @@
     <string name="title_home">Inicio</string>
     <string name="title_emergencys">Emergencias</string>
     <string name="title_profile">Perfil</string>
+    <string name="title_hlc">HLC</string>
 
     <!--General-->
     <string name="text_list_empty">No hay ítems para mostrar</string>
