@@ -15,7 +15,7 @@
         android:id="@+id/navigation_emergency"
         android:name="com.skysam.enlacehospitales.ui.emergencys.EmergencysFragment"
         android:label="@string/title_emergencys"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_emergencys" />
 
     <fragment
         android:id="@+id/navigation_profile"
