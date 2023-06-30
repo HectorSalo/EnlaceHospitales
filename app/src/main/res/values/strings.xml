@@ -16,19 +16,63 @@
     <string name="text_update">Actualizar</string>
     <string name="text_delete">Eliminar</string>
     <string name="text_confirm">Confirmar</string>
+    <string name="text_next">Siguiente</string>
+    <string name="text_back">Atrás</string>
     <string name="msg_exit_dialog">Se perderá toda la información.\n¿Desea salir?</string>
     <string name="msg_delete_dialog">¿Desea eliminar esta información?</string>
 
     <!--Errors-->
-    <string name="error_field_empty">Campo vacío</string>
+    <string name="error_field_empty">Campo obligatorio</string>
 
     <!--Dialogs-->
     <string name="title_timepicker_dialog">Seleccione la hora</string>
     <string name="title_confirmation_dialog">Confirmar</string>
+
+    <!--New Emergency Notification-->
+    <string name="date_call">Fecha/Hora de la llamada</string>
+    <string name="person_call">Persona que llamó</string>
+    <string name="information_person_call">Información de contacto de quien llamó</string>
+    <string name="patient_needs_help">Paciente solicita ayuda del HLC</string>
+    <string name="relationship_patient">Relación con el paciente</string>
+    <!--New Emergency Patient-->
+    <string name="patient_name">Nombre del paciente</string>
+    <string name="text_male">Masculino</string>
+    <string name="text_female">Femenino</string>
+    <string name="text_age">Edad</string>
+    <string name="text_comments">Comentarios</string>
+    <string name="question_baptized_male">¿Bautizado?</string>
+    <string name="question_baptized_female">¿Bautizada?</string>
+    <string name="question_reputation">¿Buena reputación?</string>
+    <string name="question_dpa">¿DPA completa?</string>
+    <string name="text_label_patient_child">Marque la casilla si el paciente es un <b>menor o recién nacido</b></string>
+    <string name="text_name_father">Nombre del padre</string>
+    <string name="text_name_mother">Nombre de la madre</string>
+    <string name="text_comments_child">Comentarios (situación familiar, reputación, etc.)</string>
+    <string name="text_label_born">Recién nacidos</string>
+    <string name="text_weight_born">Peso al nacer</string>
+    <string name="text_age_born">Edad gestacional (semanas)</string>
+    <string name="text_date_born">Fecha de nacimiento</string>
+    <string name="text_label_apgar">Puntuación APGAR</string>
+    <string name="text_apgar_init">En el nacimiento</string>
+    <string name="text_apgar_five_minutes">A los 5 minutos</string>
+    <!--New Emergency Hospital-->
+    <string name="text_hospital_name">Nombre del hospital</string>
+    <string name="text_room">Habitación</string>
+    <string name="text_phone">Teléfono</string>
+    <string name="text_congregation">Congregación</string>
+    <string name="text_name_olders_contacted">Nombre de los ancianos contactados</string>
+    <string name="text_phone_olders_contacted">Teléfonos de contacto de los ancianos</string>
+    <!--New Emergency Problem-->
+    <string name="text_label_problem"><b>Problema específico: </b>(¿Cuál es el diagnóstico médico?
+        ¿Por qué se plantea la cuestión de la sangre: hemorragia, prematuro, anemia, etc.?)\n
+        <b>Historial médico relevante: </b>(¿A qué se debe la crisis actual?)</string>
+
 
     <!-- Notification Preferences -->
     <string name="notification_key">notification</string>
     <string name="notification_header">Notificaciones</string>
     <string name="notification_title">Notificaciones activas</string>
     <string name="notification_title_off">Notificaciones apagadas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

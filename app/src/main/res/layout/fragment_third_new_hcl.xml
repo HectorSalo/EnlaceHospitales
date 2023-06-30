@@ -18,6 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.4"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -34,7 +43,7 @@
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/person_call"
+                    android:hint="@string/text_hospital_name"
                     android:inputType="textCapWords"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -44,22 +53,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_relationship"
+                android:id="@+id/tf_room"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guide_line"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tf_name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_relationship"
+                    android:id="@+id/et_room"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/relationship_patient"
+                    android:hint="@string/text_room"
                     android:inputType="textCapSentences"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +78,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_information"
+                android:id="@+id/tf_phone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -77,14 +86,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tf_relationship">
+                app:layout_constraintStart_toStartOf="@+id/guide_line"
+                app:layout_constraintTop_toBottomOf="@+id/tf_name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_information"
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/information_person_call"
+                    android:hint="@string/text_phone"
                     android:inputType="textCapSentences"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +103,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_date"
+                android:id="@+id/tf_congregation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -103,32 +112,70 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tf_information">
+                app:layout_constraintTop_toBottomOf="@+id/tf_room">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_date"
+                    android:id="@+id/et_congregation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:drawableStart="@drawable/ic_date_24"
-                    android:focusable="false"
-                    android:hint="@string/date_call"
+                    android:hint="@string/text_congregation"
+                    android:inputType="textCapSentences"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_name_olders"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/patient_needs_help"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tf_date" />
+                app:layout_constraintTop_toBottomOf="@+id/tf_congregation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name_olders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_name_olders_contacted"
+                    android:inputType="textCapSentences"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_phone_olders"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tf_name_olders">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone_olders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_phone_olders_contacted"
+                    android:inputType="textCapSentences"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

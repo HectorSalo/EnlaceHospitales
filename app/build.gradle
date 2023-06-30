@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.skysam.enlacehospitales'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.skysam.enlacehospitales"
         minSdk 25
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "0.0.0"
 
@@ -64,7 +64,7 @@ dependencies {
     //Librerias externas
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'com.android.volley:volley:1.2.1'
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.github.shuhart:stepview:1.5.1'
 
     //Preferences

@@ -5,20 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.databinding.FragmentSecondNewHlcBinding
+import com.skysam.enlacehospitales.databinding.FragmentThirdNewHclBinding
 
-class SecondFragment : Fragment() {
+class ThirdFragment : Fragment() {
 
-    private var _binding: FragmentSecondNewHlcBinding? = null
+    private var _binding: FragmentThirdNewHclBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSecondNewHlcBinding.inflate(inflater, container, false)
+        _binding = FragmentThirdNewHclBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,4 +30,5 @@ class SecondFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
