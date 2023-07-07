@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".common.EnlaceHospitales"
         android:allowBackup="true"
@@ -14,11 +16,7 @@
         android:theme="@style/Theme.EnlaceHospitales"
         tools:targetApi="31" >
         <activity
-            android:name=".ui.hlc.NewHlcActivity"
-            android:exported="false"
-            android:theme="@style/Theme.EnlaceHospitales" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.InitActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.hlc.NewHlcActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EnlaceHospitales" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

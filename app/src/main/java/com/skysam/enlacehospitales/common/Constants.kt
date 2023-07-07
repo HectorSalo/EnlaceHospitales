@@ -3,6 +3,13 @@ package com.skysam.enlacehospitales.common
 object Constants {
     const val DEMO = "debug"
     const val RELEASE = "release"
+    const val USERS = "users"
+    const val USERS_DEMO = "usersDemo"
+
+    const val NAME = "name"
+    const val EMAIL = "email"
+    const val PHONE = "phone"
+    const val ROLE = "role"
 
     const val PREFERENCES = "preferences"
     const val PREFERENCES_NOTIFICATION = "notification"
