@@ -63,7 +63,8 @@
     <string name="text_name_olders_contacted">Nombre de los ancianos contactados</string>
     <string name="text_phone_olders_contacted">Teléfonos de contacto de los ancianos</string>
     <!--New Emergency Problem-->
-    <string name="text_label_problem"><b>Problema específico: </b>(¿Cuál es el diagnóstico médico?
+    <string name="text_info_problem">Información sobre el problema médico</string>
+    <string name="text_helper_problem"><b>Problema específico: </b>(¿Cuál es el diagnóstico médico?
         ¿Por qué se plantea la cuestión de la sangre: hemorragia, prematuro, anemia, etc.?)\n
         <b>Historial médico relevante: </b>(¿A qué se debe la crisis actual?)</string>
 

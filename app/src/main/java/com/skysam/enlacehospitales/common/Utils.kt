@@ -1,15 +1,10 @@
 package com.skysam.enlacehospitales.common
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.os.BuildCompat
 import com.skysam.enlacehospitales.BuildConfig
-import java.text.Collator
 import java.text.DateFormat
-import java.util.Collections
-import java.util.Comparator
 import java.util.Date
 import java.util.Locale
 
@@ -33,8 +28,11 @@ object Utils {
         return String.format(Locale.GERMANY, "%,.2f", valueD)
     }
 
-    fun convertDateTimeToString(value: Date): String {
+    fun convertDateToString(value: Date): String {
         return DateFormat.getDateInstance().format(value)
+    }
+    fun convertDateTimeToString(value: Date): String {
+        return DateFormat.getDateTimeInstance().format(value)
     }
 
     /*fun organizedAlphabeticList(list: MutableList<Booking>): MutableList<Booking> {

@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.databinding.FragmentSecondNewHlcBinding
+import com.skysam.enlacehospitales.databinding.FragmentFourthNewHclBinding
 import com.skysam.enlacehospitales.databinding.FragmentThirdNewHclBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class ThirdFragment : Fragment() {
+class FourthFragment : Fragment() {
 
-    private var _binding: FragmentThirdNewHclBinding? = null
+    private var _binding: FragmentFourthNewHclBinding? = null
     private val binding get() = _binding!!
     private val viewModel: NewHclViewModel by activityViewModels()
 
@@ -21,22 +23,28 @@ class ThirdFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentThirdNewHclBinding.inflate(inflater, container, false)
+        _binding = FragmentFourthNewHclBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tfInformation.helperText = getText(R.string.text_helper_problem)
+
         binding.btnNext.setOnClickListener {
-            viewModel.goStep(3)
-            findNavController().navigate(R.id.action_thirdFragment_to_fourthFragment)
+            viewModel.goStep(4)
+            lifecycleScope.launch {
+                delay(500)
+                requireActivity().finish()
+            }
         }
+
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
