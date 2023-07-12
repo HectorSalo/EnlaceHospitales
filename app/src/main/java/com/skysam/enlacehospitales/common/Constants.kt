@@ -8,8 +8,12 @@ object Constants {
 
     const val NAME = "name"
     const val EMAIL = "email"
+    const val CONGREGATION = "congregation"
     const val PHONE = "phone"
     const val ROLE = "role"
+
+    const val ROLE_ADMIN = "admin"
+    const val ROLE_VISITOR = "visitor"
 
     const val PREFERENCES = "preferences"
     const val PREFERENCES_NOTIFICATION = "notification"

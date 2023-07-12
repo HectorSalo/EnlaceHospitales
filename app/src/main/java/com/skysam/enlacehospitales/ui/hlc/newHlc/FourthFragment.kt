@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.hlc
+package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.databinding.FragmentFourthNewHclBinding
-import com.skysam.enlacehospitales.databinding.FragmentThirdNewHclBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

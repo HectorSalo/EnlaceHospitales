@@ -10,7 +10,7 @@ import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.databinding.FragmentHomeBinding
 import com.skysam.enlacehospitales.ui.common.OnClickDateTime
 import com.skysam.enlacehospitales.ui.common.TimePicker
-import com.skysam.enlacehospitales.ui.hlc.NewHlcActivity
+import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 import java.util.Calendar
 import java.util.Date
 

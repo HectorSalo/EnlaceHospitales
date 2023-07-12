@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.hlc
+package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import android.os.Bundle
 import androidx.activity.viewModels

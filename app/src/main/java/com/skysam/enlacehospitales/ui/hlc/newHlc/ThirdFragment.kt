@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.hlc
+package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.databinding.FragmentSecondNewHlcBinding
 import com.skysam.enlacehospitales.databinding.FragmentThirdNewHclBinding
 
 class ThirdFragment : Fragment() {

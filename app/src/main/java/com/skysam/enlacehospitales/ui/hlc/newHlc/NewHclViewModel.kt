@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.hlc
+package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

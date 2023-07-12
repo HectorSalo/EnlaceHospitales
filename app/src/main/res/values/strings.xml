@@ -23,10 +23,21 @@
 
     <!--Errors-->
     <string name="error_field_empty">Campo obligatorio</string>
+    <string name="error_email_invalid">Correo con formato inválido</string>
 
     <!--Dialogs-->
     <string name="title_timepicker_dialog">Seleccione la hora</string>
     <string name="title_confirmation_dialog">Confirmar</string>
+
+    <!--Login-->
+    <string name="text_email">Correo electrónico</string>
+    <string name="text_password">Contraseña</string>
+    <string name="text_login">Iniciar Sesión</string>
+
+    <!--Main-->
+    <string name="welcome_mornning">Buenos días, \n%1$s</string>
+    <string name="welcome_afternoon">Buenas tardes, \n%1$s</string>
+    <string name="welcome_night">Buenas noches, \n%1$s</string>
 
     <!--New Emergency Notification-->
     <string name="date_call">Fecha/Hora de la llamada</string>
