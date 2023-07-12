@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.firebase.ui.auth.AuthUI
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.repositories.Auth
@@ -20,6 +21,7 @@ class InitActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
 
         if (Auth.getCurrentUser() == null) {
             startAuthUI()
