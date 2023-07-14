@@ -1,21 +1,18 @@
 package com.skysam.enlacehospitales.ui.login
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.common.EnlaceHospitales
+import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.User
 import com.skysam.enlacehospitales.databinding.ActivityLoginBinding
-import com.skysam.enlacehospitales.databinding.ActivityMainBinding
 import com.skysam.enlacehospitales.repositories.Auth
 import com.skysam.enlacehospitales.ui.MainActivity
 
@@ -23,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private var users = listOf<User>()
-
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,32 +70,20 @@ class LoginActivity : AppCompatActivity() {
         binding.tfUser.isEnabled = false
         binding.tfPassword.isEnabled = false
         Utils.close(binding.root)
-
-        var isValid = false
-        for (user in users) {
-            if (email == user.email && password == user.password) {
-               isValid = true
-                break
+        viewModel.initSession(email, password).observe(this) {
+            if (it == null || it != Constants.RESULT_OK) {
+                binding.progressBar.visibility = View.GONE
+                binding.buttonLogin.isEnabled = true
+                binding.tfUser.isEnabled = true
+                binding.tfPassword.isEnabled = true
+                Snackbar.make(binding.root, it ?: "Error", Snackbar.LENGTH_SHORT).show()
+            } else {
+                goActivity()
             }
         }
-
-        if (isValid) {
-            goActivity()
-        }
-        //viewModel.initSession(email, password)
     }
 
     private fun goActivity() {
-        val test = User(
-            "",
-            "Hector Chirinos",
-            "a@b.com",
-            "1234",
-            "El Paraiso",
-            "0000-000.00.00",
-            "admin"
-        )
-        EnlaceHospitales.EnlaceHospitales.setCurrentUser(test)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

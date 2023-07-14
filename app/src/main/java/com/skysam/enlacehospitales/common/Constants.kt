@@ -6,6 +6,7 @@ object Constants {
     const val USERS = "users"
     const val USERS_DEMO = "usersDemo"
 
+    const val RESULT_OK = "ok"
     const val NAME = "name"
     const val EMAIL = "email"
     const val CONGREGATION = "congregation"
