@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.User
 import com.skysam.enlacehospitales.databinding.ActivityLoginBinding
-import com.skysam.enlacehospitales.repositories.Auth
 import com.skysam.enlacehospitales.ui.MainActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -34,17 +33,14 @@ class LoginActivity : AppCompatActivity() {
         binding.etUser.doAfterTextChanged { binding.tfUser.error = null }
         binding.etPassword.doAfterTextChanged { binding.tfPassword.error = null }
 
-        binding.buttonLogin.setOnClickListener { validateUser() }
+        binding.buttonLogin.setOnClickListener { validateFields() }
+
+
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (Auth.getCurrentUser() != null) {
-            goActivity()
-        }
-    }
-
-    private fun validateUser() {
+    private fun validateFields() {
         binding.tfUser.error = null
         binding.tfPassword.error = null
 
@@ -65,26 +61,51 @@ class LoginActivity : AppCompatActivity() {
             binding.etPassword.requestFocus()
             return
         }
-        binding.progressBar.visibility = View.VISIBLE
-        binding.buttonLogin.isEnabled = false
-        binding.tfUser.isEnabled = false
-        binding.tfPassword.isEnabled = false
+        showComponents(false)
         Utils.close(binding.root)
-        viewModel.initSession(email, password).observe(this) {
-            if (it == null || it != Constants.RESULT_OK) {
-                binding.progressBar.visibility = View.GONE
-                binding.buttonLogin.isEnabled = true
-                binding.tfUser.isEnabled = true
-                binding.tfPassword.isEnabled = true
-                Snackbar.make(binding.root, it ?: "Error", Snackbar.LENGTH_SHORT).show()
-            } else {
-                goActivity()
-            }
-        }
+
+        validateUser(email, password)
     }
 
-    private fun goActivity() {
+    private fun validateUser(email: String, password: String) {
+        var exists = false
+        var currentUser: User? = null
+        for (user in users) {
+            if (user.email == email) {
+                exists = true
+                currentUser = user
+                break
+            }
+        }
+        if (!exists) {
+            Snackbar.make(binding.root, getString(R.string.error_user_not_found), Snackbar.LENGTH_SHORT).show()
+            showComponents(true)
+            return
+        }
+
+        if (currentUser?.password != password) {
+            Snackbar.make(binding.root, getString(R.string.error_password_incorrect), Snackbar.LENGTH_SHORT).show()
+            showComponents(true)
+            return
+        }
+
+        goActivity(currentUser)
+    }
+
+    private fun goActivity(user: User) {
+        EnlaceHospitales.EnlaceHospitales.setCurrentUser(user)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    private fun showComponents(status: Boolean) {
+        if (status) {
+            binding.progressBar.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.VISIBLE
+        }
+        binding.buttonLogin.isEnabled = status
+        binding.tfUser.isEnabled = status
+        binding.tfPassword.isEnabled = status
     }
 }

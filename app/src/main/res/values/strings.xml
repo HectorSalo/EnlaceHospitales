@@ -24,6 +24,8 @@
     <!--Errors-->
     <string name="error_field_empty">Campo obligatorio</string>
     <string name="error_email_invalid">Correo con formato inválido</string>
+    <string name="error_user_not_found">Usuario no encontrado. Por favor, verifique correo electrónico</string>
+    <string name="error_password_incorrect">Contraseña inválida</string>
 
     <!--Dialogs-->
     <string name="title_timepicker_dialog">Seleccione la hora</string>

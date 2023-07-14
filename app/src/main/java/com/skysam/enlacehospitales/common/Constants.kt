@@ -20,6 +20,9 @@ object Constants {
     const val PREFERENCES_NOTIFICATION = "notification"
     const val TOPIC_ALL_NOTIFICATIONS_DEMO = "allNotificationsDemo"
     const val TOPIC_ALL_NOTIFICATIONS = "allNotifications"
+    const val PREFERENCES_BIOMETRIC = "biometric"
+    const val PASSWORD = "password"
+
 
     const val METHOD = "method"
     const val TITLE = "title"

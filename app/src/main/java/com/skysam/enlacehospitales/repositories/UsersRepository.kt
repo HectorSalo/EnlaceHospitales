@@ -37,6 +37,7 @@ object UsersRepository {
                             doc.id,
                             doc.getString(Constants.NAME)!!,
                             doc.getString(Constants.EMAIL)!!,
+                            doc.getString(Constants.PASSWORD)!!,
                             doc.getString(Constants.CONGREGATION)!!,
                             doc.getString(Constants.PHONE)!!,
                             doc.getString(Constants.ROLE)!!
