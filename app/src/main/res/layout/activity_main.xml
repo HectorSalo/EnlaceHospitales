@@ -14,16 +14,18 @@
         android:layout_marginTop="16dp"
         android:text="@string/fui_welcome_back_email_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextAppearance.Material3.TitleMedium"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_welcome">
 
@@ -39,7 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fui_name_hint"
-                android:textAppearance="?attr/textAppearanceTitleMedium" />
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tv_congregation"
@@ -48,7 +51,8 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/text_congregation"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +67,8 @@
                     android:layout_weight="2"
                     android:text="@string/text_phone"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="18sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_copy"
@@ -103,10 +108,13 @@
         app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_h"
+            android:id="@+id/card_hlc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,9 +125,9 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
-                    app:srcCompat="@drawable/media"
+                    app:srcCompat="@drawable/ic_profile_24"
                     android:scaleType="centerCrop"
-                    android:contentDescription="@string/content_description_media"
+                    android:contentDescription="@string/app_name"
                     />
 
                 <LinearLayout
@@ -132,58 +140,31 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/title"
+                        android:text="@string/title_large_hlc"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/secondary_text"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/supporting_text"
+                        android:text="@string/title_hlc"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:attr/textColorSecondary"
                         />
 
                 </LinearLayout>
-
-                <!-- Buttons -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal">
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/action_1"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/action_2"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                </LinearLayout>
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card"
+            android:id="@+id/card_gvp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,9 +175,9 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
-                    app:srcCompat="@drawable/media"
+                    app:srcCompat="@drawable/ic_groups_24"
                     android:scaleType="centerCrop"
-                    android:contentDescription="@string/content_description_media"
+                    android:contentDescription="@string/app_name"
                     />
 
                 <LinearLayout
@@ -209,49 +190,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/title"
+                        android:text="@string/title_large_gvp"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/secondary_text"
+                        android:text="@string/title_gvp"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:attr/textColorSecondary"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/supporting_text"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary"
-                        />
-
                 </LinearLayout>
-
-                <!-- Buttons -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal">
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/action_1"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/action_2"
-                        style="?attr/borderlessButtonStyle"
-                        />
-                </LinearLayout>
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>

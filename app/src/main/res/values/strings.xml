@@ -4,6 +4,7 @@
     <string name="title_emergencys">Emergencias</string>
     <string name="title_profile">Perfil</string>
     <string name="title_hlc">HLC</string>
+    <string name="title_gvp">GVP</string>
 
     <!--General-->
     <string name="text_list_empty">No hay ítems para mostrar</string>
@@ -20,6 +21,8 @@
     <string name="text_back">Atrás</string>
     <string name="msg_exit_dialog">Se perderá toda la información.\n¿Desea salir?</string>
     <string name="msg_delete_dialog">¿Desea eliminar esta información?</string>
+    <string name="title_large_hlc">Comité de Enlace con los Hospitales</string>
+    <string name="title_large_gvp">Grupo de Visita a Pacientes</string>
 
     <!--Errors-->
     <string name="error_field_empty">Campo obligatorio</string>

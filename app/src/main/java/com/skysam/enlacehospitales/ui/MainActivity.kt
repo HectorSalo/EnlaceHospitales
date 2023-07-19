@@ -1,10 +1,12 @@
 package com.skysam.enlacehospitales.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.databinding.ActivityMainBinding
+import com.skysam.enlacehospitales.ui.hlc.HlcActivity
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -26,5 +28,15 @@ class MainActivity : AppCompatActivity() {
             in 19..23 -> getString(R.string.welcome_night, user.name)
             else -> "Bienvenido"
         }*/
+
+        binding.cardHlc.setOnClickListener {
+            startActivity(Intent(this, HlcActivity::class.java))
+            finish()
+        }
+
+        binding.cardGvp.setOnClickListener {
+            startActivity(Intent(this, HlcActivity::class.java))
+            finish()
+        }
     }
 }
