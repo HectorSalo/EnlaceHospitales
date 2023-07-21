@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.home
+package com.skysam.enlacehospitales.ui.hlc.members
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.databinding.FragmentHomeBinding
+import com.skysam.enlacehospitales.databinding.FragmentMembersHlcBinding
 import com.skysam.enlacehospitales.ui.common.OnClickDateTime
 import com.skysam.enlacehospitales.ui.common.TimePicker
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 import java.util.Calendar
 import java.util.Date
 
-class HomeFragment : Fragment(), OnClickDateTime {
+class MembersHlcFragment : Fragment(), OnClickDateTime {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentMembersHlcBinding? = null
     private val binding get() = _binding!!
     private lateinit var dateSelected: Date
 
@@ -25,7 +25,7 @@ class HomeFragment : Fragment(), OnClickDateTime {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentMembersHlcBinding.inflate(inflater, container, false)
         return binding.root
     }
 

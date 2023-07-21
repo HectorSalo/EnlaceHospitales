@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.emergencys
+package com.skysam.enlacehospitales.ui.hlc.emergencys
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

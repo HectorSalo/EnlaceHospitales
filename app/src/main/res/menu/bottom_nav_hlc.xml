@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_emergency"
+        android:icon="@drawable/ic_emergency_24"
+        android:title="@string/title_emergencys" />
+
+    <item
+        android:id="@+id/navigation_members"
+        android:icon="@drawable/ic_groups_24"
+        android:title="@string/text_members" />
+
+</menu>

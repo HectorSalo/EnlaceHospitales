@@ -14,5 +14,9 @@
     <color name="green_granny_smith_apple">#8FDB97</color>
     <color name="green_haze">#00B33C</color>
 
+    <color name="green_atlantis">#A7D129</color>
+    <color name="blue_orient">#00587A</color>
+    <color name="blue_egg">#00C7B3</color>
+
     <color name="gray">#727774</color>
 </resources>

@@ -23,4 +23,18 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
         <item name="postSplashScreenTheme">@style/Theme.EnlaceHospitales</item>
     </style>
+
+    <style name="Theme.GrupoVisitas" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_atlantis</item>
+        <item name="colorPrimaryVariant">@color/blue_egg</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_orient</item>
+        <item name="colorSecondaryVariant">@color/blue_egg</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue_egg</item>
+        <!-- Customize your theme here. -->
+    </style>
 </resources>

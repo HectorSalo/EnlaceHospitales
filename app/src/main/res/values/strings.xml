@@ -23,6 +23,7 @@
     <string name="msg_delete_dialog">¿Desea eliminar esta información?</string>
     <string name="title_large_hlc">Comité de Enlace con los Hospitales</string>
     <string name="title_large_gvp">Grupo de Visita a Pacientes</string>
+    <string name="text_members">Miembros</string>
 
     <!--Errors-->
     <string name="error_field_empty">Campo obligatorio</string>
@@ -43,8 +44,10 @@
     <string name="welcome_mornning">Buenos días, \n%1$s</string>
     <string name="welcome_afternoon">Buenas tardes, \n%1$s</string>
     <string name="welcome_night">Buenas noches, \n%1$s</string>
+    <string name="text_guard">Guardia</string>
 
     <!--New Emergency Notification-->
+    <string name="text_new_emergency">Nueva Emergencia</string>
     <string name="date_call">Fecha/Hora de la llamada</string>
     <string name="person_call">Persona que llamó</string>
     <string name="information_person_call">Información de contacto de quien llamó</string>

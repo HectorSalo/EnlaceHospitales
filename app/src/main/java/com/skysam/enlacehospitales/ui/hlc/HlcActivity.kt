@@ -1,13 +1,12 @@
 package com.skysam.enlacehospitales.ui.hlc
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.databinding.ActivityHlcBinding
-import com.skysam.enlacehospitales.databinding.ActivityMainBinding
 
 class HlcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHlcBinding
@@ -17,6 +16,9 @@ class HlcActivity : AppCompatActivity() {
 
         binding = ActivityHlcBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val navView: BottomNavigationView = binding.navView
 

@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.github.shuhart:stepview:1.5.1'
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
     //Preferences
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
