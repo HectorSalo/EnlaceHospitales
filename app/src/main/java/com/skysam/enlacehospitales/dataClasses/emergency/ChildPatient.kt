@@ -7,5 +7,5 @@ data class ChildPatient(
     var isMotherBaptized: Boolean,
     var comments: String,
     var isBorn: Boolean,
-    var bornPatient: BornPatient
+    var bornPatient: BornPatient?
 )

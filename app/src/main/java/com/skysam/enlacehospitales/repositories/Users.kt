@@ -11,7 +11,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-object UsersRepository {
+object Users {
     private val PATH_USERS = when(Utils.getEnviroment()) {
         Constants.DEMO -> Constants.USERS_DEMO
         Constants.RELEASE -> Constants.USERS

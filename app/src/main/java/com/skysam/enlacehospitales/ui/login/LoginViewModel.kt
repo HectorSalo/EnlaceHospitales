@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.skysam.enlacehospitales.dataClasses.User
-import com.skysam.enlacehospitales.repositories.UsersRepository
+import com.skysam.enlacehospitales.repositories.Users
 
 class LoginViewModel: ViewModel() {
-    val users: LiveData<List<User>> = UsersRepository.getUsers().asLiveData()
+    val users: LiveData<List<User>> = Users.getUsers().asLiveData()
 }

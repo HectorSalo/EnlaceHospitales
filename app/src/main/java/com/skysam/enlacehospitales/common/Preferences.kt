@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 object Preferences {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(Constants.PREFERENCES)
 
-    private val PREFERENCE_NOTIFICATION = booleanPreferencesKey(Constants.PREFERENCES_NOTIFICATION)
+    private val PREFERENCE_NOTIFICATION = booleanPreferencesKey(Constants.NOTIFICATION)
     private val PREFERENCE_BIOMETRIC = booleanPreferencesKey(Constants.PREFERENCES_BIOMETRIC)
     private val PREFERENCE_EMAIL = stringPreferencesKey(Constants.EMAIL)
     private val PREFERENCE_PASSWORD = stringPreferencesKey(Constants.PASSWORD)

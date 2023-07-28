@@ -7,5 +7,5 @@ data class AnalisysLab(
     var hemoglobina: Double,
     var plaquetas: Double,
     var hematocrito: Double,
-    var otros: String
+    var others: String
 )

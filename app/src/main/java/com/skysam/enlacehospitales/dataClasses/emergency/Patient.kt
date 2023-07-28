@@ -11,8 +11,8 @@ data class Patient(
     var room: String,
     var phone: String,
     var congregation: String,
-    var namesOldersContacted: MutableList<String>,
-    var phonesOldersContacted: MutableList<String>,
+    var namesOldersContacted: List<String>,
+    var phonesOldersContacted: List<String>,
     var isChild: Boolean,
-    var childPatient: ChildPatient
+    var childPatient: ChildPatient?
 )
