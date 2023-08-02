@@ -7,37 +7,77 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.BiometricAvailable
+import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.dataClasses.User
+import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.databinding.ActivityLoginBinding
-import com.skysam.enlacehospitales.ui.MainActivity
+import com.skysam.enlacehospitales.ui.main.MainActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private var users = listOf<User>()
+    private var members = listOf<Member>()
     private val viewModel: LoginViewModel by viewModels()
+    private var isBiometricAvailable = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.users.observe(this) {
-            if (it.isNotEmpty()) users = it
-        }
+        isBiometricAvailable = BiometricAvailable.biometricIsAvailable()
 
-        binding.etUser.doAfterTextChanged { binding.tfUser.error = null }
-        binding.etPassword.doAfterTextChanged { binding.tfPassword.error = null }
+        initViews()
 
         binding.buttonLogin.setOnClickListener { validateFields() }
+    }
 
+    private fun initViews() {
+        var email = Constants.EMAIL
+        var password = Constants.PASSWORD
+        var isBiometric = false
 
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        viewModel.members.observe(this) {
+            if (it.isNotEmpty()) members = it
+        }
+        viewModel.emailLast.observe(this) {
+            email = it
+            if (it.isNotEmpty()) binding.etUser.setText(email)
+        }
+        viewModel.passwordLast.observe(this) {
+            password = it
+        }
+        viewModel.biometricEnable.observe(this) {
+            if (isBiometricAvailable) {
+                isBiometric = it
+                binding.cbBiometric.isChecked = isBiometric
+            } else {
+                binding.btnBiometric.visibility = View.GONE
+                binding.cbBiometric.visibility = View.GONE
+            }
+        }
+
+        binding.etUser.doAfterTextChanged {
+            binding.tfUser.error = null
+
+            if (isBiometricAvailable) {
+                if (email != binding.etUser.text.toString()) {
+                    binding.cbBiometric.visibility = View.VISIBLE
+                    binding.btnBiometric.visibility = View.GONE
+                } else {
+                    binding.cbBiometric.visibility = View.GONE
+                    if (isBiometric) binding.btnBiometric.visibility = View.VISIBLE
+                    else binding.btnBiometric.visibility = View.GONE
+                }
+            }
+        }
+        binding.etPassword.doAfterTextChanged { binding.tfPassword.error = null }
     }
 
     private fun validateFields() {
@@ -69,11 +109,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateUser(email: String, password: String) {
         var exists = false
-        var currentUser: User? = null
-        for (user in users) {
+        var currentMember: Member? = null
+        for (user in members) {
             if (user.email == email) {
                 exists = true
-                currentUser = user
+                currentMember = user
                 break
             }
         }
@@ -83,17 +123,21 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        if (currentUser?.password != password) {
+        if (currentMember?.password != password) {
             Snackbar.make(binding.root, getString(R.string.error_password_incorrect), Snackbar.LENGTH_SHORT).show()
             showComponents(true)
             return
         }
 
-        goActivity(currentUser)
+        lifecycleScope.launch {
+            viewModel.saveLastSession(email, password)
+            viewModel.activeBiometric(binding.cbBiometric.isChecked)
+        }
+        goActivity(currentMember)
     }
 
-    private fun goActivity(user: User) {
-        EnlaceHospitales.EnlaceHospitales.setCurrentUser(user)
+    private fun goActivity(member: Member) {
+        EnlaceHospitales.EnlaceHospitales.setCurrentUser(member)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

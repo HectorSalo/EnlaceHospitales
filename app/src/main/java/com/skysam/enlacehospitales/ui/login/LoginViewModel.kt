@@ -3,9 +3,22 @@ package com.skysam.enlacehospitales.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.skysam.enlacehospitales.dataClasses.User
-import com.skysam.enlacehospitales.repositories.Users
+import com.skysam.enlacehospitales.common.Preferences
+import com.skysam.enlacehospitales.dataClasses.Member
+import com.skysam.enlacehospitales.repositories.Members
 
 class LoginViewModel: ViewModel() {
-    val users: LiveData<List<User>> = Users.getUsers().asLiveData()
+    val members: LiveData<List<Member>> = Members.getMembers().asLiveData()
+    val emailLast: LiveData<String> = Preferences.getEmailSaved().asLiveData()
+    val passwordLast: LiveData<String> = Preferences.getPasswordSaved().asLiveData()
+    val biometricEnable: LiveData<Boolean> = Preferences.isBiometricEnable().asLiveData()
+
+    suspend fun saveLastSession(email: String, password: String) {
+        Preferences.setEmailSaved(email)
+        Preferences.setPasswordSaved(password)
+    }
+
+    suspend fun activeBiometric(isEnable: Boolean) {
+        Preferences.setBiometric(isEnable)
+    }
 }

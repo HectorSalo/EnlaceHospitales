@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 
 class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
@@ -22,7 +24,12 @@ class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: EmergencyAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val item = emergencys[position]
+        holder.patient.text = item.patient.name
+        holder.dateCreated.text = Utils.convertDateTimeToString(item.notification.dateCall)
+        holder.dateUpdated.text = Utils.convertDateToString(item.dateUdpdated)
+        holder.hospital.text = item.patient.nameHospital
+        holder.status.text = item.status
     }
 
     override fun getItemCount(): Int = emergencys.size
@@ -34,5 +41,12 @@ class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
         val hospital: TextView = view.findViewById(R.id.tv_hospital)
         val status: TextView = view.findViewById(R.id.tv_status)
         val card: MaterialCardView = view.findViewById(R.id.card)
+    }
+
+    fun updateList(newList: List<Emergency>) {
+        val diffUtil = EmergencyDiffUtil(emergencys, newList)
+        val result = DiffUtil.calculateDiff(diffUtil)
+        emergencys = newList
+        result.dispatchUpdatesTo(this)
     }
 }

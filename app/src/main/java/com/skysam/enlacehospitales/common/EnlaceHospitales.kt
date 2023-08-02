@@ -7,13 +7,13 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import com.skysam.enlacehospitales.dataClasses.User
+import com.skysam.enlacehospitales.dataClasses.Member
 
 class EnlaceHospitales: Application() {
     companion object {
         private lateinit var mRequestQueue: RequestQueue
         lateinit var appContext: Context
-        private var currentUser: User? = null
+        private var currentMember: Member? = null
     }
 
     override fun onCreate() {
@@ -39,10 +39,10 @@ class EnlaceHospitales: Application() {
             getmRequestQueue().add(request)
         }
 
-        fun setCurrentUser(user: User) {
-            currentUser = user
+        fun setCurrentUser(member: Member) {
+            currentMember = member
         }
 
-        fun getCurrentUser(): User = currentUser!!
+        fun getCurrentUser(): Member = currentMember!!
     }
 }

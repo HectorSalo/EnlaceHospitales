@@ -3,11 +3,10 @@ package com.skysam.enlacehospitales.ui.hlc.emergencys
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
+import com.skysam.enlacehospitales.repositories.Emergencys
 
 class EmergencysViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+    val emergencys: LiveData<List<Emergency>> = Emergencys.getEmergencys().asLiveData()
 }

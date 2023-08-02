@@ -1,6 +1,6 @@
 package com.skysam.enlacehospitales.dataClasses.emergency
 
 data class ArticlesMedical(
-    var articles: MutableList<String>,
+    var articles: String,
     var isDoctorColaborated: Boolean
 )

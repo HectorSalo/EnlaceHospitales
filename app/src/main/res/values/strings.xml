@@ -39,12 +39,16 @@
     <string name="text_email">Correo electrónico</string>
     <string name="text_password">Contraseña</string>
     <string name="text_login">Iniciar Sesión</string>
+    <string name="text_init_biometric">Iniciar con Huella</string>
 
     <!--Main-->
     <string name="welcome_mornning">Buenos días, \n%1$s</string>
     <string name="welcome_afternoon">Buenas tardes, \n%1$s</string>
     <string name="welcome_night">Buenas noches, \n%1$s</string>
     <string name="text_guard">Guardia</string>
+
+    <!--New Member-->
+    <string name="text_new_member">Nuevo Miembro</string>
 
     <!--New Emergency Notification-->
     <string name="text_new_emergency">Nueva Emergencia</string>

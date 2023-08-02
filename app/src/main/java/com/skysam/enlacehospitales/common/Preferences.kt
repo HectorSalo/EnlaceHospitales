@@ -34,7 +34,7 @@ object Preferences {
     fun isBiometricEnable(): Flow<Boolean> {
         return EnlaceHospitales.EnlaceHospitales.getContext().dataStore.data
             .map {
-                it[PREFERENCE_BIOMETRIC] ?: true
+                it[PREFERENCE_BIOMETRIC] ?: false
             }
     }
 

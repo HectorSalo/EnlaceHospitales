@@ -6,23 +6,23 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.dataClasses.User
+import com.skysam.enlacehospitales.dataClasses.Member
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-object Users {
+object Members {
     private val PATH_USERS = when(Utils.getEnviroment()) {
-        Constants.DEMO -> Constants.USERS_DEMO
-        Constants.RELEASE -> Constants.USERS
-        else -> Constants.USERS
+        Constants.DEMO -> Constants.MEMBERS_DEMO
+        Constants.RELEASE -> Constants.MEMBERS
+        else -> Constants.MEMBERS
     }
 
     private fun getInstance(): CollectionReference {
         return FirebaseFirestore.getInstance().collection(PATH_USERS)
     }
 
-    fun getUsers(): Flow<List<User>> {
+    fun getMembers(): Flow<List<Member>> {
         return callbackFlow {
             val request = getInstance()
                 .addSnapshotListener { value, error ->
@@ -31,20 +31,23 @@ object Users {
                         return@addSnapshotListener
                     }
 
-                    val users = mutableListOf<User>()
+                    val members = mutableListOf<Member>()
                     for (doc in value!!) {
-                        val user = User(
+                        val member = Member(
                             doc.id,
                             doc.getString(Constants.NAME)!!,
                             doc.getString(Constants.EMAIL)!!,
                             doc.getString(Constants.PASSWORD)!!,
                             doc.getString(Constants.CONGREGATION)!!,
                             doc.getString(Constants.PHONE)!!,
-                            doc.getString(Constants.ROLE)!!
+                            doc.getString(Constants.ROLE)!!,
+                            doc.getDate(Constants.DATE)!!,
+                            doc.getString(Constants.STATUS)!!,
+                            doc.getBoolean(Constants.GUARD)!!
                         )
-                        users.add(user)
+                        members.add(member)
                     }
-                    trySend(users)
+                    trySend(members)
                 }
             awaitClose { request.remove() }
         }

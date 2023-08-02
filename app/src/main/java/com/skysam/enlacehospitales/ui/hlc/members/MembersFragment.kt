@@ -1,4 +1,4 @@
-package com.skysam.enlacehospitales.ui.hlc.emergencys
+package com.skysam.enlacehospitales.ui.hlc.members
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,33 +13,34 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
+import com.skysam.enlacehospitales.databinding.FragmentMembersHlcBinding
 import com.skysam.enlacehospitales.ui.main.MainActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 
-class EmergencysFragment : Fragment(), MenuProvider {
+class MembersFragment : Fragment(), MenuProvider {
 
-    private var _binding: FragmentEmergencysBinding? = null
+    private var _binding: FragmentMembersHlcBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: EmergencysViewModel by activityViewModels()
-    private lateinit var emergencyAdapter: EmergencyAdapter
+    private val viewModel: MembersViewModel by activityViewModels()
+    private lateinit var memberAdapter: MemberAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEmergencysBinding.inflate(inflater, container, false)
+        _binding = FragmentMembersHlcBinding.inflate(inflater, container, false)
         requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        emergencyAdapter = EmergencyAdapter()
-        binding.rvEmergencys.apply {
+
+        memberAdapter = MemberAdapter()
+        binding.rvMembers.apply {
             setHasFixedSize(true)
-            adapter = emergencyAdapter
+            adapter = memberAdapter
         }
 
         binding.fab.setOnClickListener { startActivity(Intent(requireContext(), NewHlcActivity::class.java)) }
@@ -56,7 +57,7 @@ class EmergencysFragment : Fragment(), MenuProvider {
         menuInflater.inflate(R.menu.top_app_bar_hlc, menu)
     }
 
-    override fun onMenuItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
         android.R.id.home -> {
             getOut()
             true
@@ -65,14 +66,14 @@ class EmergencysFragment : Fragment(), MenuProvider {
     }
 
     private fun susbcribeObservers() {
-        viewModel.emergencys.observe(viewLifecycleOwner) {
+        viewModel.members.observe(viewLifecycleOwner) {
             if (_binding != null) {
                 if (it.isEmpty()) {
-                    emergencyAdapter.updateList(it)
-                    binding.rvEmergencys.visibility = View.GONE
+                    memberAdapter.updateList(it)
+                    binding.rvMembers.visibility = View.GONE
                     binding.tvListEmpty.visibility = View.VISIBLE
                 } else {
-                    binding.rvEmergencys.visibility = View.VISIBLE
+                    binding.rvMembers.visibility = View.VISIBLE
                     binding.tvListEmpty.visibility = View.GONE
                 }
                 binding.progressBar.visibility = View.GONE
