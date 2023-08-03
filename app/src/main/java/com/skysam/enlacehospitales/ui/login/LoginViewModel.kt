@@ -13,12 +13,9 @@ class LoginViewModel: ViewModel() {
     val passwordLast: LiveData<String> = Preferences.getPasswordSaved().asLiveData()
     val biometricEnable: LiveData<Boolean> = Preferences.isBiometricEnable().asLiveData()
 
-    suspend fun saveLastSession(email: String, password: String) {
+    suspend fun saveLastSession(email: String, password: String, isEnable: Boolean) {
         Preferences.setEmailSaved(email)
         Preferences.setPasswordSaved(password)
-    }
-
-    suspend fun activeBiometric(isEnable: Boolean) {
         Preferences.setBiometric(isEnable)
     }
 }
