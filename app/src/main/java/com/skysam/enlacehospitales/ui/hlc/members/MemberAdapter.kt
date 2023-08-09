@@ -12,7 +12,7 @@ import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.Member
 
-class MemberAdapter: RecyclerView.Adapter<MemberAdapter.ViewHolder>() {
+class MemberAdapter(private val onClickMember: OnClickMember): RecyclerView.Adapter<MemberAdapter.ViewHolder>() {
     lateinit var context: Context
     private var members = listOf<Member>()
 
@@ -28,7 +28,10 @@ class MemberAdapter: RecyclerView.Adapter<MemberAdapter.ViewHolder>() {
         holder.member.text = item.name
         holder.dateCreated.text = Utils.convertDateToString(item.dateCreated)
         holder.phone.text = item.phone
-        holder.status.text = item.status
+        holder.status.text = if (item.isActive) context.getString(R.string.text_active)
+        else context.getString(R.string.text_inactive)
+
+        holder.card.setOnClickListener { onClickMember.view(item) }
     }
 
     override fun getItemCount(): Int = members.size

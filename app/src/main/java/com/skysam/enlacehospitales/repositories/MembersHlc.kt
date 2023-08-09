@@ -11,11 +11,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-object Members {
+object MembersHlc {
     private val PATH_USERS = when(Utils.getEnviroment()) {
-        Constants.DEMO -> Constants.MEMBERS_DEMO
-        Constants.RELEASE -> Constants.MEMBERS
-        else -> Constants.MEMBERS
+        Constants.DEMO -> Constants.MEMBERS_HLC_DEMO
+        Constants.RELEASE -> Constants.MEMBERS_HLC
+        else -> Constants.MEMBERS_HLC
     }
 
     private fun getInstance(): CollectionReference {
@@ -33,6 +33,10 @@ object Members {
 
                     val members = mutableListOf<Member>()
                     for (doc in value!!) {
+                        var list: List<Int>
+                        @Suppress("UNCHECKED_CAST")
+                        list = doc.data.getValue(Constants.GUARD) as List<Int>
+
                         val member = Member(
                             doc.id,
                             doc.getString(Constants.NAME)!!,
@@ -42,14 +46,52 @@ object Members {
                             doc.getString(Constants.PHONE)!!,
                             doc.getString(Constants.ROLE)!!,
                             doc.getDate(Constants.DATE)!!,
-                            doc.getString(Constants.STATUS)!!,
-                            doc.getBoolean(Constants.GUARD)!!
+                            doc.getBoolean(Constants.IS_ACTIVE)!!,
+                            list
                         )
                         members.add(member)
                     }
-                    trySend(members)
+                    trySend(Utils.organizedAlphabeticListMembers(members))
                 }
             awaitClose { request.remove() }
         }
+    }
+
+    fun saveMember(member: Member) {
+        val data = hashMapOf(
+            Constants.NAME to member.name,
+            Constants.EMAIL to member.email,
+            Constants.PASSWORD to member.password,
+            Constants.CONGREGATION to member.congregation,
+            Constants.PHONE to member.phone,
+            Constants.ROLE to member.role,
+            Constants.DATE to member.dateCreated,
+            Constants.IS_ACTIVE to member.isActive,
+            Constants.GUARD to member.guard
+        )
+        getInstance().add(data)
+    }
+
+    fun updateMember(member: Member) {
+        val data = hashMapOf(
+            Constants.NAME to member.name,
+            Constants.EMAIL to member.email,
+            Constants.PASSWORD to member.password,
+            Constants.CONGREGATION to member.congregation,
+            Constants.PHONE to member.phone,
+            Constants.ROLE to member.role,
+            Constants.DATE to member.dateCreated,
+            Constants.IS_ACTIVE to member.isActive,
+            Constants.GUARD to member.guard
+        )
+        getInstance()
+            .document(member.id)
+            .update(data)
+    }
+
+    fun changeStatus(id: String, status: Boolean) {
+        getInstance()
+            .document(id)
+            .update(Constants.IS_ACTIVE, status)
     }
 }

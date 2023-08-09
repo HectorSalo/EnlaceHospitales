@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.skysam.enlacehospitales.BuildConfig
+import com.skysam.enlacehospitales.dataClasses.Member
+import java.text.Collator
 import java.text.DateFormat
+import java.util.Collections
 import java.util.Date
 import java.util.Locale
 
@@ -35,14 +38,14 @@ object Utils {
         return DateFormat.getDateTimeInstance().format(value)
     }
 
-    /*fun organizedAlphabeticList(list: MutableList<Booking>): MutableList<Booking> {
-        Collections.sort(list, object : Comparator<Booking> {
+    fun organizedAlphabeticListMembers(list: MutableList<Member>): List<Member> {
+        Collections.sort(list, object : Comparator<Member> {
             var collator = Collator.getInstance()
-            override fun compare(p0: Booking?, p1: Booking?): Int {
+            override fun compare(p0: Member?, p1: Member?): Int {
                 return collator.compare(p0?.name, p1?.name)
             }
 
         })
         return list
-    }*/
+    }
 }

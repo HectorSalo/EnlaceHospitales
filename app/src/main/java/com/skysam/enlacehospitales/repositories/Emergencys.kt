@@ -200,7 +200,7 @@ object Emergencys {
                         val emergencyNew = Emergency(
                             emergency.id,
                             emergency.getDate(Constants.DATE_UPDATED)!!,
-                            emergency.getString(Constants.STATUS)!!,
+                            emergency.getString(Constants.IS_ACTIVE)!!,
                             notification,
                             patient,
                             emergency.getString(Constants.ISSUE_MEDICAL)!!,

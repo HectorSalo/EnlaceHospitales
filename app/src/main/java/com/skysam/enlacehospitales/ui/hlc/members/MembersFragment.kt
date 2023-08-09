@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.EnlaceHospitales
+import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.databinding.FragmentMembersHlcBinding
 import com.skysam.enlacehospitales.ui.main.MainActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 
-class MembersFragment : Fragment(), MenuProvider {
+class MembersFragment : Fragment(), MenuProvider, OnClickMember {
 
     private var _binding: FragmentMembersHlcBinding? = null
     private val binding get() = _binding!!
@@ -37,13 +40,18 @@ class MembersFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        memberAdapter = MemberAdapter()
+        memberAdapter = MemberAdapter(this)
         binding.rvMembers.apply {
             setHasFixedSize(true)
             adapter = memberAdapter
         }
 
-        binding.fab.setOnClickListener { startActivity(Intent(requireContext(), NewHlcActivity::class.java)) }
+        if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role != Constants.ROLE_ADMIN) binding.fab.hide()
+
+        binding.fab.setOnClickListener {
+            val newMemberDialog = NewMemberDialog()
+            newMemberDialog.show(requireActivity().supportFragmentManager, tag)
+        }
 
         susbcribeObservers()
     }
@@ -69,10 +77,10 @@ class MembersFragment : Fragment(), MenuProvider {
         viewModel.members.observe(viewLifecycleOwner) {
             if (_binding != null) {
                 if (it.isEmpty()) {
-                    memberAdapter.updateList(it)
                     binding.rvMembers.visibility = View.GONE
                     binding.tvListEmpty.visibility = View.VISIBLE
                 } else {
+                    memberAdapter.updateList(it)
                     binding.rvMembers.visibility = View.VISIBLE
                     binding.tvListEmpty.visibility = View.GONE
                 }
@@ -84,5 +92,11 @@ class MembersFragment : Fragment(), MenuProvider {
     private fun getOut() {
         startActivity(Intent(requireContext(), MainActivity::class.java))
         requireActivity().finish()
+    }
+
+    override fun view(member: Member) {
+        viewModel.viewMember(member)
+        val viewDetailsDialog = ViewDetailsDialog()
+        viewDetailsDialog.show(requireActivity().supportFragmentManager, tag)
     }
 }
