@@ -40,6 +40,7 @@
     <string name="text_password">Contraseña</string>
     <string name="text_login">Iniciar Sesión</string>
     <string name="text_init_biometric">Iniciar con Huella</string>
+    <string name="text_put_fingerprint">Coloque la huella</string>
 
     <!--Main-->
     <string name="welcome_mornning">Buenos días, \n%1$s</string>
