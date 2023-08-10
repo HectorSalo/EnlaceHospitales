@@ -19,17 +19,22 @@
     <string name="text_confirm">Confirmar</string>
     <string name="text_next">Siguiente</string>
     <string name="text_back">Atrás</string>
+    <string name="text_active">Activo</string>
+    <string name="text_inactive">No disponible</string>
     <string name="msg_exit_dialog">Se perderá toda la información.\n¿Desea salir?</string>
     <string name="msg_delete_dialog">¿Desea eliminar esta información?</string>
     <string name="title_large_hlc">Comité de Enlace con los Hospitales</string>
     <string name="title_large_gvp">Grupo de Visita a Pacientes</string>
     <string name="text_members">Miembros</string>
+    <string name="text_details">Detalles</string>
 
     <!--Errors-->
     <string name="error_field_empty">Campo obligatorio</string>
     <string name="error_email_invalid">Correo con formato inválido</string>
-    <string name="error_user_not_found">Usuario no encontrado. Por favor, verifique correo electrónico</string>
+    <string name="error_email_repeated">Email ya registrado</string>
     <string name="error_password_incorrect">Contraseña inválida</string>
+    <string name="error_password_length">Contraseña con al menos 6 caracteres</string>
+    <string name="error_password_match">Contraseñas no coinciden</string>
 
     <!--Dialogs-->
     <string name="title_timepicker_dialog">Seleccione la hora</string>
@@ -50,6 +55,20 @@
 
     <!--New Member-->
     <string name="text_new_member">Nuevo Miembro</string>
+    <string name="text_monday">Lunes</string>
+    <string name="text_tuesday">Martes</string>
+    <string name="text_wendsday">Miércoles</string>
+    <string name="text_thursday">Jueves</string>
+    <string name="text_friday">Viernes</string>
+    <string name="text_saturday">Sábado</string>
+    <string name="text_sunday">Domingo</string>
+    <string name="text_repeat_password">Repetir contraseña</string>
+    <string name="text_permissions_role">Permisos otorgados</string>
+    <string name="role_admin">Administrador</string>
+    <string name="role_hlc">Miembro del comité</string>
+    <string name="role_gvp">Miembro de visitas</string>
+    <!--Members-->
+
 
     <!--New Emergency Notification-->
     <string name="text_new_emergency">Nueva Emergencia</string>
@@ -93,11 +112,17 @@
         <b>Historial médico relevante: </b>(¿A qué se debe la crisis actual?)</string>
 
 
-    <!-- Notification Preferences -->
-    <string name="notification_key">notification</string>
-    <string name="notification_header">Notificaciones</string>
-    <string name="notification_title">Notificaciones activas</string>
-    <string name="notification_title_off">Notificaciones apagadas</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Profile -->
+    <string name="text_about">Información de la App</string>>
+    <string name="version_name">Versión %1$s</string>
+    <string name="title_sign_out">Cerrar sesión</string>
+    <string name="message_sign_out">¿Desea cerrar la sesión actual?</string>
+    <string name="text_security">Seguridad</string>>
+    <string name="text_summary_fingerprint">Iniciar sesión con huella</string>
+    <string name="text_fingerprint">Biometría</string>
+    <string name="key_fingerprint">fingerprint</string>
+
+    <!-- Soon -->
+    <string name="title_soon">¡Próximamente!</string>>
+    <string name="message_soon">Esta función estará disponible en una versión muy pronto</string>
 </resources>

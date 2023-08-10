@@ -3,8 +3,10 @@ package com.skysam.enlacehospitales.common
 object Constants {
     const val DEMO = "debug"
     const val RELEASE = "release"
-    const val MEMBERS = "members"
-    const val MEMBERS_DEMO = "membersDemo"
+    const val MEMBERS_HLC = "membersHlc"
+    const val MEMBERS_HLC_DEMO = "membersDemo"
+    const val MEMBERS_GVP = "membersGvp"
+    const val MEMBERS_GVP_DEMO = "membersGvpDemo"
     const val EMERGENCYS = "emergencys"
     const val EMERGENCYS_DEMO = "emergencysDemo"
 
@@ -14,12 +16,11 @@ object Constants {
     const val CONGREGATION = "congregation"
     const val PHONE = "phone"
     const val ROLE = "role"
-    const val STATUS = "status"
+    const val IS_ACTIVE = "isActive"
 
     const val ROLE_ADMIN = "admin"
-    const val ROLE_VISITOR = "visitor"
-    const val STATUS_ACTIVE = "active"
-    const val STATUS_SUSPEND = "suspend"
+    const val ROLE_HLC = "hlc"
+    const val ROLE_GVP = "gvp"
     const val GUARD = "guard"
 
     const val DATE_CALL = "dateCall"

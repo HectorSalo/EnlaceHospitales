@@ -131,7 +131,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         style="@style/StyleButtonCircle"
-        app:icon="@drawable/ic_biometric_48"
+        app:icon="@drawable/ic_fingerprint_48"
         app:iconSize="32dp"
         app:iconGravity="textStart"
         app:iconPadding="0dp"

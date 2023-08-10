@@ -133,13 +133,13 @@ class LoginActivity : AppCompatActivity(), BiometricChecked {
             }
         }
         if (!exists) {
-            Snackbar.make(binding.root, getString(R.string.error_user_not_found), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(com.firebase.ui.auth.R.string.fui_error_email_does_not_exist), Snackbar.LENGTH_SHORT).show()
             showComponents(true)
             return
         }
 
         if (currentMember?.password != password) {
-            Snackbar.make(binding.root, getString(R.string.error_password_incorrect), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(com.firebase.ui.auth.R.string.fui_error_invalid_password), Snackbar.LENGTH_SHORT).show()
             showComponents(true)
             return
         }
@@ -163,6 +163,7 @@ class LoginActivity : AppCompatActivity(), BiometricChecked {
             binding.progressBar.visibility = View.VISIBLE
         }
         binding.buttonLogin.isEnabled = status
+        binding.btnBiometric.isEnabled = status
         binding.tfUser.isEnabled = status
         binding.tfPassword.isEnabled = status
     }

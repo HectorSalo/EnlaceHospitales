@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceScreen
+        app:key="back"
+        app:icon="@drawable/ic_back_24"/>
+
+    <PreferenceCategory app:title="@string/title_profile">
+        <PreferenceScreen
+            app:key="signOut"
+            app:title="@string/title_sign_out"
+            app:icon="@drawable/ic_logout_24"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/text_security">
+
+        <SwitchPreferenceCompat
+            app:key="@string/key_fingerprint"
+            app:title="@string/text_fingerprint"
+            app:defaultValue="false"
+            app:icon="@drawable/ic_fingerprint_48"
+            app:summaryOn="@string/text_summary_fingerprint"
+            app:summaryOff="@string/text_summary_fingerprint"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/text_about">
+
+        <PreferenceScreen
+            app:key="name_version"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
