@@ -110,7 +110,9 @@
     <string name="text_helper_problem"><b>Problema específico: </b>(¿Cuál es el diagnóstico médico?
         ¿Por qué se plantea la cuestión de la sangre: hemorragia, prematuro, anemia, etc.?)\n
         <b>Historial médico relevante: </b>(¿A qué se debe la crisis actual?)</string>
-
+    <!--Emergencys-->
+    <string name="text_date_call_item">Fecha de llamada: %1$s</string>
+    <string name="text_date_updated_item">Fecha de última actualización: %1$s</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>

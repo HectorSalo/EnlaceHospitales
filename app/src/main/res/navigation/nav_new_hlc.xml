@@ -40,5 +40,9 @@
     <fragment
         android:id="@+id/fourthFragment"
         android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.FourthFragment"
-        tools:layout="@layout/fragment_fourth_new_hcl" />
+        tools:layout="@layout/fragment_fourth_new_hcl" >
+        <action
+            android:id="@+id/action_fourthFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+    </fragment>
 </navigation>

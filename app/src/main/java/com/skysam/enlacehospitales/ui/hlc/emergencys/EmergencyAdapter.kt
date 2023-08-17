@@ -26,20 +26,20 @@ class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: EmergencyAdapter.ViewHolder, position: Int) {
         val item = emergencys[position]
         holder.patient.text = item.patient.name
-        holder.dateCreated.text = Utils.convertDateTimeToString(item.notification.dateCall)
-        holder.dateUpdated.text = Utils.convertDateToString(item.dateUdpdated)
-        holder.hospital.text = item.patient.nameHospital
-        holder.status.text = item.status
+        holder.dateCall.text = context.getString(R.string.text_date_call_item,
+            Utils.convertDateTimeToString(item.notification.dateCall))
+        holder.dateUpdated.text = context.getString(R.string.text_date_updated_item,
+            Utils.convertDateToString(item.dateUdpdated))
+        holder.hospital.text = item.hospital.nameHospital
     }
 
     override fun getItemCount(): Int = emergencys.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val patient: TextView = view.findViewById(R.id.tv_patient)
-        val dateCreated: TextView = view.findViewById(R.id.tv_date_created)
+        val dateCall: TextView = view.findViewById(R.id.tv_date_call)
         val dateUpdated: TextView = view.findViewById(R.id.tv_date_updated)
         val hospital: TextView = view.findViewById(R.id.tv_hospital)
-        val status: TextView = view.findViewById(R.id.tv_status)
         val card: MaterialCardView = view.findViewById(R.id.card)
     }
 

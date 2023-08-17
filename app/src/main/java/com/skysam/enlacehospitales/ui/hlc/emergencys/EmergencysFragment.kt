@@ -68,10 +68,10 @@ class EmergencysFragment : Fragment(), MenuProvider {
         viewModel.emergencys.observe(viewLifecycleOwner) {
             if (_binding != null) {
                 if (it.isEmpty()) {
-                    emergencyAdapter.updateList(it)
                     binding.rvEmergencys.visibility = View.GONE
                     binding.tvListEmpty.visibility = View.VISIBLE
                 } else {
+                    emergencyAdapter.updateList(it)
                     binding.rvEmergencys.visibility = View.VISIBLE
                     binding.tvListEmpty.visibility = View.GONE
                 }
