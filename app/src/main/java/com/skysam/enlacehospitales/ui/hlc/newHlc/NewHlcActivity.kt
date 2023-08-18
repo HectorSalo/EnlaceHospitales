@@ -25,6 +25,7 @@ class NewHlcActivity : AppCompatActivity() {
 
         viewModel.step.observe(this) {
             binding.stepView.go(it, true)
+            if (it < binding.stepView.currentStep) binding.stepView.done(false)
             if (it == 4) binding.stepView.done(true)
         }
     }

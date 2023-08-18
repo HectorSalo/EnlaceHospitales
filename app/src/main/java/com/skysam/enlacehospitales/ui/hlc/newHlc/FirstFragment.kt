@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Utils
+import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.databinding.FragmentFirstNewHlcBinding
 import com.skysam.enlacehospitales.ui.common.DatePicker
 import com.skysam.enlacehospitales.ui.common.ExitDialog
@@ -36,25 +38,70 @@ class FirstFragment : Fragment(), OnClickDateTime, OnClickExit {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dateSelected = Date()
+        binding.etDate.setText(Utils.convertDateTimeToString(dateSelected))
+        binding.etName.doAfterTextChanged { binding.tfName.error = null }
+        binding.etRelationship.doAfterTextChanged { binding.tfRelationship.error = null }
+
         binding.btnExit.setOnClickListener {
             val exitDialog = ExitDialog(this)
             exitDialog.show(requireActivity().supportFragmentManager, tag)
         }
 
-        binding.btnNext.setOnClickListener {
-            viewModel.goStep(1)
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+        binding.btnNext.setOnClickListener { validateData() }
 
         binding.etDate.setOnClickListener {
             val datePicker = DatePicker(requireActivity(), this)
             datePicker.viewCalendar()
         }
+
+        subscribeObservers()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun subscribeObservers() {
+        viewModel.notification.observe(viewLifecycleOwner) {
+            if (_binding != null) {
+                if (it != null) {
+                    binding.etName.setText(it.personCall)
+                    binding.etRelationship.setText(it.relationshipPatient)
+                    binding.etInformation.setText(it.infoPersonCall)
+                    binding.etDate.setText(Utils.convertDateTimeToString(it.dateCall))
+                    dateSelected = it.dateCall
+                    binding.checkBox.isChecked = it.isNeedHelp
+                }
+            }
+        }
+    }
+
+    private fun validateData() {
+        val name = binding.etName.text.toString()
+        if (name.isEmpty()) {
+            binding.tfName.error = getString(R.string.error_field_empty)
+            binding.etName.requestFocus()
+            return
+        }
+        val relationship = binding.etRelationship.text.toString()
+        if (name.isEmpty()) {
+            binding.tfRelationship.error = getString(R.string.error_field_empty)
+            binding.etRelationship.requestFocus()
+            return
+        }
+
+        val notification = Notification(
+            dateSelected,
+            name,
+            relationship,
+            binding.etInformation.text.toString(),
+            binding.checkBox.isChecked
+        )
+        viewModel.goStep(1)
+        viewModel.setNotification(notification)
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
     override fun onClickExit() {

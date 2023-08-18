@@ -1,7 +1,6 @@
 package com.skysam.enlacehospitales.ui.hlc.emergencys
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency

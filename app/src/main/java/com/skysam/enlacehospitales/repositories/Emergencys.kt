@@ -13,6 +13,7 @@ import com.skysam.enlacehospitales.dataClasses.emergency.BornPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.ChildPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.Doctor
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
+import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.dataClasses.emergency.Patient
 import com.skysam.enlacehospitales.dataClasses.emergency.Tracing
@@ -45,7 +46,7 @@ object Emergencys {
                     val emergencys = mutableListOf<Emergency>()
                     for (emergency in value!!) {
                         val itemNotif = emergency.data.getValue(Constants.NOTIFICATION) as HashMap<*, *>
-                        val timestampNotif: Timestamp = itemNotif[Constants.DATE] as Timestamp
+                        val timestampNotif: Timestamp = itemNotif[Constants.DATE_CALL] as Timestamp
                         val dateNotif = timestampNotif.toDate()
 
                         val notification = Notification(
@@ -57,13 +58,13 @@ object Emergencys {
                         )
 
                         val item = emergency.data.getValue(Constants.PATIENT) as HashMap<*, *>
-                        @Suppress("UNCHECKED_CAST")
+                        /*@Suppress("UNCHECKED_CAST")
                         val olders = emergency.data.getValue(Constants.NAMES_OLDERS_CONTACTED) as List<String>
                         @Suppress("UNCHECKED_CAST")
-                        val phones = emergency.data.getValue(Constants.PHONES_OLDERS_CONTACTED) as List<String>
+                        val phones = emergency.data.getValue(Constants.PHONES_OLDERS_CONTACTED) as List<String>*/
 
-                        val childPatient = if (item[Constants.IS_CHILD].toString().toBoolean()) {
-                            val bornPatient = if(item[Constants.IS_BORN].toString().toBoolean()) {
+                        val childPatient = if (item[Constants.CHILD_PATIENT] != null) {
+                            val bornPatient = if(item[Constants.BORN_PATIENT] != null) {
                                 val timestamp: Timestamp = item[Constants.DATE_BORN] as Timestamp
                                 val date = timestamp.toDate()
                                 BornPatient(
@@ -81,7 +82,6 @@ object Emergencys {
                                 item[Constants.IS_FATHER_BAPTIZED].toString().toBoolean(),
                                 item[Constants.IS_MOTHER_BAPTIZED].toString().toBoolean(),
                                 item[Constants.COMMENTS].toString(),
-                                item[Constants.IS_BORN].toString().toBoolean(),
                                 bornPatient
                             )
                         } else null
@@ -93,14 +93,18 @@ object Emergencys {
                             item[Constants.COMMENTS].toString(),
                             item[Constants.IS_BAPTIZED].toString().toBoolean(),
                             item[Constants.IS_REPUTATION].toString().toBoolean(),
-                            item[Constants.NAME_HOSPITAL].toString(),
-                            item[Constants.ROOM].toString(),
-                            item[Constants.PHONE].toString(),
+                            item[Constants.IS_DPA].toString().toBoolean(),
                             item[Constants.CONGREGATION].toString(),
-                            olders,
-                            phones,
-                            item[Constants.IS_CHILD].toString().toBoolean(),
                             childPatient
+                        )
+
+                        val itemHospital = emergency.data.getValue(Constants.HOSPITAL) as HashMap<*, *>
+                        val hospital = Hospital(
+                            itemHospital[Constants.NAME_HOSPITAL].toString(),
+                            itemHospital[Constants.ROOM].toString(),
+                            itemHospital[Constants.PHONE].toString(),
+                            listOf(),
+                            listOf(),
                         )
 
                         val listLab = mutableListOf<AnalisysLab>()
@@ -147,7 +151,7 @@ object Emergencys {
                         } else null
 
                         val strategies = if (emergency.getString(Constants.STRATEGIES) != null)
-                            emergency.getString(Constants.STRATEGIES) else null
+                            emergency.getString(Constants.STRATEGIES)!! else ""
 
                         val articlesMedical = if (emergency.get(Constants.ARTICLES_MEDICAL) != null) {
                             @Suppress("UNCHECKED_CAST")
@@ -159,7 +163,7 @@ object Emergencys {
                         } else null
 
                         val isTalkWithSecondDoctor = if (emergency.getBoolean(Constants.IS_TALK_WITH_SECOND_DOCTOR) != null)
-                            emergency.getBoolean(Constants.IS_TALK_WITH_SECOND_DOCTOR) else null
+                            emergency.getBoolean(Constants.IS_TALK_WITH_SECOND_DOCTOR)!! else false
 
                         val secondDoctor = if (emergency.get(Constants.SECOND_DOCTOR) != null) {
                             @Suppress("UNCHECKED_CAST")
@@ -173,7 +177,7 @@ object Emergencys {
                         } else null
 
                         val isTransfered = if (emergency.getBoolean(Constants.IS_TRANSFERED) != null)
-                            emergency.getBoolean(Constants.IS_TRANSFERED) else null
+                            emergency.getBoolean(Constants.IS_TRANSFERED)!! else false
 
                         val transferPatient = if (emergency.get(Constants.TRANSFER_PATIENT) != null) {
                             @Suppress("UNCHECKED_CAST")
@@ -199,10 +203,12 @@ object Emergencys {
 
                         val emergencyNew = Emergency(
                             emergency.id,
+                            emergency.getDate(Constants.DATE)!!,
                             emergency.getDate(Constants.DATE_UPDATED)!!,
-                            emergency.getString(Constants.IS_ACTIVE)!!,
+                            emergency.getString(Constants.STATUS)!!,
                             notification,
                             patient,
+                            hospital,
                             emergency.getString(Constants.ISSUE_MEDICAL)!!,
                             listLab,
                             listDoctors,
@@ -221,5 +227,18 @@ object Emergencys {
                 }
             awaitClose { request.remove() }
         }
+    }
+
+    fun saveEmergency(emergency: Emergency) {
+        val data = hashMapOf(
+            Constants.DATE to emergency.dateCreated,
+            Constants.DATE_UPDATED to emergency.dateUdpdated,
+            Constants.STATUS to emergency.status,
+            Constants.NOTIFICATION to emergency.notification,
+            Constants.PATIENT to emergency.patient,
+            Constants.HOSPITAL to emergency.hospital,
+            Constants.ISSUE_MEDICAL to emergency.issueMedical
+        )
+        getInstance().add(data)
     }
 }

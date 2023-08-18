@@ -7,12 +7,7 @@ data class Patient(
     var comments: String,
     var isBaptized: Boolean,
     var isReputation: Boolean,
-    var nameHospital: String,
-    var room: String,
-    var phone: String,
+    var isDpaComplete: Boolean,
     var congregation: String,
-    var namesOldersContacted: List<String>,
-    var phonesOldersContacted: List<String>,
-    var isChild: Boolean,
     var childPatient: ChildPatient?
 )
