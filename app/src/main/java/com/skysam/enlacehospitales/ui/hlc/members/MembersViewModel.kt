@@ -12,11 +12,30 @@ class MembersViewModel : ViewModel() {
 
     private val _memberToView = MutableLiveData<Member>()
     val memberToView: LiveData<Member> get() = _memberToView
+
+    private val _memberToUpdate = MutableLiveData<Member>()
+    val memberToUpdate: LiveData<Member> get() = _memberToUpdate
     fun saveMember(member: Member) {
         MembersHlc.saveMember(member)
     }
 
     fun viewMember(member: Member) {
         _memberToView.value = member
+    }
+
+    fun memberToDialogUpdate(member: Member) {
+        _memberToUpdate.value = member
+    }
+
+    fun updateMember(member: Member) {
+        MembersHlc.updateMember(member)
+    }
+
+    fun changeStatusMember(member: Member, status: Boolean) {
+        MembersHlc.changeStatus(member.id, status)
+    }
+
+    fun deleteMember(member: Member) {
+        MembersHlc.deleteMember(member.id)
     }
 }

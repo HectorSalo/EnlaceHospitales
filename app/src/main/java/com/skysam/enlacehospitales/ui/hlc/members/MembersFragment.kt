@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,7 +19,6 @@ import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.databinding.FragmentMembersHlcBinding
 import com.skysam.enlacehospitales.ui.main.MainActivity
-import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 
 class MembersFragment : Fragment(), MenuProvider, OnClickMember {
 
@@ -98,5 +98,28 @@ class MembersFragment : Fragment(), MenuProvider, OnClickMember {
         viewModel.viewMember(member)
         val viewDetailsDialog = ViewDetailsDialog()
         viewDetailsDialog.show(requireActivity().supportFragmentManager, tag)
+    }
+
+    override fun update(member: Member) {
+        viewModel.memberToDialogUpdate(member)
+        val updateMemberDialog = UpdateMemberDialog()
+        updateMemberDialog.show(requireActivity().supportFragmentManager, tag)
+    }
+
+    override fun delete(member: Member) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(getString(R.string.title_confirmation_dialog))
+            .setMessage(getString(R.string.msg_delete_dialog))
+            .setPositiveButton(R.string.text_delete) { _, _ ->
+                viewModel.deleteMember(member)
+            }
+            .setNegativeButton(R.string.text_cancel, null)
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    override fun changeStatus(member: Member) {
+        viewModel.changeStatusMember(member, !member.isActive)
     }
 }

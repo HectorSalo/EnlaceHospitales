@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.databinding.DialogViewMemberDetailsBinding
 
@@ -39,20 +40,30 @@ class ViewDetailsDialog: DialogFragment() {
             if (_binding != null) {
                 binding.tvName.text = it.name
                 binding.tvEmail.text = it.email
-                binding.tvCongregation.text = it.congregation
-                binding.tvDateCreated.text = Utils.convertDateToString(it.dateCreated)
-                binding.tvStatus.text = if (it.isActive) getString(R.string.text_active)
-                else getString(R.string.text_inactive)
-                binding.tvPassword.text = it.password
+                binding.tvPassword.text = EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.text_password_from,
+                    it.password)
+                binding.tvPassword.text = EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.text_password_from,
+                    it.password)
+                binding.tvCongregation.text = EnlaceHospitales.EnlaceHospitales.getContext()
+                    .getString(R.string.text_congregation_from, it.congregation)
+                binding.tvPhone.text = it.phone
+                binding.tvStatus.text = if (it.isActive) EnlaceHospitales.EnlaceHospitales.getContext()
+                    .getString(R.string.text_active) else EnlaceHospitales.EnlaceHospitales.getContext()
+                        .getString(R.string.text_inactive)
+                binding.tvDateCreated.text = EnlaceHospitales.EnlaceHospitales.getContext()
+                    .getString(R.string.text_date_created_account_from,
+                    Utils.convertDateToString(it.dateCreated))
                 binding.tvRole.text = when(it.role) {
-                    Constants.ROLE_ADMIN -> getString(R.string.role_admin)
-                    Constants.ROLE_HLC -> getString(R.string.role_hlc)
-                    Constants.ROLE_GVP -> getString(R.string.role_gvp)
+                    Constants.ROLE_ADMIN -> EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.text_role_from,
+                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_admin))
+                    Constants.ROLE_HLC -> EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.text_role_from,
+                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_hlc))
+                    Constants.ROLE_GVP -> EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.text_role_from,
+                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_gvp))
                     else -> ""
                 }
-                binding.tvPhone.text = it.phone
 
-                if (it.role != Constants.ROLE_ADMIN) {
+                if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role != Constants.ROLE_ADMIN) {
                     binding.tvRole.visibility = View.GONE
                     binding.tvPassword.visibility = View.GONE
                 }

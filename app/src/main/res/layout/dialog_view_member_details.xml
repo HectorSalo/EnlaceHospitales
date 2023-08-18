@@ -14,7 +14,9 @@
         android:text="@string/fui_name_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_email"
@@ -26,7 +28,9 @@
         android:text="@string/fui_email_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_password"
@@ -38,7 +42,9 @@
         android:text="@string/fui_password_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_email"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_congregation"
@@ -50,7 +56,9 @@
         android:text="@string/text_congregation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_password" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_password"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_phone"
@@ -62,7 +70,9 @@
         android:text="@string/fui_phone_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_congregation" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_congregation"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_role"
@@ -74,7 +84,9 @@
         android:text="@string/role_admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_date_created"
@@ -86,7 +98,9 @@
         android:text="@string/text_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_role" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_role"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_status"
@@ -98,5 +112,7 @@
         android:text="@string/text_active"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_date_created" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_created"
+        android:gravity="center"
+        android:textSize="18sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

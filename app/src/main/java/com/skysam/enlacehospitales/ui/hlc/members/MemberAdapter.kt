@@ -4,11 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.Member
 
@@ -32,6 +35,24 @@ class MemberAdapter(private val onClickMember: OnClickMember): RecyclerView.Adap
         else context.getString(R.string.text_inactive)
 
         holder.card.setOnClickListener { onClickMember.view(item) }
+        if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role == Constants.ROLE_ADMIN) {
+            holder.card.setOnLongClickListener {
+                val popMenu = PopupMenu(context, holder.card)
+                popMenu.inflate(R.menu.menu_members_item)
+                popMenu.menu.getItem(1).title = if (item.isActive) context.getString(R.string.text_inactive_menu)
+                else context.getString(R.string.text_active_menu)
+                popMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.menu_edit -> onClickMember.update(item)
+                        R.id.menu_status -> onClickMember.changeStatus(item)
+                        R.id.menu_delete -> onClickMember.delete(item)
+                    }
+                    false
+                }
+                popMenu.show()
+                true
+            }
+        }
     }
 
     override fun getItemCount(): Int = members.size

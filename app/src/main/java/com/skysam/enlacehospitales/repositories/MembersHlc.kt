@@ -94,4 +94,10 @@ object MembersHlc {
             .document(id)
             .update(Constants.IS_ACTIVE, status)
     }
+
+    fun deleteMember(id: String) {
+        getInstance()
+            .document(id)
+            .delete()
+    }
 }

@@ -12,22 +12,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.SnapHelper
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.CarouselSnapHelper
+import com.google.android.material.carousel.HeroCarouselStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.EnlaceHospitales
+import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.databinding.FragmentMainBinding
 import com.skysam.enlacehospitales.ui.hlc.HlcActivity
-import com.skysam.enlacehospitales.ui.login.LoginActivity
-import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class MainFragment : Fragment() {
+
+class MainFragment : Fragment(), OnClickGuard {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var guardAdapter: GuardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,17 +45,29 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val c = Calendar.getInstance()
 
+        guardAdapter = GuardAdapter(this)
+        val carouselLayoutManager = CarouselLayoutManager(HeroCarouselStrategy())
+        binding.rvGuard.apply {
+            layoutManager = carouselLayoutManager
+            adapter = guardAdapter
+            isNestedScrollingEnabled = false
+        }
+        val snapHelper: SnapHelper = CarouselSnapHelper()
+        snapHelper.attachToRecyclerView(binding.rvGuard)
+
+        binding.rvGuard.scroll
+
         viewModel.members.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                val listGuard = mutableListOf<Member>()
                 it.forEach {member ->
                     for (day in member.guard) {
                         if (day == c.get(Calendar.DAY_OF_WEEK)) {
-                            binding.tvName.text = member.name
-                            binding.tvPhone.text = member.phone
-                            binding.tvCongregation.text = member.congregation
+                            listGuard.add(member)
                         }
                     }
                 }
+                guardAdapter.updateList(listGuard)
             }
         }
 
@@ -102,5 +118,12 @@ class MainFragment : Fragment() {
         val clip = ClipData.newPlainText("text", phone)
         clipboardManager.setPrimaryClip(clip)
         Snackbar.make(binding.root, "Copiado", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun view(member: Member) {
+        binding.tvName.text = member.name
+        binding.tvPhone.text = member.phone
+        binding.tvCongregation.text = member.congregation
+        binding.materialCardView.visibility = View.VISIBLE
     }
 }

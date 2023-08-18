@@ -68,7 +68,12 @@
     <string name="role_hlc">Miembro del comité</string>
     <string name="role_gvp">Miembro de visitas</string>
     <!--Members-->
-
+    <string name="text_congregation_from">Congregación: %1$s</string>
+    <string name="text_role_from">Permisos: %1$s</string>
+    <string name="text_date_created_account_from">Creación de cuenta: %1$s</string>
+    <string name="text_password_from">Contraseña: %1$s</string>
+    <string name="text_inactive_menu">Inhabilitar</string>
+    <string name="text_active_menu">Habilitar</string>
 
     <!--New Emergency Notification-->
     <string name="text_new_emergency">Nueva Emergencia</string>
