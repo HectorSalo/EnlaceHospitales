@@ -55,7 +55,7 @@ class MainFragment : Fragment(), OnClickGuard {
         val snapHelper: SnapHelper = CarouselSnapHelper()
         snapHelper.attachToRecyclerView(binding.rvGuard)
 
-        binding.rvGuard.scroll
+        //binding.rvGuard.scroll
 
         viewModel.members.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
