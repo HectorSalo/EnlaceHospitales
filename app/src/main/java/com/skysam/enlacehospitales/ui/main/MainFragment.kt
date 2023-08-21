@@ -13,10 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.SnapHelper
-import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.CarouselSnapHelper
-import com.google.android.material.carousel.HeroCarouselStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.EnlaceHospitales
@@ -26,7 +22,7 @@ import com.skysam.enlacehospitales.ui.hlc.HlcActivity
 import java.util.Calendar
 
 
-class MainFragment : Fragment(), OnClickGuard {
+class MainFragment : Fragment(), OnClick {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -46,16 +42,10 @@ class MainFragment : Fragment(), OnClickGuard {
         val c = Calendar.getInstance()
 
         guardAdapter = GuardAdapter(this)
-        val carouselLayoutManager = CarouselLayoutManager(HeroCarouselStrategy())
         binding.rvGuard.apply {
-            layoutManager = carouselLayoutManager
             adapter = guardAdapter
-            isNestedScrollingEnabled = false
+            setHasFixedSize(true)
         }
-        val snapHelper: SnapHelper = CarouselSnapHelper()
-        snapHelper.attachToRecyclerView(binding.rvGuard)
-
-        //binding.rvGuard.scroll
 
         viewModel.members.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
@@ -83,14 +73,6 @@ class MainFragment : Fragment(), OnClickGuard {
                     getString(R.string.welcome_night, user.name)
             else -> getString(com.firebase.ui.auth.R.string.fui_welcome_back_email_header)
         }
-
-        binding.btnCall.setOnClickListener {
-            val intent = Intent(Intent.ACTION_CALL)
-            intent.data = Uri.parse("tel:${user.phone}")
-            startActivity(intent)
-        }
-
-        binding.btnCopy.setOnClickListener { copy(user.phone) }
 
         binding.cardHlc.setOnClickListener {
             startActivity(Intent(requireContext(), HlcActivity::class.java))
@@ -120,10 +102,13 @@ class MainFragment : Fragment(), OnClickGuard {
         Snackbar.make(binding.root, "Copiado", Snackbar.LENGTH_SHORT).show()
     }
 
-    override fun view(member: Member) {
-        binding.tvName.text = member.name
-        binding.tvPhone.text = member.phone
-        binding.tvCongregation.text = member.congregation
-        binding.materialCardView.visibility = View.VISIBLE
+    override fun copy(member: Member) {
+        copy(member.phone)
+    }
+
+    override fun call(member: Member) {
+        val intent = Intent(Intent.ACTION_CALL)
+        intent.data = Uri.parse("tel:${member.phone}")
+        startActivity(intent)
     }
 }

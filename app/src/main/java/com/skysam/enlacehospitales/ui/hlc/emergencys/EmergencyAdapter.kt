@@ -4,15 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 
-class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
+class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
     lateinit var context: Context
     private var emergencys = listOf<Emergency>()
 
@@ -31,6 +34,21 @@ class EmergencyAdapter: RecyclerView.Adapter<EmergencyAdapter.ViewHolder>() {
         holder.dateUpdated.text = context.getString(R.string.text_date_updated_item,
             Utils.convertDateToString(item.dateUdpdated))
         holder.hospital.text = item.hospital.nameHospital
+
+        if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role == Constants.ROLE_ADMIN) {
+            holder.card.setOnLongClickListener {
+                val popMenu = PopupMenu(context, holder.card)
+                popMenu.inflate(R.menu.menu_emergency_item)
+                popMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.menu_delete -> onClick.delete(item)
+                    }
+                    false
+                }
+                popMenu.show()
+                true
+            }
+        }
     }
 
     override fun getItemCount(): Int = emergencys.size

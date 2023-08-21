@@ -4,11 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Constants
@@ -19,14 +18,14 @@ import com.skysam.enlacehospitales.ui.hlc.members.MemberDiffUtil
  * Created by Hector Chirinos on 13/08/2023.
  */
 
-class GuardAdapter(private val onClickGuard: OnClickGuard):
+class GuardAdapter(private val onClick: OnClick):
  RecyclerView.Adapter<GuardAdapter.ViewHolder>() {
  private lateinit var context: Context
  private var members = listOf<Member>()
 
  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuardAdapter.ViewHolder {
   val view = LayoutInflater.from(parent.context)
-   .inflate(R.layout.layout_carousel_item, parent, false)
+   .inflate(R.layout.layout_guard_item, parent, false)
   context = parent.context
   return ViewHolder(view)
  }
@@ -37,7 +36,21 @@ class GuardAdapter(private val onClickGuard: OnClickGuard):
           context.getString(R.string.title_gvp) else context.getString(R.string.text_guard) + " " +
           context.getString(R.string.title_hlc)
   holder.name.text = item.name
-  holder.card.setOnClickListener { onClickGuard.view(item) }
+  holder.congregation.text = item.congregation
+  if (item.congregation.isEmpty()) {
+   holder.congregation.visibility = View.GONE
+  } else {
+   holder.congregation.visibility = View.VISIBLE
+  }
+  holder.phone.text = item.phone
+  if (item.phone.isEmpty()) {
+   holder.phone.visibility = View.GONE
+  } else {
+   holder.phone.visibility = View.VISIBLE
+  }
+
+  holder.copy.setOnClickListener { onClick.copy(item) }
+  holder.call.setOnClickListener { onClick.call(item) }
  }
 
  override fun getItemCount(): Int = members.size
@@ -45,6 +58,10 @@ class GuardAdapter(private val onClickGuard: OnClickGuard):
  inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   val title: TextView = view.findViewById(R.id.tv_title)
   val name: TextView = view.findViewById(R.id.tv_name)
+  val congregation: TextView = view.findViewById(R.id.tv_congregation)
+  val phone: TextView = view.findViewById(R.id.tv_phone)
+  val copy: MaterialButton = view.findViewById(R.id.btn_copy)
+  val call: MaterialButton = view.findViewById(R.id.btn_call)
   val card: MaterialCardView = view.findViewById(R.id.card)
  }
 

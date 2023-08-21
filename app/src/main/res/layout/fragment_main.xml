@@ -37,115 +37,30 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_guard"
-        android:layout_width="match_parent"
-        android:layout_height="196dp"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+        android:layout_marginEnd="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_profile"
-        tools:listitem="@layout/layout_carousel_item"
-        android:clipChildren="false"
-        android:clipToPadding="false"/>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_guard">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_guard"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/fui_name_hint"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textSize="22sp" />
-
-            <TextView
-                android:id="@+id/tv_congregation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/text_congregation"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_phone"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="2"
-                    android:text="@string/text_phone"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="18sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_copy"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:icon="@drawable/ic_copy_24"
-                    app:iconSize="24dp"
-                    app:iconTint="?android:textColorTertiary" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_call"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:icon="@drawable/ic_call_24"
-                    app:iconSize="24dp"
-                    app:iconTint="?android:textColorTertiary" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        tools:listitem="@layout/layout_guard_item" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+        app:layout_constraintTop_toBottomOf="@+id/rv_guard">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_hlc"

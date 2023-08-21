@@ -241,4 +241,10 @@ object Emergencys {
         )
         getInstance().add(data)
     }
+
+    fun deleteEmergency(emergency: Emergency) {
+        getInstance()
+            .document(emergency.id)
+            .delete()
+    }
 }

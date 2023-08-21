@@ -8,4 +8,8 @@ import com.skysam.enlacehospitales.repositories.Emergencys
 
 class EmergencysViewModel : ViewModel() {
     val emergencys: LiveData<List<Emergency>> = Emergencys.getEmergencys().asLiveData()
+
+    fun delete(emergency: Emergency) {
+        Emergencys.deleteEmergency(emergency)
+    }
 }

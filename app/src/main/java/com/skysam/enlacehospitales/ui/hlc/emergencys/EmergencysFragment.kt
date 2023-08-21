@@ -8,16 +8,18 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
 import com.skysam.enlacehospitales.ui.main.MainActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 
-class EmergencysFragment : Fragment(), MenuProvider {
+class EmergencysFragment : Fragment(), MenuProvider, OnClick {
 
     private var _binding: FragmentEmergencysBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +38,7 @@ class EmergencysFragment : Fragment(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        emergencyAdapter = EmergencyAdapter()
+        emergencyAdapter = EmergencyAdapter(this)
         binding.rvEmergencys.apply {
             setHasFixedSize(true)
             adapter = emergencyAdapter
@@ -83,5 +85,22 @@ class EmergencysFragment : Fragment(), MenuProvider {
     private fun getOut() {
         startActivity(Intent(requireContext(), MainActivity::class.java))
         requireActivity().finish()
+    }
+
+    override fun view(emergency: Emergency) {
+
+    }
+
+    override fun delete(emergency: Emergency) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(getString(R.string.title_confirmation_dialog))
+            .setMessage(getString(R.string.msg_delete_dialog))
+            .setPositiveButton(R.string.text_delete) { _, _ ->
+                viewModel.delete(emergency)
+            }
+            .setNegativeButton(R.string.text_cancel, null)
+
+        val dialog = builder.create()
+        dialog.show()
     }
 }
