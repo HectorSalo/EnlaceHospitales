@@ -75,6 +75,11 @@
     <string name="text_inactive_menu">Inhabilitar</string>
     <string name="text_active_menu">Habilitar</string>
 
+    <!--New Emergency-->
+    <string name="text_notification">Notificación</string>
+    <string name="text_patient">Paciente</string>
+    <string name="text_hospital">Hospital</string>
+    <string name="text_issue_medical">Problema médico</string>
     <!--New Emergency Notification-->
     <string name="text_new_emergency">Nueva Emergencia</string>
     <string name="date_call">Fecha/Hora de la llamada</string>

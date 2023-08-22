@@ -13,6 +13,10 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
@@ -25,6 +29,7 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     private val binding get() = _binding!!
     private val viewModel: EmergencysViewModel by activityViewModels()
     private lateinit var emergencyAdapter: EmergencyAdapter
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +43,9 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(R.layout.layout_options_emergency)
+        bottomSheetDialog.dismissWithAnimation = true
         emergencyAdapter = EmergencyAdapter(this)
         binding.rvEmergencys.apply {
             setHasFixedSize(true)
@@ -88,7 +96,13 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     }
 
     override fun view(emergency: Emergency) {
-
+        bottomSheetDialog.show()
+        val viewSheet: View? = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+        val btnNotification: MaterialCardView = viewSheet!!.findViewById(R.id.card_notification)
+        btnNotification.setOnClickListener {
+            bottomSheetDialog.hide()
+            Snackbar.make(binding.root, "Prueba", Snackbar.LENGTH_SHORT).setAnchorView(binding.fab).show()
+        }
     }
 
     override fun delete(emergency: Emergency) {

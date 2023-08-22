@@ -49,6 +49,8 @@ class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<Emerg
                 true
             }
         }
+
+        holder.card.setOnClickListener { onClick.view(item) }
     }
 
     override fun getItemCount(): Int = emergencys.size
