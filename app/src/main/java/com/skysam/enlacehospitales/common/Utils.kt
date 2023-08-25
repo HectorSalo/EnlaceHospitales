@@ -25,10 +25,14 @@ object Utils {
         return String.format(Locale.GERMANY, "%,.2f", value)
     }
 
-    fun convertNumberTwoDecimals(value: String): String {
-        val valueR = value.replace(",", ""). replace(".", "")
-        val valueD: Double = valueR.toDouble() / 100
-        return String.format(Locale.GERMANY, "%,.2f", valueD)
+    fun convertStringToDouble(value: String): Double {
+        var number = 0.0
+        var str = ""
+        if (value.isNotEmpty()) {
+            str = value.replace(".","").replace(",", ".")
+            number = str.toDouble()
+        }
+        return number
     }
 
     fun convertDateToString(value: Date): String {

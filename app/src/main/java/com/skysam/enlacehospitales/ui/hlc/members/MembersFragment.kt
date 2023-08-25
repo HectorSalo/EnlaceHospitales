@@ -118,8 +118,4 @@ class MembersFragment : Fragment(), MenuProvider, OnClickMember {
         val dialog = builder.create()
         dialog.show()
     }
-
-    override fun changeStatus(member: Member) {
-        viewModel.changeStatusMember(member, !member.isActive)
-    }
 }

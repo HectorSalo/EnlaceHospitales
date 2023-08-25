@@ -47,9 +47,7 @@ class ViewDetailsDialog: DialogFragment() {
                 binding.tvCongregation.text = EnlaceHospitales.EnlaceHospitales.getContext()
                     .getString(R.string.text_congregation_from, it.congregation)
                 binding.tvPhone.text = it.phone
-                binding.tvStatus.text = if (it.isActive) EnlaceHospitales.EnlaceHospitales.getContext()
-                    .getString(R.string.text_active) else EnlaceHospitales.EnlaceHospitales.getContext()
-                        .getString(R.string.text_inactive)
+                binding.tvSpeciality.text = it.speciality
                 binding.tvDateCreated.text = EnlaceHospitales.EnlaceHospitales.getContext()
                     .getString(R.string.text_date_created_account_from,
                     Utils.convertDateToString(it.dateCreated))

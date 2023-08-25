@@ -42,7 +42,7 @@ class FirstFragment : Fragment(), OnClickDateTime, OnClickExit {
         binding.etDate.setText(Utils.convertDateTimeToString(dateSelected))
         binding.etName.doAfterTextChanged { binding.tfName.error = null }
         binding.etRelationship.doAfterTextChanged { binding.tfRelationship.error = null }
-
+        binding.etInformation.doAfterTextChanged { binding.tfInformation.error = null }
         binding.btnExit.setOnClickListener {
             val exitDialog = ExitDialog(this)
             exitDialog.show(requireActivity().supportFragmentManager, tag)
@@ -91,12 +91,18 @@ class FirstFragment : Fragment(), OnClickDateTime, OnClickExit {
             binding.etRelationship.requestFocus()
             return
         }
+        val information = binding.etInformation.text.toString()
+        if (information.isEmpty()) {
+            binding.tfInformation.error = getString(R.string.error_field_empty)
+            binding.etInformation.requestFocus()
+            return
+        }
 
         val notification = Notification(
             dateSelected,
             name,
             relationship,
-            binding.etInformation.text.toString(),
+            information,
             binding.checkBox.isChecked
         )
         viewModel.goStep(1)

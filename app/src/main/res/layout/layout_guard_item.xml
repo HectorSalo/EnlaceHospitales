@@ -55,11 +55,11 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_copy"
+                android:id="@+id/btn_share"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                app:icon="@drawable/ic_copy_24"
+                app:icon="@drawable/ic_share_24"
                 app:iconSize="24dp"
                 app:iconTint="?android:textColorTertiary" />
 

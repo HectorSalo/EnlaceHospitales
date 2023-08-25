@@ -95,15 +95,15 @@ class MainFragment : Fragment(), OnClick {
         binding.btnProfile.setOnClickListener { findNavController().navigate(R.id.mainFragmentToProfileFragment) }
     }
 
-    private fun copy(phone: String) {
-        val clipboardManager = requireActivity().getSystemService(AppCompatActivity.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("text", phone)
-        clipboardManager.setPrimaryClip(clip)
-        Snackbar.make(binding.root, "Copiado", Snackbar.LENGTH_SHORT).show()
-    }
-
-    override fun copy(member: Member) {
-        copy(member.phone)
+    override fun share(member: Member) {
+        val selection = StringBuilder()
+        selection.append(member.name)
+            .append("\n")
+            .append(member.phone)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, selection.toString())
+        startActivity(Intent.createChooser(intent, getString(R.string.title_share_dialog)))
     }
 
     override fun call(member: Member) {

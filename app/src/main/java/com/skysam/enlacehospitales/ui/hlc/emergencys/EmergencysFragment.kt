@@ -14,11 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
+import com.skysam.enlacehospitales.common.Constants
+import com.skysam.enlacehospitales.common.Utils
+import com.skysam.enlacehospitales.dataClasses.emergency.BornPatient
+import com.skysam.enlacehospitales.dataClasses.emergency.ChildPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
+import com.skysam.enlacehospitales.dataClasses.emergency.Patient
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
 import com.skysam.enlacehospitales.ui.main.MainActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
@@ -105,12 +109,12 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         }
     }
 
-    override fun delete(emergency: Emergency) {
+    override fun finish(emergency: Emergency) {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(getString(R.string.title_confirmation_dialog))
-            .setMessage(getString(R.string.msg_delete_dialog))
-            .setPositiveButton(R.string.text_delete) { _, _ ->
-                viewModel.delete(emergency)
+            .setMessage(getString(R.string.msg_finish_dialog))
+            .setPositiveButton(R.string.text_finish_emergency) { _, _ ->
+                viewModel.finish(emergency)
             }
             .setNegativeButton(R.string.text_cancel, null)
 

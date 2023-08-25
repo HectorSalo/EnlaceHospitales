@@ -7,6 +7,6 @@ import com.skysam.enlacehospitales.dataClasses.Member
  */
 
 interface OnClick {
- fun copy(member: Member)
+ fun share(member: Member)
  fun call(member: Member)
 }

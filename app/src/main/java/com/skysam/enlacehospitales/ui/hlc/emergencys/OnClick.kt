@@ -8,5 +8,5 @@ import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 
 interface OnClick {
  fun view(emergency: Emergency)
- fun delete(emergency: Emergency)
+ fun finish(emergency: Emergency)
 }

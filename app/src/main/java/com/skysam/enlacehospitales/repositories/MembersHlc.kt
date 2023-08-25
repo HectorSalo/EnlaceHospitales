@@ -12,14 +12,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 object MembersHlc {
-    private val PATH_USERS = when(Utils.getEnviroment()) {
+    private val PATH = when(Utils.getEnviroment()) {
         Constants.DEMO -> Constants.MEMBERS_HLC_DEMO
         Constants.RELEASE -> Constants.MEMBERS_HLC
         else -> Constants.MEMBERS_HLC
     }
 
     private fun getInstance(): CollectionReference {
-        return FirebaseFirestore.getInstance().collection(PATH_USERS)
+        return FirebaseFirestore.getInstance().collection(PATH)
     }
 
     fun getMembers(): Flow<List<Member>> {
@@ -46,7 +46,7 @@ object MembersHlc {
                             doc.getString(Constants.PHONE)!!,
                             doc.getString(Constants.ROLE)!!,
                             doc.getDate(Constants.DATE)!!,
-                            doc.getBoolean(Constants.IS_ACTIVE)!!,
+                            doc.getString(Constants.SPECIALITY)!!,
                             list
                         )
                         members.add(member)
@@ -66,7 +66,7 @@ object MembersHlc {
             Constants.PHONE to member.phone,
             Constants.ROLE to member.role,
             Constants.DATE to member.dateCreated,
-            Constants.IS_ACTIVE to member.isActive,
+            Constants.SPECIALITY to member.speciality,
             Constants.GUARD to member.guard
         )
         getInstance().add(data)
@@ -81,18 +81,12 @@ object MembersHlc {
             Constants.PHONE to member.phone,
             Constants.ROLE to member.role,
             Constants.DATE to member.dateCreated,
-            Constants.IS_ACTIVE to member.isActive,
+            Constants.SPECIALITY to member.speciality,
             Constants.GUARD to member.guard
         )
         getInstance()
             .document(member.id)
             .update(data)
-    }
-
-    fun changeStatus(id: String, status: Boolean) {
-        getInstance()
-            .document(id)
-            .update(Constants.IS_ACTIVE, status)
     }
 
     fun deleteMember(id: String) {

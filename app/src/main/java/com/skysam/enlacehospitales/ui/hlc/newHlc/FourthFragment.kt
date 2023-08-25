@@ -91,6 +91,7 @@ class FourthFragment : Fragment() {
             Date(),
             Date(),
             Constants.IS_ACTIVE,
+            "",
             notification,
             patient,
             hospital,

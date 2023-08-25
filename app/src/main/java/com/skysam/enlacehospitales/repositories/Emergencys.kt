@@ -90,6 +90,7 @@ object Emergencys {
                             item[Constants.NAME].toString(),
                             item[Constants.GENDER].toString(),
                             item[Constants.AGE].toString().toInt(),
+                            item[Constants.PHONE].toString(),
                             item[Constants.COMMENTS].toString(),
                             item[Constants.IS_BAPTIZED].toString().toBoolean(),
                             item[Constants.IS_REPUTATION].toString().toBoolean(),
@@ -102,9 +103,8 @@ object Emergencys {
                         val hospital = Hospital(
                             itemHospital[Constants.NAME_HOSPITAL].toString(),
                             itemHospital[Constants.ROOM].toString(),
-                            itemHospital[Constants.PHONE].toString(),
-                            listOf(),
-                            listOf(),
+                            itemHospital[Constants.NAMES_OLDERS_CONTACTED].toString(),
+                            itemHospital[Constants.PHONES_OLDERS_CONTACTED].toString(),
                         )
 
                         val listLab = mutableListOf<AnalisysLab>()
@@ -206,6 +206,7 @@ object Emergencys {
                             emergency.getDate(Constants.DATE)!!,
                             emergency.getDate(Constants.DATE_UPDATED)!!,
                             emergency.getString(Constants.STATUS)!!,
+                            emergency.getString(Constants.SPECIALITY)!!,
                             notification,
                             patient,
                             hospital,
@@ -242,9 +243,9 @@ object Emergencys {
         getInstance().add(data)
     }
 
-    fun deleteEmergency(emergency: Emergency) {
+    fun finishEmergency(emergency: Emergency) {
         getInstance()
             .document(emergency.id)
-            .delete()
+            .update(Constants.PATIENT, null, Constants.STATUS, Constants.IS_ACTIVE)
     }
 }

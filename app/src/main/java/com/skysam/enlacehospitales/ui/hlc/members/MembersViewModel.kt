@@ -31,10 +31,6 @@ class MembersViewModel : ViewModel() {
         MembersHlc.updateMember(member)
     }
 
-    fun changeStatusMember(member: Member, status: Boolean) {
-        MembersHlc.changeStatus(member.id, status)
-    }
-
     fun deleteMember(member: Member) {
         MembersHlc.deleteMember(member.id)
     }

@@ -148,7 +148,7 @@ class NewMemberDialog: DialogFragment(), OnClickExit, OnClickDateTime {
             binding.etPhone.text.toString(),
             if (binding.rbAdmin.isChecked) Constants.ROLE_ADMIN else Constants.ROLE_HLC,
             dateSelected,
-            true,
+            binding.etSpecality.text.toString(),
             listGuard
         )
 

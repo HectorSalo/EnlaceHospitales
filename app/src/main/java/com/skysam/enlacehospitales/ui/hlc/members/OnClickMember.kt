@@ -6,5 +6,4 @@ interface OnClickMember {
     fun view(member: Member)
     fun update(member: Member)
     fun delete(member: Member)
-    fun changeStatus(member: Member)
 }

@@ -1,11 +1,13 @@
 package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
@@ -18,8 +20,9 @@ import com.skysam.enlacehospitales.databinding.FragmentSecondNewHlcBinding
 import com.skysam.enlacehospitales.ui.common.DatePicker
 import com.skysam.enlacehospitales.ui.common.OnClickDateTime
 import java.util.Date
+import java.util.Locale
 
-class SecondFragment : Fragment(), OnClickDateTime {
+class SecondFragment : Fragment(), OnClickDateTime, TextWatcher {
 
     private var _binding: FragmentSecondNewHlcBinding? = null
     private val binding get() = _binding!!
@@ -38,7 +41,10 @@ class SecondFragment : Fragment(), OnClickDateTime {
         super.onViewCreated(view, savedInstanceState)
 
         binding.etName.doAfterTextChanged { binding.tfName.error = null }
-        binding.etAge.doAfterTextChanged { binding.tfAge.error = null }
+        binding.etPhone.doAfterTextChanged { binding.tfPhone.error = null }
+        binding.etApgarBorn.addTextChangedListener(this)
+        binding.etApgarMinutes.addTextChangedListener(this)
+        binding.etWeight.addTextChangedListener(this)
 
         binding.cbChild.setOnCheckedChangeListener { _, isChecked ->
             binding.constraintChild.visibility = if (isChecked) View.VISIBLE else View.GONE
@@ -76,7 +82,8 @@ class SecondFragment : Fragment(), OnClickDateTime {
                     binding.cbDpa.isChecked = it.isDpaComplete
                     if (it.gender == Constants.MALE) binding.rbMale.isChecked = true
                     else binding.rbFemale.isChecked = true
-                    binding.etAge.setText(it.age.toString())
+                    binding.etAge.setText(if (it.age == 0) "" else it.age.toString())
+                    binding.etPhone.setText(it.phone)
                     binding.etComments.setText(it.comments)
 
                     if (it.childPatient != null) {
@@ -89,10 +96,10 @@ class SecondFragment : Fragment(), OnClickDateTime {
 
                         if (it.childPatient?.bornPatient != null) {
                             binding.cbBorn.isChecked = true
-                            binding.etWeight.setText(it.childPatient?.bornPatient?.weight.toString())
+                            binding.etWeight.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient?.weight!!))
                             binding.etAgeBorn.setText(it.childPatient?.bornPatient?.weeksAge.toString())
-                            binding.etApgarBorn.setText(it.childPatient?.bornPatient?.bornAPGAR.toString())
-                            binding.etApgarMinutes.setText(it.childPatient?.bornPatient?.fiveMinutesAPGAR.toString())
+                            binding.etApgarBorn.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient?.bornAPGAR!!))
+                            binding.etApgarMinutes.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient?.fiveMinutesAPGAR!!))
                             binding.etDate.setText(Utils.convertDateToString(it.childPatient?.bornPatient!!.dateBorn))
                         }
                     }
@@ -108,20 +115,20 @@ class SecondFragment : Fragment(), OnClickDateTime {
             binding.etName.requestFocus()
             return
         }
-        val age = binding.etAge.text.toString()
-        if (age.isEmpty()) {
-            binding.tfAge.error = getString(R.string.error_field_empty)
-            binding.etAge.requestFocus()
+        val phone = binding.etPhone.text.toString()
+        if (phone.isEmpty()) {
+            binding.tfPhone.error = getString(R.string.error_field_empty)
+            binding.etPhone.requestFocus()
             return
         }
 
         val bornPatient = if (binding.cbBorn.isChecked) {
             BornPatient(
-                if (binding.etWeight.text.toString().isNotEmpty()) binding.etWeight.text.toString().toDouble() else 0.0,
+                Utils.convertStringToDouble(binding.etWeight.text.toString()),
                 if (binding.etAgeBorn.text.toString().isNotEmpty()) binding.etAgeBorn.text.toString().toInt() else 0,
                 dateSelected,
-                if (binding.etApgarBorn.text.toString().isNotEmpty()) binding.etApgarBorn.text.toString().toDouble() else 0.0,
-                if (binding.etApgarMinutes.text.toString().isNotEmpty()) binding.etApgarMinutes.text.toString().toDouble() else 0.0,
+                Utils.convertStringToDouble(binding.etApgarBorn.text.toString()),
+                Utils.convertStringToDouble(binding.etApgarMinutes.text.toString())
             )
         } else null
 
@@ -139,7 +146,8 @@ class SecondFragment : Fragment(), OnClickDateTime {
         val patient = Patient(
             name,
             if (binding.rbMale.isChecked) Constants.MALE else Constants.FEMALE,
-            age.toInt(),
+            if (binding.etAge.text.toString().isEmpty()) 0 else binding.etAge.text.toString().toInt(),
+            phone,
             binding.etComments.text.toString(),
             binding.cbBaptized.isChecked,
             binding.cbReputation.isChecked,
@@ -160,5 +168,39 @@ class SecondFragment : Fragment(), OnClickDateTime {
 
     override fun timeSelected(hour: Int, minute: Int) {
 
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+        var cadena = s.toString()
+        cadena = cadena.replace(",", "").replace(".", "")
+        val cantidad: Double = cadena.toDouble() / 100
+        cadena = String.format(Locale.GERMANY, "%,.2f", cantidad)
+
+        if (s.toString() == binding.etApgarBorn.text.toString()) {
+            binding.etApgarBorn.removeTextChangedListener(this)
+            binding.etApgarBorn.setText(cadena)
+            binding.etApgarBorn.setSelection(cadena.length)
+            binding.etApgarBorn.addTextChangedListener(this)
+        }
+        if (s.toString() == binding.etApgarMinutes.text.toString()) {
+            binding.etApgarMinutes.removeTextChangedListener(this)
+            binding.etApgarMinutes.setText(cadena)
+            binding.etApgarMinutes.setSelection(cadena.length)
+            binding.etApgarMinutes.addTextChangedListener(this)
+        }
+        if (s.toString() == binding.etWeight.text.toString()) {
+            binding.etWeight.removeTextChangedListener(this)
+            binding.etWeight.setText(cadena)
+            binding.etWeight.setSelection(cadena.length)
+            binding.etWeight.addTextChangedListener(this)
+        }
     }
 }

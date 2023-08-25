@@ -30,7 +30,6 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.etName.doAfterTextChanged { binding.tfName.error = null }
-        binding.etRoom.doAfterTextChanged { binding.tfRoom.error = null }
 
         binding.btnBack.setOnClickListener {
             viewModel.goStep(1)
@@ -48,7 +47,8 @@ class ThirdFragment : Fragment() {
                 if (it != null) {
                     binding.etName.setText(it.nameHospital)
                     binding.etRoom.setText(it.room)
-                    binding.etPhone.setText(it.phone)
+                    binding.etNameOlders.setText(it.namesOldersContacted)
+                    binding.etPhoneOlders.setText(it.phonesOldersContacted)
                 }
             }
         }
@@ -61,21 +61,12 @@ class ThirdFragment : Fragment() {
             binding.etName.requestFocus()
             return
         }
-        val room = binding.etRoom.text.toString()
-        if (room.isEmpty()) {
-            binding.tfRoom.error = getString(R.string.error_field_empty)
-            binding.etRoom.requestFocus()
-            return
-        }
 
-        val olders = mutableListOf<String>()
-        val phones = mutableListOf<String>()
         val hospital = Hospital(
             name,
-            room,
-            binding.etPhone.text.toString(),
-            olders,
-            phones
+            binding.etRoom.text.toString(),
+            binding.etNameOlders.text.toString(),
+            binding.etPhoneOlders.text.toString()
         )
 
         viewModel.setHospital(hospital)

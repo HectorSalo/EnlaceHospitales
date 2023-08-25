@@ -51,7 +51,8 @@
     <string name="welcome_mornning">Buenos días, \n%1$s</string>
     <string name="welcome_afternoon">Buenas tardes, \n%1$s</string>
     <string name="welcome_night">Buenas noches, \n%1$s</string>
-    <string name="text_guard">Guardia</string>
+    <string name="text_guard">Guardia CEH</string>
+    <string name="title_share_dialog">Compartir con</string>
 
     <!--New Member-->
     <string name="text_new_member">Nuevo Miembro</string>
@@ -64,6 +65,7 @@
     <string name="text_sunday">Domingo</string>
     <string name="text_repeat_password">Repetir contraseña</string>
     <string name="text_permissions_role">Permisos otorgados</string>
+    <string name="text_speciality">Especialidad</string>
     <string name="role_admin">Administrador</string>
     <string name="role_hlc">Miembro del comité</string>
     <string name="role_gvp">Miembro de visitas</string>
@@ -108,6 +110,7 @@
     <string name="text_label_apgar">Puntuación APGAR</string>
     <string name="text_apgar_init">En el nacimiento</string>
     <string name="text_apgar_five_minutes">A los 5 minutos</string>
+    <string name="text_init_zero">0,00</string>
     <!--New Emergency Hospital-->
     <string name="text_hospital_name">Nombre del hospital</string>
     <string name="text_room">Habitación</string>
@@ -123,6 +126,8 @@
     <!--Emergencys-->
     <string name="text_date_call_item">Fecha de llamada: %1$s</string>
     <string name="text_date_updated_item">Fecha de última actualización: %1$s</string>
+    <string name="text_finish_emergency">Finalizar emergencia</string>
+    <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea salir?</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>

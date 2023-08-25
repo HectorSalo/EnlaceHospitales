@@ -11,6 +11,6 @@ data class Member(
     var phone: String,
     var role: String,
     val dateCreated: Date,
-    val isActive: Boolean,
+    var speciality: String,
     val guard: List<Int>
 )

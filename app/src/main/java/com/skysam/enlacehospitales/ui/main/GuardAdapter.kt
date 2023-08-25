@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.ui.hlc.members.MemberDiffUtil
 
@@ -32,9 +31,6 @@ class GuardAdapter(private val onClick: OnClick):
 
  override fun onBindViewHolder(holder: GuardAdapter.ViewHolder, position: Int) {
   val item = members[position]
-  holder.title.text  = if (item.role != Constants.ROLE_ADMIN) context.getString(R.string.text_guard) + " " +
-          context.getString(R.string.title_gvp) else context.getString(R.string.text_guard) + " " +
-          context.getString(R.string.title_hlc)
   holder.name.text = item.name
   holder.congregation.text = item.congregation
   if (item.congregation.isEmpty()) {
@@ -49,7 +45,7 @@ class GuardAdapter(private val onClick: OnClick):
    holder.phone.visibility = View.VISIBLE
   }
 
-  holder.copy.setOnClickListener { onClick.copy(item) }
+  holder.share.setOnClickListener { onClick.share(item) }
   holder.call.setOnClickListener { onClick.call(item) }
  }
 
@@ -60,7 +56,7 @@ class GuardAdapter(private val onClick: OnClick):
   val name: TextView = view.findViewById(R.id.tv_name)
   val congregation: TextView = view.findViewById(R.id.tv_congregation)
   val phone: TextView = view.findViewById(R.id.tv_phone)
-  val copy: MaterialButton = view.findViewById(R.id.btn_copy)
+  val share: MaterialButton = view.findViewById(R.id.btn_share)
   val call: MaterialButton = view.findViewById(R.id.btn_call)
   val card: MaterialCardView = view.findViewById(R.id.card)
  }

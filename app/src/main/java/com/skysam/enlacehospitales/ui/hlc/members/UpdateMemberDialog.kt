@@ -99,6 +99,7 @@ class UpdateMemberDialog:DialogFragment(), OnClickExit, OnClickDateTime {
                 binding.etCongregation.setText(it.congregation)
                 binding.etDate.setText(Utils.convertDateToString(it.dateCreated))
                 binding.etPhone.setText(it.phone)
+                binding.etSpecality.setText(it.speciality)
                 if (it.role == Constants.ROLE_ADMIN) binding.rbAdmin.isChecked = true
                 else binding.rbHlc.isChecked = true
                 for (day in it.guard) {
@@ -177,7 +178,7 @@ class UpdateMemberDialog:DialogFragment(), OnClickExit, OnClickDateTime {
             binding.etPhone.text.toString(),
             if (binding.rbAdmin.isChecked) Constants.ROLE_ADMIN else Constants.ROLE_HLC,
             dateSelected,
-            member.isActive,
+            binding.etSpecality.text.toString(),
             listGuard
         )
 
