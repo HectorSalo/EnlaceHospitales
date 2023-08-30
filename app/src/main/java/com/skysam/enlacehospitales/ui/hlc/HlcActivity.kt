@@ -16,9 +16,6 @@ class HlcActivity : AppCompatActivity() {
 
         binding = ActivityHlcBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.topAppBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val navView: BottomNavigationView = binding.navView
 

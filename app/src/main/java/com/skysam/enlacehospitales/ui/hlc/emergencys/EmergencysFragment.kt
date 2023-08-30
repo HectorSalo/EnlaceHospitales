@@ -13,19 +13,18 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.common.Constants
-import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.dataClasses.emergency.BornPatient
-import com.skysam.enlacehospitales.dataClasses.emergency.ChildPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
-import com.skysam.enlacehospitales.dataClasses.emergency.Patient
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
-import com.skysam.enlacehospitales.ui.main.MainActivity
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.HospitalDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.IssueMedicalDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.NotificationDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.PatientDialog
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
+import com.skysam.enlacehospitales.ui.main.MainActivity
 
 class EmergencysFragment : Fragment(), MenuProvider, OnClick {
 
@@ -33,7 +32,6 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     private val binding get() = _binding!!
     private val viewModel: EmergencysViewModel by activityViewModels()
     private lateinit var emergencyAdapter: EmergencyAdapter
-    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,20 +39,26 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEmergencysBinding.inflate(inflater, container, false)
-        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        binding.topAppBar.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        binding.topAppBar.setNavigationIcon(R.drawable.ic_back_24)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.setContentView(R.layout.layout_options_emergency)
-        bottomSheetDialog.dismissWithAnimation = true
         emergencyAdapter = EmergencyAdapter(this)
         binding.rvEmergencys.apply {
             setHasFixedSize(true)
             adapter = emergencyAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) binding.fab.hide() else binding.fab.show()
+                    super.onScrolled(recyclerView, dx, dy)
+                }
+            })
         }
+
+        binding.topAppBar.setNavigationOnClickListener { getOut() }
 
         binding.fab.setOnClickListener { startActivity(Intent(requireContext(), NewHlcActivity::class.java)) }
 
@@ -100,12 +104,42 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     }
 
     override fun view(emergency: Emergency) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(R.layout.layout_options_emergency)
+        bottomSheetDialog.dismissWithAnimation = true
         bottomSheetDialog.show()
         val viewSheet: View? = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet)
         val btnNotification: MaterialCardView = viewSheet!!.findViewById(R.id.card_notification)
+        val btnPatient: MaterialCardView = viewSheet.findViewById(R.id.card_patient)
+        val btnHospital: MaterialCardView = viewSheet.findViewById(R.id.card_hospital)
+        val btnIssue: MaterialCardView = viewSheet.findViewById(R.id.card_issue_medical)
+
+        if (emergency.patient == null) {
+            btnPatient.visibility = View.GONE
+        }
         btnNotification.setOnClickListener {
             bottomSheetDialog.hide()
-            Snackbar.make(binding.root, "Prueba", Snackbar.LENGTH_SHORT).setAnchorView(binding.fab).show()
+            viewModel.viewNotification(emergency.notification)
+            val notificationDialog = NotificationDialog()
+            notificationDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnPatient.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.viewPatient(emergency.patient!!)
+            val patientDialog = PatientDialog()
+            patientDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnHospital.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.viewHospital(emergency.hospital)
+            val hospitalDialog = HospitalDialog()
+            hospitalDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnIssue.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.viewIssueMedical(emergency.issueMedical)
+            val issueMedicalDialog = IssueMedicalDialog()
+            issueMedicalDialog.show(requireActivity().supportFragmentManager, tag)
         }
     }
 

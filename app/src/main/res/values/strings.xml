@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Enlace Hospitales</string>
+    <string name="app_name">CEH</string>
     <string name="title_home">Inicio</string>
     <string name="title_emergencys">Emergencias</string>
     <string name="title_profile">Perfil</string>
@@ -74,8 +74,6 @@
     <string name="text_role_from">Permisos: %1$s</string>
     <string name="text_date_created_account_from">Creación de cuenta: %1$s</string>
     <string name="text_password_from">Contraseña: %1$s</string>
-    <string name="text_inactive_menu">Inhabilitar</string>
-    <string name="text_active_menu">Habilitar</string>
 
     <!--New Emergency-->
     <string name="text_notification">Notificación</string>
@@ -123,11 +121,13 @@
     <string name="text_helper_problem"><b>Problema específico: </b>(¿Cuál es el diagnóstico médico?
         ¿Por qué se plantea la cuestión de la sangre: hemorragia, prematuro, anemia, etc.?)\n
         <b>Historial médico relevante: </b>(¿A qué se debe la crisis actual?)</string>
-    <!--Emergencys-->
+    <!--Emergency-->
     <string name="text_date_call_item">Fecha de llamada: %1$s</string>
     <string name="text_date_updated_item">Fecha de última actualización: %1$s</string>
     <string name="text_finish_emergency">Finalizar emergencia</string>
-    <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea salir?</string>
+    <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea continuar?</string>
+    <!--Hospital Details-->
+    <string name="text_room_details">Habitación: %1$s</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>

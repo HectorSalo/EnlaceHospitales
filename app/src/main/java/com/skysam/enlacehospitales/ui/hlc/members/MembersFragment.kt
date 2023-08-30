@@ -13,6 +13,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.RecyclerView
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.EnlaceHospitales
@@ -33,7 +34,8 @@ class MembersFragment : Fragment(), MenuProvider, OnClickMember {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMembersHlcBinding.inflate(inflater, container, false)
-        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        binding.topAppBar.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        binding.topAppBar.setNavigationIcon(R.drawable.ic_back_24)
         return binding.root
     }
 
@@ -44,9 +46,17 @@ class MembersFragment : Fragment(), MenuProvider, OnClickMember {
         binding.rvMembers.apply {
             setHasFixedSize(true)
             adapter = memberAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) binding.fab.hide() else binding.fab.show()
+                    super.onScrolled(recyclerView, dx, dy)
+                }
+            })
         }
 
         if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role != Constants.ROLE_ADMIN) binding.fab.hide()
+
+        binding.topAppBar.setNavigationOnClickListener { getOut() }
 
         binding.fab.setOnClickListener {
             val newMemberDialog = NewMemberDialog()

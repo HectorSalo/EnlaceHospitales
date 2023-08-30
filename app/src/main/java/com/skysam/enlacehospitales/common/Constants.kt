@@ -16,7 +16,6 @@ object Constants {
     const val CONGREGATION = "congregation"
     const val PHONE = "phone"
     const val ROLE = "role"
-    const val IS_ACTIVE = "isActive"
 
     const val ROLE_ADMIN = "admin"
     const val ROLE_HLC = "hlc"
@@ -85,6 +84,8 @@ object Constants {
     const val TRACING = "TRACING"
     const val IS_CONTACTED_OLDERS_LOCALS = "isContactedOldersLocals"
     const val RESULTS = "results"
+    const val YES = "Si"
+    const val NO = "No"
 
     const val PREFERENCES = "preferences"
     const val NOTIFICATION = "notification"

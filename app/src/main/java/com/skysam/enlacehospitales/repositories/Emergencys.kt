@@ -57,47 +57,45 @@ object Emergencys {
                             itemNotif[Constants.IS_NEED_HELP].toString().toBoolean()
                         )
 
-                        val item = emergency.data.getValue(Constants.PATIENT) as HashMap<*, *>
-                        /*@Suppress("UNCHECKED_CAST")
-                        val olders = emergency.data.getValue(Constants.NAMES_OLDERS_CONTACTED) as List<String>
-                        @Suppress("UNCHECKED_CAST")
-                        val phones = emergency.data.getValue(Constants.PHONES_OLDERS_CONTACTED) as List<String>*/
+                        val patient = if (emergency.get(Constants.PATIENT) != null) {
+                            val itemPatient = emergency.data.getValue(Constants.PATIENT) as HashMap<*, *>
 
-                        val childPatient = if (item[Constants.CHILD_PATIENT] != null) {
-                            val bornPatient = if(item[Constants.BORN_PATIENT] != null) {
-                                val timestamp: Timestamp = item[Constants.DATE_BORN] as Timestamp
-                                val date = timestamp.toDate()
-                                BornPatient(
-                                    item[Constants.WEIGHT].toString().toDouble(),
-                                    item[Constants.WEEKS_AGE].toString().toInt(),
-                                    date,
-                                    item[Constants.BORN_APGAR].toString().toDouble(),
-                                    item[Constants.FIVE_MINUTES_APGAR].toString().toDouble(),
+                            val childPatient = if (itemPatient[Constants.CHILD_PATIENT] != null) {
+                                val bornPatient = if(itemPatient[Constants.BORN_PATIENT] != null) {
+                                    val timestamp: Timestamp = itemPatient[Constants.DATE_BORN] as Timestamp
+                                    val date = timestamp.toDate()
+                                    BornPatient(
+                                        itemPatient[Constants.WEIGHT].toString().toDouble(),
+                                        itemPatient[Constants.WEEKS_AGE].toString().toInt(),
+                                        date,
+                                        itemPatient[Constants.BORN_APGAR].toString().toDouble(),
+                                        itemPatient[Constants.FIVE_MINUTES_APGAR].toString().toDouble(),
+                                    )
+                                } else null
+
+                                ChildPatient(
+                                    itemPatient[Constants.NAME_FATHER].toString(),
+                                    itemPatient[Constants.NAME_MOTHER].toString(),
+                                    itemPatient[Constants.IS_FATHER_BAPTIZED].toString().toBoolean(),
+                                    itemPatient[Constants.IS_MOTHER_BAPTIZED].toString().toBoolean(),
+                                    itemPatient[Constants.COMMENTS].toString(),
+                                    bornPatient
                                 )
                             } else null
 
-                            ChildPatient(
-                                item[Constants.NAME_FATHER].toString(),
-                                item[Constants.NAME_MOTHER].toString(),
-                                item[Constants.IS_FATHER_BAPTIZED].toString().toBoolean(),
-                                item[Constants.IS_MOTHER_BAPTIZED].toString().toBoolean(),
-                                item[Constants.COMMENTS].toString(),
-                                bornPatient
+                            Patient(
+                                itemPatient[Constants.NAME].toString(),
+                                itemPatient[Constants.GENDER].toString(),
+                                itemPatient[Constants.AGE].toString().toInt(),
+                                itemPatient[Constants.PHONE].toString(),
+                                itemPatient[Constants.COMMENTS].toString(),
+                                itemPatient[Constants.IS_BAPTIZED].toString().toBoolean(),
+                                itemPatient[Constants.IS_REPUTATION].toString().toBoolean(),
+                                itemPatient[Constants.IS_DPA].toString().toBoolean(),
+                                itemPatient[Constants.CONGREGATION].toString(),
+                                childPatient
                             )
                         } else null
-
-                        val patient = Patient(
-                            item[Constants.NAME].toString(),
-                            item[Constants.GENDER].toString(),
-                            item[Constants.AGE].toString().toInt(),
-                            item[Constants.PHONE].toString(),
-                            item[Constants.COMMENTS].toString(),
-                            item[Constants.IS_BAPTIZED].toString().toBoolean(),
-                            item[Constants.IS_REPUTATION].toString().toBoolean(),
-                            item[Constants.IS_DPA].toString().toBoolean(),
-                            item[Constants.CONGREGATION].toString(),
-                            childPatient
-                        )
 
                         val itemHospital = emergency.data.getValue(Constants.HOSPITAL) as HashMap<*, *>
                         val hospital = Hospital(
@@ -112,7 +110,7 @@ object Emergencys {
                             @Suppress("UNCHECKED_CAST")
                             val list = emergency.data.getValue(Constants.ANALISYS_LAB) as List<HashMap<String, Any>>
                             for (itemLab in list) {
-                                val timestamp: Timestamp = item[Constants.DATE] as Timestamp
+                                val timestamp: Timestamp = itemLab[Constants.DATE] as Timestamp
                                 val date = timestamp.toDate()
 
                                 val analisysLab = AnalisysLab(
@@ -205,7 +203,7 @@ object Emergencys {
                             emergency.id,
                             emergency.getDate(Constants.DATE)!!,
                             emergency.getDate(Constants.DATE_UPDATED)!!,
-                            emergency.getString(Constants.STATUS)!!,
+                            emergency.getBoolean(Constants.STATUS)!!,
                             emergency.getString(Constants.SPECIALITY)!!,
                             notification,
                             patient,
@@ -235,6 +233,7 @@ object Emergencys {
             Constants.DATE to emergency.dateCreated,
             Constants.DATE_UPDATED to emergency.dateUdpdated,
             Constants.STATUS to emergency.status,
+            Constants.SPECIALITY to emergency.speciality,
             Constants.NOTIFICATION to emergency.notification,
             Constants.PATIENT to emergency.patient,
             Constants.HOSPITAL to emergency.hospital,
@@ -246,6 +245,6 @@ object Emergencys {
     fun finishEmergency(emergency: Emergency) {
         getInstance()
             .document(emergency.id)
-            .update(Constants.PATIENT, null, Constants.STATUS, Constants.IS_ACTIVE)
+            .update(Constants.PATIENT, null, Constants.STATUS, false)
     }
 }

@@ -6,7 +6,7 @@ data class Emergency(
     val id: String,
     val dateCreated: Date,
     val dateUdpdated: Date,
-    var status: String,
+    var status: Boolean,
     var speciality: String,
     val notification: Notification,
     var patient: Patient?,
@@ -17,8 +17,10 @@ data class Emergency(
     var tratment: Tratment?,
     var strategies: String,
     var articlesMedical: ArticlesMedical?,
+    @field:JvmField
     var isTalkWithSecondDoctor: Boolean,
     var secondDoctor: Doctor?,
+    @field:JvmField
     var isTransfered: Boolean,
     var transferPatient: TransferPatient?,
     var tracing: Tracing?

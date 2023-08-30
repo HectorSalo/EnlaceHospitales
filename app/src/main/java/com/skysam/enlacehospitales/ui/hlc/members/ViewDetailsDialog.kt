@@ -10,15 +10,15 @@ import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.databinding.DialogViewMemberDetailsBinding
+import com.skysam.enlacehospitales.databinding.DialogMemberDetailsBinding
 
 class ViewDetailsDialog: DialogFragment() {
-    private var _binding: DialogViewMemberDetailsBinding? = null
+    private var _binding: DialogMemberDetailsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MembersViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = DialogViewMemberDetailsBinding.inflate(layoutInflater)
+        _binding = DialogMemberDetailsBinding.inflate(layoutInflater)
 
         subscribeViewModel()
 

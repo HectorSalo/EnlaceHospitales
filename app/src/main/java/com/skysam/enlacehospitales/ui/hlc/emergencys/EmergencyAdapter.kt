@@ -28,13 +28,20 @@ class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<Emerg
 
     override fun onBindViewHolder(holder: EmergencyAdapter.ViewHolder, position: Int) {
         val item = emergencys[position]
-        holder.patient.text = item.patient?.name
+        if (item.patient != null) {
+            holder.patient.text = item.patient?.name
+            holder.patient.visibility = View.VISIBLE
+            holder.phone.text = item.patient?.phone
+            holder.phone.visibility = View.VISIBLE
+        } else {
+            holder.patient.visibility = View.GONE
+            holder.phone.visibility = View.GONE
+        }
         holder.dateCall.text = context.getString(R.string.text_date_call_item,
             Utils.convertDateTimeToString(item.notification.dateCall))
         holder.dateUpdated.text = context.getString(R.string.text_date_updated_item,
             Utils.convertDateToString(item.dateUdpdated))
         holder.hospital.text = item.hospital.nameHospital
-        holder.phone.text = item.patient?.phone
         if (item.speciality.isNotEmpty()) {
             holder.speciality.text = item.speciality
             holder.speciality.visibility = View.VISIBLE

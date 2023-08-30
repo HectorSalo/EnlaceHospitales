@@ -7,5 +7,6 @@ data class Notification(
     var personCall: String,
     var relationshipPatient: String,
     var infoPersonCall: String,
+    @field:JvmField
     var isNeedHelp: Boolean
 )

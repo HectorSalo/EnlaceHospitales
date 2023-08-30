@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
@@ -90,7 +89,7 @@ class FourthFragment : Fragment() {
             "",
             Date(),
             Date(),
-            Constants.IS_ACTIVE,
+            true,
             "",
             notification,
             patient,
