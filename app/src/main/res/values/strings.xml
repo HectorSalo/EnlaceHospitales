@@ -48,9 +48,9 @@
     <string name="text_put_fingerprint">Coloque la huella</string>
 
     <!--Main-->
-    <string name="welcome_mornning">Buenos días, \n%1$s</string>
-    <string name="welcome_afternoon">Buenas tardes, \n%1$s</string>
-    <string name="welcome_night">Buenas noches, \n%1$s</string>
+    <string name="welcome_mornning">Buenos días, %1$s</string>
+    <string name="welcome_afternoon">Buenas tardes, %1$s</string>
+    <string name="welcome_night">Buenas noches, %1$s</string>
     <string name="text_guard">Guardia CEH</string>
     <string name="title_share_dialog">Compartir con</string>
 

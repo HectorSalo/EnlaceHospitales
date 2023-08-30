@@ -1,7 +1,5 @@
 package com.skysam.enlacehospitales.ui.main
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.EnlaceHospitales
 import com.skysam.enlacehospitales.dataClasses.Member
@@ -58,6 +54,7 @@ class MainFragment : Fragment(), OnClick {
                     }
                 }
                 guardAdapter.updateList(listGuard)
+                binding.rvGuard.visibility = if (listGuard.isEmpty()) View.GONE else View.VISIBLE
             }
         }
 
