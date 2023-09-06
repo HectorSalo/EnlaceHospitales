@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.FirstFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.NotificationFragment"
         tools:layout="@layout/fragment_first_new_hlc">
 
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.SecondFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.PatientFragment"
         tools:layout="@layout/fragment_second_new_hlc">
 
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.ThirdFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.HospitalFragment"
         tools:layout="@layout/fragment_third_new_hcl" >
         <action
             android:id="@+id/action_thirdFragment_to_SecondFragment"
@@ -39,10 +39,22 @@
     </fragment>
     <fragment
         android:id="@+id/fourthFragment"
-        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.FourthFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.IssueFragment"
         tools:layout="@layout/fragment_fourth_new_hcl" >
         <action
             android:id="@+id/action_fourthFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
+        <action
+            android:id="@+id/action_fourthFragment_to_labFragment"
+            app:destination="@id/labFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/labFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.LabFragment"
+        android:label="fragment_lab"
+        tools:layout="@layout/fragment_lab" >
+        <action
+            android:id="@+id/action_labFragment_to_fourthFragment"
+            app:destination="@id/fourthFragment" />
     </fragment>
 </navigation>

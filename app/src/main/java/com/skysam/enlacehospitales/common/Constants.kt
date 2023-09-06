@@ -9,6 +9,7 @@ object Constants {
     const val MEMBERS_GVP_DEMO = "membersGvpDemo"
     const val EMERGENCYS = "emergencys"
     const val EMERGENCYS_DEMO = "emergencysDemo"
+    const val EMAIL_USER_TEST = "hchlc@yopmail.com"
 
     const val RESULT_OK = "ok"
     const val NAME = "name"

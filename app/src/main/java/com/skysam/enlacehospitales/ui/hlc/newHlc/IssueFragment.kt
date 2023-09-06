@@ -7,27 +7,15 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
-import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
-import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
-import com.skysam.enlacehospitales.dataClasses.emergency.Notification
-import com.skysam.enlacehospitales.dataClasses.emergency.Patient
 import com.skysam.enlacehospitales.databinding.FragmentFourthNewHclBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.util.Date
 
-class FourthFragment : Fragment() {
+class IssueFragment : Fragment() {
 
     private var _binding: FragmentFourthNewHclBinding? = null
     private val binding get() = _binding!!
     private val viewModel: NewHclViewModel by activityViewModels()
-
-    private lateinit var patient: Patient
-    private lateinit var notification: Notification
-    private lateinit var hospital: Hospital
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,19 +47,11 @@ class FourthFragment : Fragment() {
 
     private fun subscribeObservers() {
         if (_binding != null) {
-            viewModel.notification.observe(viewLifecycleOwner) {
+            viewModel.issueMedical.observe(viewLifecycleOwner) {
                 if (_binding != null) {
-                    notification = it!!
-                }
-            }
-            viewModel.patient.observe(viewLifecycleOwner) {
-                if (_binding != null) {
-                    patient = it!!
-                }
-            }
-            viewModel.hospital.observe(viewLifecycleOwner) {
-                if (_binding != null) {
-                    hospital = it!!
+                    if (it != null) {
+                        binding.etInformation.setText(it)
+                    }
                 }
             }
         }
@@ -85,33 +65,8 @@ class FourthFragment : Fragment() {
             return
         }
 
-        val emergency = Emergency(
-            "",
-            Date(),
-            Date(),
-            true,
-            "",
-            notification,
-            patient,
-            hospital,
-            information,
-            listOf(),
-            listOf(),
-            null,
-            "",
-            null,
-            false,
-            null,
-            false,
-            null,
-            null
-        )
-
-        viewModel.saveEmergency(emergency)
+        viewModel.setIssue(information)
         viewModel.goStep(4)
-        lifecycleScope.launch {
-            delay(500)
-            requireActivity().finish()
-        }
+        findNavController().navigate(R.id.action_fourthFragment_to_labFragment)
     }
 }

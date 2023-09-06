@@ -8,7 +8,7 @@ import com.skysam.enlacehospitales.dataClasses.Member
 import com.skysam.enlacehospitales.repositories.MembersHlc
 
 class LoginViewModel: ViewModel() {
-    val members: LiveData<List<Member>> = MembersHlc.getMembers().asLiveData()
+    val members: LiveData<List<Member>> = MembersHlc.getMembersInitSession().asLiveData()
     val emailLast: LiveData<String> = Preferences.getEmailSaved().asLiveData()
     val passwordLast: LiveData<String> = Preferences.getPasswordSaved().asLiveData()
     val biometricEnable: LiveData<Boolean> = Preferences.isBiometricEnable().asLiveData()

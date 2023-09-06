@@ -45,17 +45,22 @@ object Emergencys {
 
                     val emergencys = mutableListOf<Emergency>()
                     for (emergency in value!!) {
-                        val itemNotif = emergency.data.getValue(Constants.NOTIFICATION) as HashMap<*, *>
-                        val timestampNotif: Timestamp = itemNotif[Constants.DATE_CALL] as Timestamp
-                        val dateNotif = timestampNotif.toDate()
 
-                        val notification = Notification(
-                            dateNotif,
-                            itemNotif[Constants.PERSON_CALL].toString(),
-                            itemNotif[Constants.RELATIONSHIP_PATIENT].toString(),
-                            itemNotif[Constants.INFO_PERSON_CALL].toString(),
-                            itemNotif[Constants.IS_NEED_HELP].toString().toBoolean()
-                        )
+                        val notification = if (emergency.get(Constants.NOTIFICATION) != null) {
+                            val itemNotif =
+                                emergency.data.getValue(Constants.NOTIFICATION) as HashMap<*, *>
+                            val timestampNotif: Timestamp =
+                                itemNotif[Constants.DATE_CALL] as Timestamp
+                            val dateNotif = timestampNotif.toDate()
+
+                            Notification(
+                                dateNotif,
+                                itemNotif[Constants.PERSON_CALL].toString(),
+                                itemNotif[Constants.RELATIONSHIP_PATIENT].toString(),
+                                itemNotif[Constants.INFO_PERSON_CALL].toString(),
+                                itemNotif[Constants.IS_NEED_HELP].toString().toBoolean()
+                            )
+                        } else null
 
                         val patient = if (emergency.get(Constants.PATIENT) != null) {
                             val itemPatient = emergency.data.getValue(Constants.PATIENT) as HashMap<*, *>
@@ -97,13 +102,15 @@ object Emergencys {
                             )
                         } else null
 
-                        val itemHospital = emergency.data.getValue(Constants.HOSPITAL) as HashMap<*, *>
-                        val hospital = Hospital(
-                            itemHospital[Constants.NAME_HOSPITAL].toString(),
-                            itemHospital[Constants.ROOM].toString(),
-                            itemHospital[Constants.NAMES_OLDERS_CONTACTED].toString(),
-                            itemHospital[Constants.PHONES_OLDERS_CONTACTED].toString(),
-                        )
+                        val hospital = if (emergency.data.getValue(Constants.HOSPITAL) != null) {
+                            val itemHospital = emergency.data.getValue(Constants.HOSPITAL) as HashMap<*, *>
+                            Hospital(
+                                itemHospital[Constants.NAME_HOSPITAL].toString(),
+                                itemHospital[Constants.ROOM].toString(),
+                                itemHospital[Constants.NAMES_OLDERS_CONTACTED].toString(),
+                                itemHospital[Constants.PHONES_OLDERS_CONTACTED].toString(),
+                            )
+                        } else null
 
                         val listLab = mutableListOf<AnalisysLab>()
                         if (emergency.get(Constants.ANALISYS_LAB) != null) {
@@ -237,14 +244,21 @@ object Emergencys {
             Constants.NOTIFICATION to emergency.notification,
             Constants.PATIENT to emergency.patient,
             Constants.HOSPITAL to emergency.hospital,
-            Constants.ISSUE_MEDICAL to emergency.issueMedical
+            Constants.ISSUE_MEDICAL to emergency.issueMedical,
+            Constants.ANALISYS_LAB to emergency.analisysLab
         )
         getInstance().add(data)
     }
 
     fun finishEmergency(emergency: Emergency) {
+        val data: Map<String, Any?> = hashMapOf(
+            Constants.PATIENT to null,
+            Constants.NOTIFICATION to null,
+            Constants.HOSPITAL to null,
+            Constants.STATUS to false
+        )
         getInstance()
             .document(emergency.id)
-            .update(Constants.PATIENT, null, Constants.STATUS, false)
+            .update(data)
     }
 }

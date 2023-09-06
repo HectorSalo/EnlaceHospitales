@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.skysam.enlacehospitales.BuildConfig
 import com.skysam.enlacehospitales.dataClasses.Member
+import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
 import java.text.Collator
 import java.text.DateFormat
 import java.util.Collections
@@ -47,6 +48,17 @@ object Utils {
             var collator = Collator.getInstance()
             override fun compare(p0: Member?, p1: Member?): Int {
                 return collator.compare(p0?.name, p1?.name)
+            }
+
+        })
+        return list
+    }
+
+    fun organizedDatesListLabs(list: MutableList<AnalisysLab>): List<AnalisysLab> {
+        Collections.sort(list, object : Comparator<AnalisysLab> {
+            var collator = Collator.getInstance()
+            override fun compare(p0: AnalisysLab?, p1: AnalisysLab?): Int {
+                return collator.compare(p0?.date, p1?.date)
             }
 
         })

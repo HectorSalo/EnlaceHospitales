@@ -22,7 +22,7 @@ import com.skysam.enlacehospitales.ui.common.OnClickDateTime
 import java.util.Date
 import java.util.Locale
 
-class SecondFragment : Fragment(), OnClickDateTime, TextWatcher {
+class PatientFragment : Fragment(), OnClickDateTime, TextWatcher {
 
     private var _binding: FragmentSecondNewHlcBinding? = null
     private val binding get() = _binding!!

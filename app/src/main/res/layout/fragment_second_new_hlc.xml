@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/text_phone"
-                    android:inputType="textCapSentences"
+                    android:inputType="phone"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

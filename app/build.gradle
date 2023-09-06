@@ -20,12 +20,13 @@ android {
 
     buildTypes {
         release {
+            resValue 'string', 'app_name', '"CEH"'
             minifyEnabled false
-            buildConfigField "String","ENVIRONMENT",'"PRODUCCION"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField "String","ENVIRONMENT",'"DEMO"'
+            resValue 'string', 'app_name', '"CEH Demo"'
+            applicationIdSuffix ".demo"
         }
     }
     compileOptions {
