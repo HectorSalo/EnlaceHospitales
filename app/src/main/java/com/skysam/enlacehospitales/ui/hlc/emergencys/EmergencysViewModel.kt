@@ -29,6 +29,12 @@ class EmergencysViewModel : ViewModel() {
     private val _labToView = MutableLiveData<List<AnalisysLab>>()
     val labToView: LiveData<List<AnalisysLab>> get() = _labToView
 
+    private val _newLab = MutableLiveData<Boolean>()
+    val newLab: LiveData<Boolean> get() = _newLab
+
+    private val _emergencyNewLab = MutableLiveData<Emergency>()
+    val emergencyNewLab: LiveData<Emergency> get() = _emergencyNewLab
+
 
     fun viewNotification(notification: Notification) {
         _notificationToView.value = notification
@@ -44,6 +50,18 @@ class EmergencysViewModel : ViewModel() {
     }
     fun viewLab(labs: List<AnalisysLab>) {
         _labToView.value = labs
+    }
+    fun newLab(isNew: Boolean) {
+        _newLab.value = isNew
+    }
+    fun emergencyNewLab(emergency: Emergency) {
+        _emergencyNewLab.value = emergency
+    }
+    fun saveNewLab(emergency: Emergency, lab: AnalisysLab) {
+        Emergencys.saveNewLab(emergency.id, lab)
+    }
+    fun setSpeciality(emergency: Emergency, speciality: String) {
+        Emergencys.setSpeciality(emergency.id, speciality)
     }
 
     fun finish(emergency: Emergency) {

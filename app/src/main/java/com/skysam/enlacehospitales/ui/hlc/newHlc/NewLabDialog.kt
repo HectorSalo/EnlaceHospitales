@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
+import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.databinding.DialogNewLabBinding
 import com.skysam.enlacehospitales.ui.common.DatePicker
 import com.skysam.enlacehospitales.ui.common.OnClickDateTime
@@ -26,6 +27,7 @@ class NewLabDialog(private val fromEmergency: Boolean): DialogFragment(), OnClic
     private val viewModelHcl: NewHclViewModel by activityViewModels()
     private val viewModelEmergency: EmergencysViewModel by activityViewModels()
     private lateinit var dateSelected: Date
+    private lateinit var emergency: Emergency
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogNewLabBinding.inflate(layoutInflater)
@@ -78,43 +80,11 @@ class NewLabDialog(private val fromEmergency: Boolean): DialogFragment(), OnClic
 
 
     private fun subscribeViewModel() {
-        /*viewModel.memberToView.observe(this.requireActivity()) {
+        viewModelEmergency.emergencyNewLab.observe(this.requireActivity()) {
             if (_binding != null) {
-                binding.tvName.text = it.name
-                binding.tvEmail.text = it.email
-                binding.tvPassword.text = EnlaceHospitales.EnlaceHospitales.getContext().getString(
-                    R.string.text_password_from,
-                    it.password)
-                binding.tvPassword.text = EnlaceHospitales.EnlaceHospitales.getContext().getString(
-                    R.string.text_password_from,
-                    it.password)
-                binding.tvCongregation.text = EnlaceHospitales.EnlaceHospitales.getContext()
-                    .getString(R.string.text_congregation_from, it.congregation)
-                binding.tvPhone.text = it.phone
-                binding.tvSpeciality.text = it.speciality
-                binding.tvDateCreated.text = EnlaceHospitales.EnlaceHospitales.getContext()
-                    .getString(
-                        R.string.text_date_created_account_from,
-                        Utils.convertDateToString(it.dateCreated))
-                binding.tvRole.text = when(it.role) {
-                    Constants.ROLE_ADMIN -> EnlaceHospitales.EnlaceHospitales.getContext().getString(
-                        R.string.text_role_from,
-                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_admin))
-                    Constants.ROLE_HLC -> EnlaceHospitales.EnlaceHospitales.getContext().getString(
-                        R.string.text_role_from,
-                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_hlc))
-                    Constants.ROLE_GVP -> EnlaceHospitales.EnlaceHospitales.getContext().getString(
-                        R.string.text_role_from,
-                        EnlaceHospitales.EnlaceHospitales.getContext().getString(R.string.role_gvp))
-                    else -> ""
-                }
-
-                if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role != Constants.ROLE_ADMIN) {
-                    binding.tvRole.visibility = View.GONE
-                    binding.tvPassword.visibility = View.GONE
-                }
+                emergency = it
             }
-        }*/
+        }
     }
 
     private fun sendData() {
@@ -126,7 +96,7 @@ class NewLabDialog(private val fromEmergency: Boolean): DialogFragment(), OnClic
             binding.etOthers.text.toString()
         )
 
-        if (!fromEmergency) viewModelHcl.setLabs(lab)
+        if (!fromEmergency) viewModelHcl.setLabs(lab) else viewModelEmergency.saveNewLab(emergency, lab)
         dismiss()
     }
 

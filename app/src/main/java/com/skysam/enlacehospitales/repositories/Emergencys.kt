@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
@@ -216,7 +217,7 @@ object Emergencys {
                             patient,
                             hospital,
                             emergency.getString(Constants.ISSUE_MEDICAL)!!,
-                            listLab,
+                            listLab.sortedBy { it.date },
                             listDoctors,
                             tratment,
                             strategies,
@@ -248,6 +249,18 @@ object Emergencys {
             Constants.ANALISYS_LAB to emergency.analisysLab
         )
         getInstance().add(data)
+    }
+
+    fun saveNewLab(id: String, lab: AnalisysLab) {
+        getInstance()
+            .document(id)
+            .update(Constants.ANALISYS_LAB, FieldValue.arrayUnion(lab))
+    }
+
+    fun setSpeciality(id: String, speciality: String) {
+        getInstance()
+            .document(id)
+            .update(Constants.SPECIALITY, speciality)
     }
 
     fun finishEmergency(emergency: Emergency) {

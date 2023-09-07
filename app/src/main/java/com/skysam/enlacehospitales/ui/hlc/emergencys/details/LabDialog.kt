@@ -33,7 +33,8 @@ class LabDialog: DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.text_accept, null)
             .setNegativeButton(R.string.text_new_lab) { _, _ ->
-
+                viewModel.newLab(true)
+                dismiss()
             }
 
         val dialog = builder.create()

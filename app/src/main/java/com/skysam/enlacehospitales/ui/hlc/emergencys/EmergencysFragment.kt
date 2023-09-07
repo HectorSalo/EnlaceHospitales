@@ -25,6 +25,7 @@ import com.skysam.enlacehospitales.ui.hlc.emergencys.details.LabDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.NotificationDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.PatientDialog
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
+import com.skysam.enlacehospitales.ui.hlc.newHlc.NewLabDialog
 import com.skysam.enlacehospitales.ui.main.MainActivity
 
 class EmergencysFragment : Fragment(), MenuProvider, OnClick {
@@ -97,6 +98,15 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
                 binding.progressBar.visibility = View.GONE
             }
         }
+        viewModel.newLab.observe(viewLifecycleOwner) {
+            if (_binding != null) {
+                if (it) {
+                    val newLabDialog = NewLabDialog(true)
+                    newLabDialog.show(requireActivity().supportFragmentManager, tag)
+                    viewModel.newLab(false)
+                }
+            }
+        }
     }
 
     private fun getOut() {
@@ -153,6 +163,7 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         btnLab.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.viewLab(emergency.analisysLab)
+            viewModel.emergencyNewLab(emergency)
             val labDialog = LabDialog()
             labDialog.show(requireActivity().supportFragmentManager, tag)
         }
