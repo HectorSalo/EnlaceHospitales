@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.skysam.enlacehospitales.dataClasses.Member
+import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
@@ -26,6 +26,9 @@ class EmergencysViewModel : ViewModel() {
     private val _issueMedicalToView = MutableLiveData<String>()
     val issueMedicalToView: LiveData<String> get() = _issueMedicalToView
 
+    private val _labToView = MutableLiveData<List<AnalisysLab>>()
+    val labToView: LiveData<List<AnalisysLab>> get() = _labToView
+
 
     fun viewNotification(notification: Notification) {
         _notificationToView.value = notification
@@ -38,6 +41,9 @@ class EmergencysViewModel : ViewModel() {
     }
     fun viewIssueMedical(issue: String) {
         _issueMedicalToView.value = issue
+    }
+    fun viewLab(labs: List<AnalisysLab>) {
+        _labToView.value = labs
     }
 
     fun finish(emergency: Emergency) {

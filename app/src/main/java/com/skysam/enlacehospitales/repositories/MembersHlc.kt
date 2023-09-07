@@ -22,7 +22,7 @@ object MembersHlc {
         return FirebaseFirestore.getInstance().collection(PATH)
     }
 
-    fun getMembers(): Flow<List<Member>> {
+    fun getMembersInitSession(): Flow<List<Member>> {
         return callbackFlow {
             val request = getInstance()
                 .addSnapshotListener { value, error ->
@@ -50,6 +50,43 @@ object MembersHlc {
                             list
                         )
                         members.add(member)
+                    }
+                    trySend(Utils.organizedAlphabeticListMembers(members))
+                }
+            awaitClose { request.remove() }
+        }
+    }
+
+    fun getMembers(): Flow<List<Member>> {
+        return callbackFlow {
+            val request = getInstance()
+                .addSnapshotListener { value, error ->
+                    if (error != null) {
+                        Log.w(ContentValues.TAG, "Listen failed.", error)
+                        return@addSnapshotListener
+                    }
+
+                    val members = mutableListOf<Member>()
+                    for (doc in value!!) {
+                        var list: List<Int>
+                        @Suppress("UNCHECKED_CAST")
+                        list = doc.data.getValue(Constants.GUARD) as List<Int>
+
+                        val member = Member(
+                            doc.id,
+                            doc.getString(Constants.NAME)!!,
+                            doc.getString(Constants.EMAIL)!!,
+                            doc.getString(Constants.PASSWORD)!!,
+                            doc.getString(Constants.CONGREGATION)!!,
+                            doc.getString(Constants.PHONE)!!,
+                            doc.getString(Constants.ROLE)!!,
+                            doc.getDate(Constants.DATE)!!,
+                            doc.getString(Constants.SPECIALITY)!!,
+                            list
+                        )
+                        if (member.email != Constants.EMAIL_USER_TEST) {
+                            members.add(member)
+                        }
                     }
                     trySend(Utils.organizedAlphabeticListMembers(members))
                 }

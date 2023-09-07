@@ -129,12 +129,49 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_hospital">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/fui_transparent"
+                android:src="@drawable/ic_medical_information_32" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:text="@string/text_issue_medical"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_lab"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_button_sheet"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         app:cardElevation="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_hospital"
+        app:layout_constraintTop_toBottomOf="@+id/card_issue_medical"
         android:clickable="true"
         android:focusable="true">
 
@@ -148,14 +185,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
-                android:src="@drawable/ic_medical_information_32"
+                android:src="@drawable/ic_lab_32"
                 android:backgroundTint="@color/fui_transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/text_issue_medical"
+                android:text="@string/text_lab"
                 android:textSize="22sp"
                 android:layout_marginStart="16dp"/>
         </LinearLayout>

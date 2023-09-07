@@ -37,18 +37,28 @@ class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<Emerg
             holder.patient.visibility = View.GONE
             holder.phone.visibility = View.GONE
         }
-        holder.dateCall.text = context.getString(R.string.text_date_call_item,
-            Utils.convertDateTimeToString(item.notification.dateCall))
+        if (item.notification != null) {
+            holder.dateCall.text = context.getString(R.string.text_date_call_item,
+                Utils.convertDateTimeToString(item.notification.dateCall))
+            holder.dateCall.visibility = View.VISIBLE
+        } else {
+            holder.dateCall.visibility = View.GONE
+        }
         holder.dateUpdated.text = context.getString(R.string.text_date_updated_item,
             Utils.convertDateToString(item.dateUdpdated))
-        holder.hospital.text = item.hospital.nameHospital
+        if (item.hospital != null) {
+            holder.hospital.text = item.hospital.nameHospital
+            holder.hospital.visibility = View.VISIBLE
+        } else {
+            holder.hospital.visibility = View.GONE
+        }
         if (item.speciality.isNotEmpty()) {
             holder.speciality.text = item.speciality
             holder.speciality.visibility = View.VISIBLE
         } else holder.speciality.visibility = View.GONE
 
 
-        if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role == Constants.ROLE_ADMIN) {
+        if (EnlaceHospitales.EnlaceHospitales.getCurrentUser().role == Constants.ROLE_ADMIN && item.status) {
             holder.card.setOnLongClickListener {
                 val popMenu = PopupMenu(context, holder.card)
                 popMenu.inflate(R.menu.menu_emergency_item)

@@ -1,18 +1,18 @@
 package com.skysam.enlacehospitales.ui.hlc.newHlc
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.databinding.FragmentThirdNewHclBinding
 
-class ThirdFragment : Fragment() {
+class HospitalFragment : Fragment() {
 
     private var _binding: FragmentThirdNewHclBinding? = null
     private val binding get() = _binding!!

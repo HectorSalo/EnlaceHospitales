@@ -20,7 +20,7 @@ import com.skysam.enlacehospitales.ui.common.TimePicker
 import java.util.Calendar
 import java.util.Date
 
-class FirstFragment : Fragment(), OnClickDateTime, OnClickExit {
+class NotificationFragment : Fragment(), OnClickDateTime, OnClickExit {
 
     private var _binding: FragmentFirstNewHlcBinding? = null
     private val binding get() = _binding!!

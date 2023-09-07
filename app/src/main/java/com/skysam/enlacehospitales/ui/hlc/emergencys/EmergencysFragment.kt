@@ -21,6 +21,7 @@ import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.HospitalDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.IssueMedicalDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.LabDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.NotificationDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.PatientDialog
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
@@ -113,13 +114,21 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         val btnPatient: MaterialCardView = viewSheet.findViewById(R.id.card_patient)
         val btnHospital: MaterialCardView = viewSheet.findViewById(R.id.card_hospital)
         val btnIssue: MaterialCardView = viewSheet.findViewById(R.id.card_issue_medical)
+        val btnLab: MaterialCardView = viewSheet.findViewById(R.id.card_lab)
 
+        if (emergency.notification == null) {
+            btnNotification.visibility = View.GONE
+        }
         if (emergency.patient == null) {
             btnPatient.visibility = View.GONE
         }
+        if (emergency.hospital == null) {
+            btnHospital.visibility = View.GONE
+        }
+
         btnNotification.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewNotification(emergency.notification)
+            viewModel.viewNotification(emergency.notification!!)
             val notificationDialog = NotificationDialog()
             notificationDialog.show(requireActivity().supportFragmentManager, tag)
         }
@@ -131,7 +140,7 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         }
         btnHospital.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewHospital(emergency.hospital)
+            viewModel.viewHospital(emergency.hospital!!)
             val hospitalDialog = HospitalDialog()
             hospitalDialog.show(requireActivity().supportFragmentManager, tag)
         }
@@ -140,6 +149,12 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
             viewModel.viewIssueMedical(emergency.issueMedical)
             val issueMedicalDialog = IssueMedicalDialog()
             issueMedicalDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnLab.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.viewLab(emergency.analisysLab)
+            val labDialog = LabDialog()
+            labDialog.show(requireActivity().supportFragmentManager, tag)
         }
     }
 
