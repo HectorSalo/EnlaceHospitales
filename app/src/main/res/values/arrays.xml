@@ -7,13 +7,13 @@
         <item>Hospital</item>
         <item>Problema</item>
         <item>Lab</item>
-        <!--<item>Médico</item>
+        <item>Médico</item>
         <item>Tratamiento</item>
         <item>Alternativas</item>
         <item>Artículos</item>
         <item>Consultas</item>
         <item>Traslado</item>
-        <item>Seguimiento</item>-->
+        <item>Seguimiento</item>
     </string-array>
 
 </resources>

@@ -30,8 +30,9 @@
         app:sv_stepNumberTextSize="12sp"
         app:sv_stepPadding="4dp"
         app:sv_stepViewStyle="@style/StepView"
-        app:sv_steps="@array/steps"
-        app:sv_doneTextColor="@color/gray"/>
+        app:sv_stepsNumber="12"
+        app:sv_doneTextColor="@color/gray"
+        />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_content_new_hlc"
