@@ -78,5 +78,65 @@
         <action
             android:id="@+id/action_treatmentFragment_to_doctorFragment"
             app:destination="@id/doctorFragment" />
+        <action
+            android:id="@+id/action_treatmentFragment_to_strategiesFragment"
+            app:destination="@id/strategiesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/strategiesFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.StrategiesFragment"
+        android:label="fragment_strategies"
+        tools:layout="@layout/fragment_strategies" >
+        <action
+            android:id="@+id/action_strategiesFragment_to_treatmentFragment"
+            app:destination="@id/treatmentFragment" />
+        <action
+            android:id="@+id/action_strategiesFragment_to_articlesFragment"
+            app:destination="@id/articlesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.ArticlesFragment"
+        android:label="fragment_articles"
+        tools:layout="@layout/fragment_articles" >
+        <action
+            android:id="@+id/action_articlesFragment_to_strategiesFragment"
+            app:destination="@id/strategiesFragment" />
+        <action
+            android:id="@+id/action_articlesFragment_to_consultFragment"
+            app:destination="@id/consultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.ConsultFragment"
+        android:label="fragment_consult"
+        tools:layout="@layout/fragment_consult" >
+        <action
+            android:id="@+id/action_consultFragment_to_articlesFragment"
+            app:destination="@id/articlesFragment" />
+        <action
+            android:id="@+id/action_consultFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.TransferFragment"
+        android:label="fragment_transfer"
+        tools:layout="@layout/fragment_transfer" >
+        <action
+            android:id="@+id/action_transferFragment_to_consultFragment"
+            app:destination="@id/consultFragment" />
+        <action
+            android:id="@+id/action_transferFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" >
+        <action
+            android:id="@+id/action_resultsFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
     </fragment>
 </navigation>

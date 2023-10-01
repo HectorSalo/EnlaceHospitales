@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
+import com.skysam.enlacehospitales.dataClasses.emergency.ArticlesMedical
 import com.skysam.enlacehospitales.dataClasses.emergency.Doctor
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.dataClasses.emergency.Patient
+import com.skysam.enlacehospitales.dataClasses.emergency.Tracing
+import com.skysam.enlacehospitales.dataClasses.emergency.TransferPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.Treatment
 import com.skysam.enlacehospitales.repositories.Emergencys
 
@@ -41,6 +44,18 @@ class NewHclViewModel: ViewModel() {
  private val _treatment = MutableLiveData<Treatment?>().apply { value = null }
  val treatment: LiveData<Treatment?> get() = _treatment
 
+ private val _strategies = MutableLiveData<String?>().apply { value = null }
+ val strategies: LiveData<String?> get() = _strategies
+
+ private val _articles = MutableLiveData<ArticlesMedical?>().apply { value = null }
+ val articles: LiveData<ArticlesMedical?> get() = _articles
+
+ private val _secondDoctor = MutableLiveData<Doctor?>().apply { value = null }
+ val secondDoctor: LiveData<Doctor?> get() = _secondDoctor
+
+ private val _transfer = MutableLiveData<TransferPatient?>().apply { value = null }
+ val transfer: LiveData<TransferPatient?> get() = _transfer
+
  fun goStep(step: Int) {
   _step.value = step
  }
@@ -72,6 +87,22 @@ class NewHclViewModel: ViewModel() {
 
  fun setTreatment(treatment: Treatment) {
   _treatment.value = treatment
+ }
+
+ fun setStrategies(strategy: String) {
+  _strategies.value = strategy
+ }
+
+ fun setArticles(articlesMedical: ArticlesMedical) {
+  _articles.value = articlesMedical
+ }
+
+ fun setSecondDoctor(doctor: Doctor) {
+  _secondDoctor.value = doctor
+ }
+
+ fun setTransfer(transferPatient: TransferPatient) {
+  _transfer.value = transferPatient
  }
 
  fun saveEmergency(emergency: Emergency) {

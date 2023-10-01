@@ -17,11 +17,7 @@ data class Emergency(
     var treatment: Treatment?,
     var strategies: String,
     var articlesMedical: ArticlesMedical?,
-    @field:JvmField
-    var isTalkWithSecondDoctor: Boolean,
     var secondDoctor: Doctor?,
-    @field:JvmField
-    var isTransfered: Boolean,
     var transferPatient: TransferPatient?,
     var tracing: Tracing?
 )

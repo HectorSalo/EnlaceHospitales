@@ -168,9 +168,6 @@ object Emergencys {
                             )
                         } else null
 
-                        val isTalkWithSecondDoctor = if (emergency.getBoolean(Constants.IS_TALK_WITH_SECOND_DOCTOR) != null)
-                            emergency.getBoolean(Constants.IS_TALK_WITH_SECOND_DOCTOR)!! else false
-
                         val secondDoctor = if (emergency.get(Constants.SECOND_DOCTOR) != null) {
                             @Suppress("UNCHECKED_CAST")
                             val itemSecondDoctor = emergency.data.getValue(Constants.SECOND_DOCTOR) as HashMap<String, Any>
@@ -181,9 +178,6 @@ object Emergencys {
                                 itemSecondDoctor[Constants.INFORMATION].toString()
                             )
                         } else null
-
-                        val isTransfered = if (emergency.getBoolean(Constants.IS_TRANSFERED) != null)
-                            emergency.getBoolean(Constants.IS_TRANSFERED)!! else false
 
                         val transferPatient = if (emergency.get(Constants.TRANSFER_PATIENT) != null) {
                             @Suppress("UNCHECKED_CAST")
@@ -222,9 +216,7 @@ object Emergencys {
                             treatment,
                             strategies,
                             articlesMedical,
-                            isTalkWithSecondDoctor,
                             secondDoctor,
-                            isTransfered,
                             transferPatient,
                             tracing
                         )

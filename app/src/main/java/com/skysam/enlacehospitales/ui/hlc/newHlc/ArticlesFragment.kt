@@ -9,12 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.common.Utils
-import com.skysam.enlacehospitales.dataClasses.emergency.Treatment
-import com.skysam.enlacehospitales.databinding.FragmentTreatmentBinding
+import com.skysam.enlacehospitales.dataClasses.emergency.ArticlesMedical
+import com.skysam.enlacehospitales.databinding.FragmentArticlesBinding
 
-class TreatmentFragment : Fragment() {
+class ArticlesFragment : Fragment() {
 
-    private var _binding: FragmentTreatmentBinding? = null
+    private var _binding: FragmentArticlesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: NewHclViewModel by activityViewModels()
 
@@ -22,7 +22,7 @@ class TreatmentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTreatmentBinding.inflate(inflater, container, false)
+        _binding = FragmentArticlesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,8 +30,8 @@ class TreatmentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBack.setOnClickListener {
-            viewModel.goStep(5)
-            findNavController().navigate(R.id.action_treatmentFragment_to_doctorFragment)
+            viewModel.goStep(7)
+            findNavController().navigate(R.id.action_articlesFragment_to_strategiesFragment)
         }
 
         binding.btnNext.setOnClickListener { saveData() }
@@ -45,11 +45,11 @@ class TreatmentFragment : Fragment() {
     }
 
     private fun subscribeObservers() {
-        viewModel.treatment.observe(viewLifecycleOwner) {
+        viewModel.articles.observe(viewLifecycleOwner) {
             if (_binding != null) {
                 if (it != null) {
-                    binding.etTreatment.setText(it.information)
-                    binding.cbHelp.isChecked = it.isCommunicatedWithDoctors
+                    binding.etArticles.setText(it.articles)
+                    binding.cbDoctorColaborated.isChecked = it.isDoctorColaborated
                 }
             }
         }
@@ -57,12 +57,12 @@ class TreatmentFragment : Fragment() {
 
     private fun saveData() {
         Utils.close(binding.root)
-        val treatment = Treatment(
-            binding.etTreatment.text.toString().ifEmpty { "" },
-            binding.cbHelp.isChecked
+        val articlesMedical = ArticlesMedical(
+            binding.etArticles.text.toString().ifEmpty { "" },
+            binding.cbDoctorColaborated.isChecked
         )
-        viewModel.setTreatment(treatment)
-        viewModel.goStep(7)
-        findNavController().navigate(R.id.action_treatmentFragment_to_strategiesFragment)
+        viewModel.setArticles(articlesMedical)
+        viewModel.goStep(9)
+        findNavController().navigate(R.id.action_articlesFragment_to_consultFragment)
     }
 }

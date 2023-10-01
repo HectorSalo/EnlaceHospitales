@@ -143,6 +143,24 @@
     <!-- Treatment -->
     <string name="text_treatment">Tratamiento</string>
     <string name="question_request_help_hlc">¿Se ha comunicado al personal médico que el paciente ha solicitado la ayuda del HLC?</string>
+    <!-- Strategies -->
+    <string name="text_strategies">Estrategias</string>
+    <!-- Articles -->
+    <string name="text_articles">Artículos médicos</string>
+    <string name="question_doctor_colaborated">Tras revisar artículos de apoyo, ¿está el médico dispuesto a colaborar?</string>
+    <!-- Consult -->
+    <string name="text_name_second_doctor">Nombre del médico a consultar</string>
+    <string name="text_contact_second_doctor">Contacto del médico a consultar</string>
+    <string name="text_information">Información</string>
+    <!-- Transfer -->
+    <string name="text_plans_confirmed">Planes de traslado confirmados</string>
+    <string name="text_contacted_section_information">Se contactó con la Sección de Información sobre Hospitales (si el traslado es a un lugar fuera del área atendida por el HLC local)</string>
+    <string name="text_hospital_transfer">Hospital al que se traslada</string>
+    <string name="text_doctor_transfer">Médico que lo atenderá</string>
+    <string name="text_contact_hospital_transfer">Número de contacto del hospital</string>
+    <!-- Results -->
+    <string name="text_olders_contacted">Ancianos locales contactados para seguimiento</string>
+    <string name="text_results">Resultados</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>
@@ -157,6 +175,4 @@
     <!-- Soon -->
     <string name="title_soon">¡Próximamente!</string>>
     <string name="message_soon">Esta función estará disponible en una versión muy pronto</string>
-
-
 </resources>
