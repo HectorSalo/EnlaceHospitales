@@ -30,19 +30,33 @@
         app:sv_stepNumberTextSize="12sp"
         app:sv_stepPadding="4dp"
         app:sv_stepViewStyle="@style/StepView"
-        app:sv_steps="@array/steps"
+        app:sv_stepsNumber="12"
         app:sv_doneTextColor="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/text_notification"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_view" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_content_new_hlc"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step_view"
+        app:layout_constraintTop_toBottomOf="@+id/tv_section"
         app:navGraph="@navigation/nav_new_hlc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

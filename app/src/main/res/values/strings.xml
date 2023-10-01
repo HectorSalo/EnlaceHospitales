@@ -127,6 +127,22 @@
     <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea continuar?</string>
     <!--Hospital Details-->
     <string name="text_room_details">Habitación: %1$s</string>
+    <!-- Lab -->
+    <string name="text_lab">Laboratorio</string>
+    <string name="text_date_lab">Fecha/Hora en que se realizó</string>>
+    <string name="text_hemoglobina">Hemoglobina (Hb g/dl)</string>
+    <string name="text_hematocrito">Hematocrito (Hto %)</string>
+    <string name="text_plaquetas">Plaquetas (Plts /μL)</string>
+    <string name="text_others">Otros</string>
+    <string name="text_list_empty_lab">Si no posee resultados de Laboratorio, presione Siguiente.</string>
+    <string name="text_new_lab">Nuevos resultados</string>
+    <string name="text_init_plaquetas">0,000</string>
+    <!-- Doctor -->
+    <string name="text_list_empty_doctor">Si no posee información sobre los médicos, presione Siguiente.</string>
+    <string name="text_new_doctor">Agregar Doctor</string>
+    <!-- Treatment -->
+    <string name="text_treatment">Tratamiento</string>
+    <string name="question_request_help_hlc">¿Se ha comunicado al personal médico que el paciente ha solicitado la ayuda del HLC?</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>
@@ -138,19 +154,9 @@
     <string name="text_fingerprint">Biometría</string>
     <string name="key_fingerprint">fingerprint</string>
 
-    <!-- Lab -->
-    <string name="text_lab">Laboratorio</string>
-    <string name="text_date_lab">Fecha/Hora en que se realizó</string>>
-    <string name="text_hemoglobina">Hemoglobina (Hb g/dl)</string>
-    <string name="text_hematocrito">Hematocrito (Hto %)</string>
-    <string name="text_plaquetas">Plaquetas (Plts /μL)</string>
-    <string name="text_others">Otros</string>
-    <string name="text_list_empty_lab">Si no posee resultados de Laboratorio, presione Guardar para almacenar el resto de la información.</string>
-    <string name="text_new_lab">Nuevos resultados</string>
-    <string name="text_init_plaquetas">0,000</string>
-
     <!-- Soon -->
     <string name="title_soon">¡Próximamente!</string>>
     <string name="message_soon">Esta función estará disponible en una versión muy pronto</string>
+
 
 </resources>

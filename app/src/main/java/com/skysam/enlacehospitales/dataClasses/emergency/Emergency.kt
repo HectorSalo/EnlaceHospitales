@@ -14,7 +14,7 @@ data class Emergency(
     var issueMedical: String,
     var analisysLab: List<AnalisysLab>,
     var doctors: List<Doctor>,
-    var tratment: Tratment?,
+    var treatment: Treatment?,
     var strategies: String,
     var articlesMedical: ArticlesMedical?,
     @field:JvmField

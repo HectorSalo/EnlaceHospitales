@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
+import com.skysam.enlacehospitales.dataClasses.emergency.Doctor
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.dataClasses.emergency.Patient
+import com.skysam.enlacehospitales.dataClasses.emergency.Treatment
 import com.skysam.enlacehospitales.repositories.Emergencys
 
 /**
@@ -33,6 +35,12 @@ class NewHclViewModel: ViewModel() {
  private val _labs = MutableLiveData<MutableList<AnalisysLab>>().apply { value = mutableListOf() }
  val labs: LiveData<MutableList<AnalisysLab>> get() = _labs
 
+ private val _doctors = MutableLiveData<MutableList<Doctor>>().apply { value = mutableListOf() }
+ val doctors: LiveData<MutableList<Doctor>> get() = _doctors
+
+ private val _treatment = MutableLiveData<Treatment?>().apply { value = null }
+ val treatment: LiveData<Treatment?> get() = _treatment
+
  fun goStep(step: Int) {
   _step.value = step
  }
@@ -55,6 +63,15 @@ class NewHclViewModel: ViewModel() {
  fun setLabs(lab: AnalisysLab) {
   _labs.value?.add(lab)
   _labs.value = _labs.value
+ }
+
+ fun setDoctors(doctor: Doctor) {
+  _doctors.value?.add(doctor)
+  _doctors.value = _doctors.value
+ }
+
+ fun setTreatment(treatment: Treatment) {
+  _treatment.value = treatment
  }
 
  fun saveEmergency(emergency: Emergency) {

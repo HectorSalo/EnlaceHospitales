@@ -29,7 +29,6 @@ class LabFragment : Fragment() {
     private lateinit var hospital: Hospital
     private lateinit var issueMedical: String
     private lateinit var labAdapter: LabAdapter
-    private var labs = listOf<AnalisysLab>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +57,10 @@ class LabFragment : Fragment() {
             findNavController().navigate(R.id.action_labFragment_to_fourthFragment)
         }
 
-        binding.btnNext.setOnClickListener { save() }
+        binding.btnNext.setOnClickListener {
+            viewModel.goStep(5)
+            findNavController().navigate(R.id.action_labFragment_to_doctorFragment)
+        }
 
         subscribeObservers()
     }
@@ -70,7 +72,7 @@ class LabFragment : Fragment() {
 
     private fun subscribeObservers() {
         if (_binding != null) {
-            viewModel.notification.observe(viewLifecycleOwner) {
+            /*viewModel.notification.observe(viewLifecycleOwner) {
                 if (_binding != null) notification = it!!
             }
             viewModel.patient.observe(viewLifecycleOwner) {
@@ -81,14 +83,13 @@ class LabFragment : Fragment() {
             }
             viewModel.issueMedical.observe(viewLifecycleOwner) {
                 if (_binding != null) issueMedical = it!!
-            }
+            }*/
             viewModel.labs.observe(viewLifecycleOwner) {
                 if (_binding != null) {
                     if (it.isNotEmpty()) {
                         binding.rvLab.visibility = View.VISIBLE
                         binding.tvListEmpty.visibility = View.GONE
-                        labs = it
-                        labAdapter.updateList(labs)
+                        labAdapter.updateList(it)
                     }
                 }
             }
@@ -96,7 +97,7 @@ class LabFragment : Fragment() {
     }
 
     private fun save() {
-        val emergency = Emergency(
+        /*val emergency = Emergency(
             "",
             Date(),
             Date(),
@@ -123,7 +124,7 @@ class LabFragment : Fragment() {
             viewModel.goStep(5)
             delay(500)
             requireActivity().finish()
-        }
+        }*/
     }
 
 }

@@ -19,7 +19,7 @@ import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.dataClasses.emergency.Patient
 import com.skysam.enlacehospitales.dataClasses.emergency.Tracing
 import com.skysam.enlacehospitales.dataClasses.emergency.TransferPatient
-import com.skysam.enlacehospitales.dataClasses.emergency.Tratment
+import com.skysam.enlacehospitales.dataClasses.emergency.Treatment
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -147,10 +147,10 @@ object Emergencys {
                             }
                         }
 
-                        val tratment = if (emergency.get(Constants.TRATMENT) != null) {
+                        val treatment = if (emergency.get(Constants.TRATMENT) != null) {
                             @Suppress("UNCHECKED_CAST")
                             val trat = emergency.data.getValue(Constants.TRATMENT) as HashMap<String, Any>
-                            Tratment(
+                            Treatment(
                                 trat[Constants.INFORMATION].toString(),
                                 trat[Constants.IS_COMMUNICATED_WITH_DOCTORS].toString().toBoolean()
                             )
@@ -219,7 +219,7 @@ object Emergencys {
                             emergency.getString(Constants.ISSUE_MEDICAL)!!,
                             listLab.sortedBy { it.date },
                             listDoctors,
-                            tratment,
+                            treatment,
                             strategies,
                             articlesMedical,
                             isTalkWithSecondDoctor,

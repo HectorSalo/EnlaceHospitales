@@ -56,5 +56,27 @@
         <action
             android:id="@+id/action_labFragment_to_fourthFragment"
             app:destination="@id/fourthFragment" />
+        <action
+            android:id="@+id/action_labFragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.DoctorFragment"
+        tools:layout="@layout/fragment_doctor" >
+        <action
+            android:id="@+id/action_doctorFragment_to_labFragment"
+            app:destination="@id/labFragment" />
+        <action
+            android:id="@+id/action_doctorFragment_to_treatmentFragment"
+            app:destination="@id/treatmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/treatmentFragment"
+        android:name="com.skysam.enlacehospitales.ui.hlc.newHlc.TreatmentFragment"
+        tools:layout="@layout/fragment_treatment" >
+        <action
+            android:id="@+id/action_treatmentFragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
     </fragment>
 </navigation>

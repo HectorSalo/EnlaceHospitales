@@ -23,10 +23,13 @@ class NewHlcActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_new_hlc) as NavHostFragment
         navHostFragment.navController
 
+        val sections = resources.getStringArray(R.array.steps).asList()
+
         viewModel.step.observe(this) {
             binding.stepView.go(it, true)
             if (it < binding.stepView.currentStep) binding.stepView.done(false)
-            if (it == 5) binding.stepView.done(true)
+            binding.tvSection.text = sections[it]
+            if (it == 12) binding.stepView.done(true)
         }
     }
 }
