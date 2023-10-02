@@ -44,10 +44,10 @@ class LabDialog: DialogFragment() {
     }
 
     private fun subscribeViewModel() {
-        viewModel.labToView.observe(this.requireActivity()) {
+        viewModel.emergencyToView.observe(this.requireActivity()) {
             if (_binding != null) {
-                if (it.isNotEmpty()) {
-                    labAdapter.updateList(it)
+                if (it.analisysLab.isNotEmpty()) {
+                    labAdapter.updateList(it.analisysLab)
                     binding.rvLab.visibility = View.VISIBLE
                     binding.tvListEmpty.visibility = View.GONE
                 }

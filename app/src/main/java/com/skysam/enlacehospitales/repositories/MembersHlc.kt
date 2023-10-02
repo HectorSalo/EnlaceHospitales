@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.Member
@@ -25,7 +26,7 @@ object MembersHlc {
     fun getMembersInitSession(): Flow<List<Member>> {
         return callbackFlow {
             val request = getInstance()
-                .addSnapshotListener { value, error ->
+                .addSnapshotListener (MetadataChanges.INCLUDE){ value, error ->
                     if (error != null) {
                         Log.w(ContentValues.TAG, "Listen failed.", error)
                         return@addSnapshotListener

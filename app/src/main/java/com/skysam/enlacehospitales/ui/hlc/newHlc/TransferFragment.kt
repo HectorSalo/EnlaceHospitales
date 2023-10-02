@@ -61,14 +61,15 @@ class TransferFragment : Fragment() {
 
     private fun saveData() {
         Utils.close(binding.root)
-        val transferPatient = TransferPatient(
+        val transferPatient = if (binding.etHospital.text.toString().isNotEmpty())
+            TransferPatient(
             binding.cbPlans.isChecked,
             binding.cbContactedSection.isChecked,
             binding.etHospital.text.toString().ifEmpty { "" },
             binding.etDoctor.text.toString().ifEmpty { "" },
             binding.etContact.text.toString().ifEmpty { "" },
             binding.etInformation.text.toString().ifEmpty { "" },
-        )
+        ) else null
         viewModel.setTransfer(transferPatient)
         viewModel.goStep(11)
         findNavController().navigate(R.id.action_transferFragment_to_resultsFragment)

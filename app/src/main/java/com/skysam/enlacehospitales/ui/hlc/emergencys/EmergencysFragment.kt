@@ -138,35 +138,38 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
 
         btnNotification.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewNotification(emergency.notification!!)
+            viewModel.emergencyToView(emergency)
             val notificationDialog = NotificationDialog()
             notificationDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnPatient.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewPatient(emergency.patient!!)
+            viewModel.emergencyToView(emergency)
             val patientDialog = PatientDialog()
             patientDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnHospital.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewHospital(emergency.hospital!!)
+            viewModel.emergencyToView(emergency)
             val hospitalDialog = HospitalDialog()
             hospitalDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnIssue.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewIssueMedical(emergency.issueMedical)
+            viewModel.emergencyToView(emergency)
             val issueMedicalDialog = IssueMedicalDialog()
             issueMedicalDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnLab.setOnClickListener {
             bottomSheetDialog.hide()
-            viewModel.viewLab(emergency.analisysLab)
-            viewModel.emergencyNewLab(emergency)
+            viewModel.emergencyToView(emergency)
             val labDialog = LabDialog()
             labDialog.show(requireActivity().supportFragmentManager, tag)
         }
+    }
+
+    override fun speciality(emergency: Emergency) {
+
     }
 
     override fun finish(emergency: Emergency) {

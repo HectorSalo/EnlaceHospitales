@@ -57,10 +57,11 @@ class TreatmentFragment : Fragment() {
 
     private fun saveData() {
         Utils.close(binding.root)
-        val treatment = Treatment(
+        val treatment = if (binding.etTreatment.text.toString().isNotEmpty())
+            Treatment(
             binding.etTreatment.text.toString().ifEmpty { "" },
             binding.cbHelp.isChecked
-        )
+        ) else null
         viewModel.setTreatment(treatment)
         viewModel.goStep(7)
         findNavController().navigate(R.id.action_treatmentFragment_to_strategiesFragment)

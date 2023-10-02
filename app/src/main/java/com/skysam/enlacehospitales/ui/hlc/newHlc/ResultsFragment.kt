@@ -35,13 +35,14 @@ class ResultsFragment : Fragment() {
     private lateinit var notification: Notification
     private lateinit var hospital: Hospital
     private lateinit var issueMedical: String
+    private lateinit var speciality: String
     private var labs = listOf<AnalisysLab>()
     private var doctors = listOf<Doctor>()
-    private lateinit var treatment: Treatment
+    private var treatment: Treatment? = null
     private lateinit var strategies: String
-    private lateinit var articlesMedical: ArticlesMedical
-    private lateinit var secondDoctor: Doctor
-    private lateinit var transferPatient: TransferPatient
+    private var articlesMedical: ArticlesMedical? = null
+    private var secondDoctor: Doctor? = null
+    private var transferPatient: TransferPatient? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +83,9 @@ class ResultsFragment : Fragment() {
         viewModel.issueMedical.observe(viewLifecycleOwner) {
             if (_binding != null) issueMedical = it!!
         }
+        viewModel.speciality.observe(viewLifecycleOwner) {
+            if (_binding != null) speciality = it!!
+        }
         viewModel.labs.observe(viewLifecycleOwner) {
             if (_binding != null) labs = it!!
         }
@@ -89,35 +93,36 @@ class ResultsFragment : Fragment() {
             if (_binding != null) doctors = it!!
         }
         viewModel.treatment.observe(viewLifecycleOwner) {
-            if (_binding != null) treatment = it!!
+            if (_binding != null) treatment = it
         }
         viewModel.strategies.observe(viewLifecycleOwner) {
             if (_binding != null) strategies = it!!
         }
         viewModel.articles.observe(viewLifecycleOwner) {
-            if (_binding != null) articlesMedical = it!!
+            if (_binding != null) articlesMedical = it
         }
         viewModel.secondDoctor.observe(viewLifecycleOwner) {
-            if (_binding != null) secondDoctor = it!!
+            if (_binding != null) secondDoctor = it
         }
         viewModel.transfer.observe(viewLifecycleOwner) {
-            if (_binding != null) transferPatient = it!!
+            if (_binding != null) transferPatient = it
         }
     }
 
     private fun saveData() {
         Utils.close(binding.root)
-        val tracing = Tracing(
+        val tracing = if (binding.etResults.text.toString().isNotEmpty())
+            Tracing(
             binding.cbOldersContacted.isChecked,
             binding.etResults.text.toString().ifEmpty { "" }
-        )
+        ) else null
 
         val emergency = Emergency(
             "",
             Date(),
             Date(),
             true,
-            "",
+            speciality,
             notification,
             patient,
             hospital,
@@ -129,7 +134,8 @@ class ResultsFragment : Fragment() {
             articlesMedical,
             secondDoctor,
             transferPatient,
-            tracing)
+            tracing
+        )
 
         viewModel.saveEmergency(emergency)
         lifecycleScope.launch {

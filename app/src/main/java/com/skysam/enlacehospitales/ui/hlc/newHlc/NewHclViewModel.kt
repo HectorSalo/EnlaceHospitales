@@ -10,7 +10,6 @@ import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
 import com.skysam.enlacehospitales.dataClasses.emergency.Patient
-import com.skysam.enlacehospitales.dataClasses.emergency.Tracing
 import com.skysam.enlacehospitales.dataClasses.emergency.TransferPatient
 import com.skysam.enlacehospitales.dataClasses.emergency.Treatment
 import com.skysam.enlacehospitales.repositories.Emergencys
@@ -31,6 +30,9 @@ class NewHclViewModel: ViewModel() {
 
  private val _hospital = MutableLiveData<Hospital?>().apply { value = null }
  val hospital: LiveData<Hospital?> get() = _hospital
+
+ private val _speciality = MutableLiveData<String?>().apply { value = null }
+ val speciality: LiveData<String?> get() = _speciality
 
  private val _issueMedical = MutableLiveData<String?>().apply { value = null }
  val issueMedical: LiveData<String?> get() = _issueMedical
@@ -75,6 +77,10 @@ class NewHclViewModel: ViewModel() {
   _issueMedical.value = issueMedical
  }
 
+ fun setSpeciality(speciality: String) {
+  _speciality.value = speciality
+ }
+
  fun setLabs(lab: AnalisysLab) {
   _labs.value?.add(lab)
   _labs.value = _labs.value
@@ -85,7 +91,7 @@ class NewHclViewModel: ViewModel() {
   _doctors.value = _doctors.value
  }
 
- fun setTreatment(treatment: Treatment) {
+ fun setTreatment(treatment: Treatment?) {
   _treatment.value = treatment
  }
 
@@ -93,15 +99,15 @@ class NewHclViewModel: ViewModel() {
   _strategies.value = strategy
  }
 
- fun setArticles(articlesMedical: ArticlesMedical) {
+ fun setArticles(articlesMedical: ArticlesMedical?) {
   _articles.value = articlesMedical
  }
 
- fun setSecondDoctor(doctor: Doctor) {
+ fun setSecondDoctor(doctor: Doctor?) {
   _secondDoctor.value = doctor
  }
 
- fun setTransfer(transferPatient: TransferPatient) {
+ fun setTransfer(transferPatient: TransferPatient?) {
   _transfer.value = transferPatient
  }
 

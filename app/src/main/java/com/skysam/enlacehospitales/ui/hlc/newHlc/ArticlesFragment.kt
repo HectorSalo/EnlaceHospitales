@@ -57,10 +57,11 @@ class ArticlesFragment : Fragment() {
 
     private fun saveData() {
         Utils.close(binding.root)
-        val articlesMedical = ArticlesMedical(
+        val articlesMedical = if (binding.etArticles.text.toString().isNotEmpty())
+            ArticlesMedical(
             binding.etArticles.text.toString().ifEmpty { "" },
             binding.cbDoctorColaborated.isChecked
-        )
+        ) else null
         viewModel.setArticles(articlesMedical)
         viewModel.goStep(9)
         findNavController().navigate(R.id.action_articlesFragment_to_consultFragment)

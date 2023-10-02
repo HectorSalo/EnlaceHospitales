@@ -6,6 +6,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
@@ -38,7 +39,7 @@ object Emergencys {
     fun getEmergencys(): Flow<List<Emergency>> {
         return callbackFlow {
             val request = getInstance()
-                .addSnapshotListener { value, error ->
+                .addSnapshotListener (MetadataChanges.INCLUDE){ value, error ->
                     if (error != null) {
                         Log.w(ContentValues.TAG, "Listen failed.", error)
                         return@addSnapshotListener
@@ -238,7 +239,13 @@ object Emergencys {
             Constants.PATIENT to emergency.patient,
             Constants.HOSPITAL to emergency.hospital,
             Constants.ISSUE_MEDICAL to emergency.issueMedical,
-            Constants.ANALISYS_LAB to emergency.analisysLab
+            Constants.ANALISYS_LAB to emergency.analisysLab,
+            Constants.DOCTORS to emergency.doctors,
+            Constants.STRATEGIES to emergency.strategies,
+            Constants.ARTICLES_MEDICAL to emergency.articlesMedical,
+            Constants.SECOND_DOCTOR to emergency.secondDoctor,
+            Constants.TRANSFER_PATIENT to emergency.transferPatient,
+            Constants.TRACING to emergency.tracing
         )
         getInstance().add(data)
     }

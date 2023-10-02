@@ -80,7 +80,7 @@ class NewLabDialog(private val fromEmergency: Boolean): DialogFragment(), OnClic
 
 
     private fun subscribeViewModel() {
-        viewModelEmergency.emergencyNewLab.observe(this.requireActivity()) {
+        viewModelEmergency.emergencyToView.observe(this.requireActivity()) {
             if (_binding != null) {
                 emergency = it
             }

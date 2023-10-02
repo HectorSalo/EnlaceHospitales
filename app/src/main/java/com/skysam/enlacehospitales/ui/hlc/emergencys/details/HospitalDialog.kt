@@ -50,16 +50,16 @@ class HospitalDialog: DialogFragment() {
  }
 
  private fun subscribeViewModel() {
-  viewModel.hospitalToView.observe(this.requireActivity()) {
+  viewModel.emergencyToView.observe(this.requireActivity()) {
    if (_binding != null) {
-    binding.etName.setText(it.nameHospital)
-    if (it.room.isEmpty()) {
+    binding.etName.setText(it.hospital?.nameHospital)
+    if (it.hospital?.room!!.isEmpty()) {
      binding.tfRoom.visibility = View.GONE
     }
     binding.etRoom.setText(EnlaceHospitales.EnlaceHospitales.getContext()
-     .getString(R.string.text_room_details, it.room))
-    binding.etNameOlders.setText(it.namesOldersContacted)
-    binding.etPhoneOlders.setText(it.phonesOldersContacted)
+     .getString(R.string.text_room_details, it.hospital.room))
+    binding.etNameOlders.setText(it.hospital.namesOldersContacted)
+    binding.etPhoneOlders.setText(it.hospital.phonesOldersContacted)
    }
   }
  }

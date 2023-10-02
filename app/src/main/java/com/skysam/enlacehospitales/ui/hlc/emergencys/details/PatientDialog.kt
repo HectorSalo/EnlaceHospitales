@@ -79,36 +79,36 @@ class PatientDialog: DialogFragment() {
     }
 
     private fun subscribeViewModel() {
-        viewModel.patientToView.observe(this.requireActivity()) {
+        viewModel.emergencyToView.observe(this.requireActivity()) {
             if (_binding != null) {
-                binding.etName.setText(it.name)
-                binding.etCongregation.setText(it.congregation)
-                binding.etPhone.setText(it.phone)
-                binding.etAge.setText(it.age.toString())
-                binding.cbBaptized.isChecked = it.isBaptized
-                binding.cbReputation.isChecked = it.isReputation
-                binding.cbDpa.isChecked = it.isDpaComplete
-                if (it.gender == Constants.MALE) binding.rbMale.isChecked = true
+                binding.etName.setText(it.patient?.name)
+                binding.etCongregation.setText(it.patient?.congregation)
+                binding.etPhone.setText(it.patient?.phone)
+                binding.etAge.setText(it.patient?.age.toString())
+                binding.cbBaptized.isChecked = it.patient!!.isBaptized
+                binding.cbReputation.isChecked = it.patient!!.isReputation
+                binding.cbDpa.isChecked = it.patient!!.isDpaComplete
+                if (it.patient!!.gender == Constants.MALE) binding.rbMale.isChecked = true
                 else binding.rbFemale.isChecked = true
-                binding.etComments.setText(it.comments)
-                binding.cbChild.isChecked = it.childPatient != null
+                binding.etComments.setText(it.patient?.comments)
+                binding.cbChild.isChecked = it.patient?.childPatient != null
 
-                if (it.childPatient != null) {
+                if (it.patient?.childPatient != null) {
                     binding.constraintChild.visibility = View.VISIBLE
-                    binding.etNameFather.setText(it.childPatient?.nameFather)
-                    binding.etNameMother.setText(it.childPatient?.nameMother)
-                    binding.etCommentsChild.setText(it.childPatient?.comments)
-                    binding.cbBaptizedFather.isChecked = it.childPatient!!.isFatherBaptized
-                    binding.cbBaptizedMother.isChecked = it.childPatient!!.isMotherBaptized
-                    binding.cbBorn.isChecked = it.childPatient?.bornPatient != null
+                    binding.etNameFather.setText(it.patient?.childPatient?.nameFather)
+                    binding.etNameMother.setText(it.patient?.childPatient?.nameMother)
+                    binding.etCommentsChild.setText(it.patient?.childPatient?.comments)
+                    binding.cbBaptizedFather.isChecked = it.patient?.childPatient!!.isFatherBaptized
+                    binding.cbBaptizedMother.isChecked = it.patient?.childPatient!!.isMotherBaptized
+                    binding.cbBorn.isChecked = it.patient?.childPatient?.bornPatient != null
 
-                    if (it.childPatient?.bornPatient != null) {
+                    if (it.patient?.childPatient?.bornPatient != null) {
                         binding.constraintBorn.visibility = View.VISIBLE
-                        binding.etWeight.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient!!.weight))
-                        binding.etAgeBorn.setText(it.childPatient?.bornPatient!!.weeksAge)
-                        binding.etDate.setText(Utils.convertDateToString(it.childPatient?.bornPatient!!.dateBorn))
-                        binding.etApgarBorn.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient!!.bornAPGAR))
-                        binding.etApgarMinutes.setText(Utils.convertDoubleToString(it.childPatient?.bornPatient!!.fiveMinutesAPGAR))
+                        binding.etWeight.setText(Utils.convertDoubleToString(it.patient?.childPatient?.bornPatient!!.weight))
+                        binding.etAgeBorn.setText(it.patient?.childPatient?.bornPatient!!.weeksAge)
+                        binding.etDate.setText(Utils.convertDateToString(it.patient?.childPatient?.bornPatient!!.dateBorn))
+                        binding.etApgarBorn.setText(Utils.convertDoubleToString(it.patient?.childPatient?.bornPatient!!.bornAPGAR))
+                        binding.etApgarMinutes.setText(Utils.convertDoubleToString(it.patient?.childPatient?.bornPatient!!.fiveMinutesAPGAR))
                     }
                 }
             }

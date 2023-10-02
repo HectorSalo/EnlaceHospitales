@@ -59,12 +59,14 @@ class ConsultFragment : Fragment() {
 
     private fun saveData() {
         Utils.close(binding.root)
-        val doctor = Doctor(
+        val doctor = if (binding.etName.text.toString().isNotEmpty()
+            && binding.etSpecality.text.toString().isNotEmpty())
+            Doctor(
             binding.etName.text.toString().ifEmpty { "" },
             binding.etSpecality.text.toString().ifEmpty { "" },
             binding.etContact.text.toString().ifEmpty { "" },
             binding.etInformation.text.toString().ifEmpty { "" },
-        )
+        ) else null
         viewModel.setSecondDoctor(doctor)
         viewModel.goStep(10)
         findNavController().navigate(R.id.action_consultFragment_to_transferFragment)

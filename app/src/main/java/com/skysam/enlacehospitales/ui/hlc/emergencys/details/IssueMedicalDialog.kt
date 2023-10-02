@@ -25,8 +25,10 @@ class IssueMedicalDialog: DialogFragment() {
 
   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
    binding.etInformation.focusable = View.NOT_FOCUSABLE
+   binding.etSpeciality.focusable = View.NOT_FOCUSABLE
   } else {
    binding.etInformation.isEnabled = false
+   binding.etSpeciality.isEnabled = false
   }
 
   subscribeViewModel()
@@ -43,9 +45,10 @@ class IssueMedicalDialog: DialogFragment() {
  }
 
  private fun subscribeViewModel() {
-  viewModel.issueMedicalToView.observe(this.requireActivity()) {
+  viewModel.emergencyToView.observe(this.requireActivity()) {
    if (_binding != null) {
-    binding.etInformation.setText(it)
+    binding.etInformation.setText(it.issueMedical)
+    binding.etSpeciality.setText(it.speciality)
    }
   }
  }

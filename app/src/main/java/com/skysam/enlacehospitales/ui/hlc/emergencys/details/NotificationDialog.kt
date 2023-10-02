@@ -55,13 +55,13 @@ class NotificationDialog: DialogFragment() {
 
 
  private fun subscribeViewModel() {
-  viewModel.notificationToView.observe(this.requireActivity()) {
+  viewModel.emergencyToView.observe(this.requireActivity()) {
    if (_binding != null) {
-    binding.etName.setText(it.personCall)
-    binding.etRelationship.setText(it.relationshipPatient)
-    binding.etDate.setText(Utils.convertDateTimeToString(it.dateCall))
-    binding.etInformation.setText(it.infoPersonCall)
-    binding.checkBox.isChecked = it.isNeedHelp
+    binding.etName.setText(it.notification?.personCall)
+    binding.etRelationship.setText(it.notification?.relationshipPatient)
+    binding.etDate.setText(Utils.convertDateTimeToString(it.notification!!.dateCall))
+    binding.etInformation.setText(it.notification.infoPersonCall)
+    binding.checkBox.isChecked = it.notification.isNeedHelp
    }
   }
  }

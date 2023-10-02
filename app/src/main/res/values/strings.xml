@@ -140,6 +140,7 @@
     <!-- Doctor -->
     <string name="text_list_empty_doctor">Si no posee información sobre los médicos, presione Siguiente.</string>
     <string name="text_new_doctor">Agregar Doctor</string>
+    <string name="text_doctor">Médico</string>
     <!-- Treatment -->
     <string name="text_treatment">Tratamiento</string>
     <string name="question_request_help_hlc">¿Se ha comunicado al personal médico que el paciente ha solicitado la ayuda del HLC?</string>
@@ -152,12 +153,14 @@
     <string name="text_name_second_doctor">Nombre del médico a consultar</string>
     <string name="text_contact_second_doctor">Contacto del médico a consultar</string>
     <string name="text_information">Información</string>
+    <string name="text_consult_doctor">Consulta segundo médico</string>
     <!-- Transfer -->
     <string name="text_plans_confirmed">Planes de traslado confirmados</string>
     <string name="text_contacted_section_information">Se contactó con la Sección de Información sobre Hospitales (si el traslado es a un lugar fuera del área atendida por el HLC local)</string>
     <string name="text_hospital_transfer">Hospital al que se traslada</string>
     <string name="text_doctor_transfer">Médico que lo atenderá</string>
     <string name="text_contact_hospital_transfer">Número de contacto del hospital</string>
+    <string name="text_transfer">Traslado</string>
     <!-- Results -->
     <string name="text_olders_contacted">Ancianos locales contactados para seguimiento</string>
     <string name="text_results">Resultados</string>

@@ -47,6 +47,13 @@ class IssueFragment : Fragment() {
 
     private fun subscribeObservers() {
         if (_binding != null) {
+            viewModel.speciality.observe(viewLifecycleOwner) {
+                if (_binding != null) {
+                    if (it != null) {
+                        binding.etSpeciality.setText(it)
+                    }
+                }
+            }
             viewModel.issueMedical.observe(viewLifecycleOwner) {
                 if (_binding != null) {
                     if (it != null) {
@@ -66,6 +73,7 @@ class IssueFragment : Fragment() {
         }
 
         viewModel.setIssue(information)
+        viewModel.setSpeciality(binding.etSpeciality.text.toString().ifEmpty { "" })
         viewModel.goStep(4)
         findNavController().navigate(R.id.action_fourthFragment_to_labFragment)
     }

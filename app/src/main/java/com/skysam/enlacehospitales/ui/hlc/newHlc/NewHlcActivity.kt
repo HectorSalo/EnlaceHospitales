@@ -28,7 +28,7 @@ class NewHlcActivity : AppCompatActivity() {
         viewModel.step.observe(this) {
             binding.stepView.go(it, true)
             if (it < binding.stepView.currentStep) binding.stepView.done(false)
-            binding.tvSection.text = sections[it]
+            if (it < 12) binding.tvSection.text = sections[it]
             if (it == 12) binding.stepView.done(true)
         }
     }
