@@ -14,7 +14,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
 
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/bottomSheetDragHandleView"
@@ -444,11 +445,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardElevation="56dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_transfer">
@@ -471,7 +470,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="16dp"
-                        android:text="@string/text_results"
+                        android:text="@string/text_results_tracing"
                         android:textSize="22sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

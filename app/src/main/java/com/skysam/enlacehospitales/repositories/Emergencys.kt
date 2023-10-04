@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
+import com.google.firebase.firestore.Query
 import com.skysam.enlacehospitales.common.Constants
 import com.skysam.enlacehospitales.common.Utils
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
@@ -39,6 +40,7 @@ object Emergencys {
     fun getEmergencys(): Flow<List<Emergency>> {
         return callbackFlow {
             val request = getInstance()
+                .orderBy(Constants.DATE_UPDATED, Query.Direction.DESCENDING)
                 .addSnapshotListener (MetadataChanges.INCLUDE){ value, error ->
                     if (error != null) {
                         Log.w(ContentValues.TAG, "Listen failed.", error)
@@ -148,9 +150,9 @@ object Emergencys {
                             }
                         }
 
-                        val treatment = if (emergency.get(Constants.TRATMENT) != null) {
+                        val treatment = if (emergency.get(Constants.TREATMENT) != null) {
                             @Suppress("UNCHECKED_CAST")
-                            val trat = emergency.data.getValue(Constants.TRATMENT) as HashMap<String, Any>
+                            val trat = emergency.data.getValue(Constants.TREATMENT) as HashMap<String, Any>
                             Treatment(
                                 trat[Constants.INFORMATION].toString(),
                                 trat[Constants.IS_COMMUNICATED_WITH_DOCTORS].toString().toBoolean()
@@ -241,6 +243,7 @@ object Emergencys {
             Constants.ISSUE_MEDICAL to emergency.issueMedical,
             Constants.ANALISYS_LAB to emergency.analisysLab,
             Constants.DOCTORS to emergency.doctors,
+            Constants.TREATMENT to emergency.treatment,
             Constants.STRATEGIES to emergency.strategies,
             Constants.ARTICLES_MEDICAL to emergency.articlesMedical,
             Constants.SECOND_DOCTOR to emergency.secondDoctor,
@@ -256,10 +259,10 @@ object Emergencys {
             .update(Constants.ANALISYS_LAB, FieldValue.arrayUnion(lab))
     }
 
-    fun setSpeciality(id: String, speciality: String) {
+    fun saveNewDoctor(id: String, doctor: Doctor) {
         getInstance()
             .document(id)
-            .update(Constants.SPECIALITY, speciality)
+            .update(Constants.DOCTORS, FieldValue.arrayUnion(doctor))
     }
 
     fun finishEmergency(emergency: Emergency) {

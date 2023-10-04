@@ -65,7 +65,6 @@ class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<Emerg
                 popMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.menu_finish -> onClick.finish(item)
-                        R.id.menu_speciality -> onClick.speciality(item)
                     }
                     false
                 }

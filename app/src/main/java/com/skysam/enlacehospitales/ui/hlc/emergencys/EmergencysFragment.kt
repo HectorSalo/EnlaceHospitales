@@ -19,11 +19,19 @@ import com.google.android.material.card.MaterialCardView
 import com.skysam.enlacehospitales.R
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.databinding.FragmentEmergencysBinding
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.ArticlesDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.ConsultDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.DoctorDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.HospitalDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.IssueMedicalDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.LabDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.NotificationDialog
 import com.skysam.enlacehospitales.ui.hlc.emergencys.details.PatientDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.ResultsDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.StrategiesDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.TransferDialog
+import com.skysam.enlacehospitales.ui.hlc.emergencys.details.TreatmentDialog
+import com.skysam.enlacehospitales.ui.hlc.newHlc.NewDoctorDialog
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewLabDialog
 import com.skysam.enlacehospitales.ui.main.MainActivity
@@ -107,6 +115,15 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
                 }
             }
         }
+        viewModel.newDoctor.observe(viewLifecycleOwner) {
+            if (_binding != null) {
+                if (it) {
+                    val newDoctorDialog = NewDoctorDialog(true)
+                    newDoctorDialog.show(requireActivity().supportFragmentManager, tag)
+                    viewModel.newDoctor(false)
+                }
+            }
+        }
     }
 
     private fun getOut() {
@@ -125,6 +142,13 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         val btnHospital: MaterialCardView = viewSheet.findViewById(R.id.card_hospital)
         val btnIssue: MaterialCardView = viewSheet.findViewById(R.id.card_issue_medical)
         val btnLab: MaterialCardView = viewSheet.findViewById(R.id.card_lab)
+        val btnDoctor: MaterialCardView = viewSheet.findViewById(R.id.card_doctor)
+        val btnTreatment: MaterialCardView = viewSheet.findViewById(R.id.card_treatment)
+        val btnStrategies: MaterialCardView = viewSheet.findViewById(R.id.card_strategies)
+        val btnArticles: MaterialCardView = viewSheet.findViewById(R.id.card_articles)
+        val btnConsult: MaterialCardView = viewSheet.findViewById(R.id.card_consult)
+        val btnTransfer: MaterialCardView = viewSheet.findViewById(R.id.card_transfer)
+        val btnResults: MaterialCardView = viewSheet.findViewById(R.id.card_results)
 
         if (emergency.notification == null) {
             btnNotification.visibility = View.GONE
@@ -134,6 +158,24 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         }
         if (emergency.hospital == null) {
             btnHospital.visibility = View.GONE
+        }
+        if (emergency.treatment == null) {
+            btnTreatment.visibility = View.GONE
+        }
+        if (emergency.strategies.isEmpty()) {
+            btnStrategies.visibility = View.GONE
+        }
+        if (emergency.articlesMedical == null) {
+            btnArticles.visibility = View.GONE
+        }
+        if (emergency.secondDoctor == null) {
+            btnConsult.visibility = View.GONE
+        }
+        if (emergency.transferPatient == null) {
+            btnTransfer.visibility = View.GONE
+        }
+        if (emergency.tracing == null) {
+            btnResults.visibility = View.GONE
         }
 
         btnNotification.setOnClickListener {
@@ -166,10 +208,48 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
             val labDialog = LabDialog()
             labDialog.show(requireActivity().supportFragmentManager, tag)
         }
-    }
-
-    override fun speciality(emergency: Emergency) {
-
+        btnDoctor.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val doctorDialog = DoctorDialog()
+            doctorDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnTreatment.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val treatmentDialog = TreatmentDialog()
+            treatmentDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnStrategies.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val strategiesDialog = StrategiesDialog()
+            strategiesDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnArticles.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val articlesDialog = ArticlesDialog()
+            articlesDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnConsult.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val consultDialog = ConsultDialog()
+            consultDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnTransfer.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val transferDialog = TransferDialog()
+            transferDialog.show(requireActivity().supportFragmentManager, tag)
+        }
+        btnResults.setOnClickListener {
+            bottomSheetDialog.hide()
+            viewModel.emergencyToView(emergency)
+            val resultsDialog = ResultsDialog()
+            resultsDialog.show(requireActivity().supportFragmentManager, tag)
+        }
     }
 
     override fun finish(emergency: Emergency) {

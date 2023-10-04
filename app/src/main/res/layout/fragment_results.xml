@@ -34,7 +34,7 @@
             android:id="@+id/et_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/text_results"
+            android:hint="@string/text_results_tracing"
             android:inputType="textCapSentences|textMultiLine"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             app:layout_constraintBottom_toBottomOf="parent"

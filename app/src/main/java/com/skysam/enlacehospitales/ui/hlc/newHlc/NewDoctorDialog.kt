@@ -45,11 +45,11 @@ class NewDoctorDialog(private val fromEmergency: Boolean): DialogFragment() {
 
 
  private fun subscribeViewModel() {
-  /*viewModelEmergency.emergencyNewLab.observe(this.requireActivity()) {
+  viewModelEmergency.emergencyToView.observe(this.requireActivity()) {
    if (_binding != null) {
     emergency = it
    }
-  }*/
+  }
  }
 
  private fun sendData() {
@@ -74,7 +74,7 @@ class NewDoctorDialog(private val fromEmergency: Boolean): DialogFragment() {
    ""
   )
 
-  if (!fromEmergency) viewModelHcl.setDoctors(doctor)
+  if (!fromEmergency) viewModelHcl.setDoctors(doctor) else viewModelEmergency.saveNewDoctor(emergency, doctor)
   dismiss()
  }
 }

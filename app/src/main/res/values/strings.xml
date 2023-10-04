@@ -163,7 +163,7 @@
     <string name="text_transfer">Traslado</string>
     <!-- Results -->
     <string name="text_olders_contacted">Ancianos locales contactados para seguimiento</string>
-    <string name="text_results">Resultados</string>
+    <string name="text_results_tracing">Resultados/Seguimiento</string>
 
     <!-- Profile -->
     <string name="text_about">Información de la App</string>>

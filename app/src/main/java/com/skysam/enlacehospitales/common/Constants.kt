@@ -68,7 +68,7 @@ object Constants {
     const val SPECIALITY = "speciality"
     const val METHOD_CONTACT = "methodContact"
     const val INFORMATION = "information"
-    const val TRATMENT = "tratment"
+    const val TREATMENT = "treatment"
     const val IS_COMMUNICATED_WITH_DOCTORS = "isCommunicatedWithDoctors"
     const val STRATEGIES = "strategies"
     const val ARTICLES_MEDICAL = "articlesMedical"

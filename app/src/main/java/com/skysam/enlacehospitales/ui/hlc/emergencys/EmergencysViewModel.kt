@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.skysam.enlacehospitales.dataClasses.emergency.AnalisysLab
+import com.skysam.enlacehospitales.dataClasses.emergency.Doctor
 import com.skysam.enlacehospitales.dataClasses.emergency.Emergency
 import com.skysam.enlacehospitales.dataClasses.emergency.Hospital
 import com.skysam.enlacehospitales.dataClasses.emergency.Notification
@@ -20,8 +21,15 @@ class EmergencysViewModel : ViewModel() {
     private val _newLab = MutableLiveData<Boolean>()
     val newLab: LiveData<Boolean> get() = _newLab
 
+    private val _newDoctor = MutableLiveData<Boolean>()
+    val newDoctor: LiveData<Boolean> get() = _newDoctor
+
     fun newLab(isNew: Boolean) {
         _newLab.value = isNew
+    }
+
+    fun newDoctor(isNew: Boolean) {
+        _newDoctor.value = isNew
     }
     fun emergencyToView(emergency: Emergency) {
         _emergencyToView.value = emergency
@@ -30,8 +38,8 @@ class EmergencysViewModel : ViewModel() {
         Emergencys.saveNewLab(emergency.id, lab)
     }
 
-    fun saveSpeciality(emergency: Emergency, speciality: String) {
-        Emergencys.setSpeciality(emergency.id, speciality)
+    fun saveNewDoctor(emergency: Emergency, doctor: Doctor) {
+        Emergencys.saveNewDoctor(emergency.id, doctor)
     }
 
     fun finish(emergency: Emergency) {
