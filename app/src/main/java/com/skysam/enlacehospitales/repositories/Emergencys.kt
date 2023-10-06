@@ -70,24 +70,26 @@ object Emergencys {
                             val itemPatient = emergency.data.getValue(Constants.PATIENT) as HashMap<*, *>
 
                             val childPatient = if (itemPatient[Constants.CHILD_PATIENT] != null) {
-                                val bornPatient = if(itemPatient[Constants.BORN_PATIENT] != null) {
-                                    val timestamp: Timestamp = itemPatient[Constants.DATE_BORN] as Timestamp
+                                val itemChild = itemPatient[Constants.CHILD_PATIENT] as HashMap<*, *>
+                                val bornPatient = if(itemChild[Constants.BORN_PATIENT] != null) {
+                                    val itemBorn = itemChild[Constants.BORN_PATIENT] as HashMap<*, *>
+                                    val timestamp: Timestamp = itemBorn[Constants.DATE_BORN] as Timestamp
                                     val date = timestamp.toDate()
                                     BornPatient(
-                                        itemPatient[Constants.WEIGHT].toString().toDouble(),
-                                        itemPatient[Constants.WEEKS_AGE].toString().toInt(),
+                                        itemBorn[Constants.WEIGHT].toString().toDouble(),
+                                        itemBorn[Constants.WEEKS_AGE].toString().toInt(),
                                         date,
-                                        itemPatient[Constants.BORN_APGAR].toString().toDouble(),
-                                        itemPatient[Constants.FIVE_MINUTES_APGAR].toString().toDouble(),
+                                        itemBorn[Constants.BORN_APGAR].toString().toDouble(),
+                                        itemBorn[Constants.FIVE_MINUTES_APGAR].toString().toDouble(),
                                     )
                                 } else null
 
                                 ChildPatient(
-                                    itemPatient[Constants.NAME_FATHER].toString(),
-                                    itemPatient[Constants.NAME_MOTHER].toString(),
-                                    itemPatient[Constants.IS_FATHER_BAPTIZED].toString().toBoolean(),
-                                    itemPatient[Constants.IS_MOTHER_BAPTIZED].toString().toBoolean(),
-                                    itemPatient[Constants.COMMENTS].toString(),
+                                    itemChild[Constants.NAME_FATHER].toString(),
+                                    itemChild[Constants.NAME_MOTHER].toString(),
+                                    itemChild[Constants.IS_FATHER_BAPTIZED].toString().toBoolean(),
+                                    itemChild[Constants.IS_MOTHER_BAPTIZED].toString().toBoolean(),
+                                    itemChild[Constants.COMMENTS].toString(),
                                     bornPatient
                                 )
                             } else null
@@ -263,6 +265,66 @@ object Emergencys {
         getInstance()
             .document(id)
             .update(Constants.DOCTORS, FieldValue.arrayUnion(doctor))
+    }
+
+    fun updateNotification(id: String, notification: Notification) {
+        getInstance()
+            .document(id)
+            .update(Constants.NOTIFICATION, notification)
+    }
+
+    fun updatePatient(id: String, patient: Patient) {
+        getInstance()
+            .document(id)
+            .update(Constants.PATIENT, patient)
+    }
+
+    fun updateHospital(id: String, hospital: Hospital) {
+        getInstance()
+            .document(id)
+            .update(Constants.HOSPITAL, hospital)
+    }
+
+    fun updateIssue(id: String, issue: String, speciality: String) {
+        getInstance()
+            .document(id)
+            .update(Constants.ISSUE_MEDICAL, issue, Constants.SPECIALITY, speciality)
+    }
+
+    fun updateTreatment(id: String, treatment: Treatment) {
+        getInstance()
+            .document(id)
+            .update(Constants.TREATMENT, treatment)
+    }
+
+    fun updateStrategy(id: String, strategy: String) {
+        getInstance()
+            .document(id)
+            .update(Constants.STRATEGIES, strategy)
+    }
+
+    fun updateArticles(id: String, articlesMedical: ArticlesMedical) {
+        getInstance()
+            .document(id)
+            .update(Constants.ARTICLES_MEDICAL, articlesMedical)
+    }
+
+    fun updateConsult(id: String, secondDoctor: Doctor) {
+        getInstance()
+            .document(id)
+            .update(Constants.SECOND_DOCTOR, secondDoctor)
+    }
+
+    fun updateTransfer(id: String, transferPatient: TransferPatient) {
+        getInstance()
+            .document(id)
+            .update(Constants.TRANSFER_PATIENT, transferPatient)
+    }
+
+    fun updateResult(id: String, tracing: Tracing) {
+        getInstance()
+            .document(id)
+            .update(Constants.TRACING, tracing)
     }
 
     fun finishEmergency(emergency: Emergency) {

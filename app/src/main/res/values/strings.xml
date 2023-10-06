@@ -125,8 +125,6 @@
     <string name="text_date_updated_item">Fecha de última actualización: %1$s</string>
     <string name="text_finish_emergency">Finalizar emergencia</string>
     <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea continuar?</string>
-    <!--Hospital Details-->
-    <string name="text_room_details">Habitación: %1$s</string>
     <!-- Lab -->
     <string name="text_lab">Laboratorio</string>
     <string name="text_date_lab">Fecha/Hora en que se realizó</string>>

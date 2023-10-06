@@ -64,6 +64,7 @@ class EmergencyAdapter(private val onClick: OnClick): RecyclerView.Adapter<Emerg
                 popMenu.inflate(R.menu.menu_emergency_item)
                 popMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
+                        R.id.menu_update -> onClick.update(item)
                         R.id.menu_finish -> onClick.finish(item)
                     }
                     false

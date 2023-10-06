@@ -132,6 +132,14 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     }
 
     override fun view(emergency: Emergency) {
+        showSheet(emergency, true)
+    }
+
+    override fun update(emergency: Emergency) {
+        showSheet(emergency, false)
+    }
+
+    private fun showSheet(emergency: Emergency, isView: Boolean) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(R.layout.layout_options_emergency)
         bottomSheetDialog.dismissWithAnimation = true
@@ -181,75 +189,89 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         btnNotification.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val notificationDialog = NotificationDialog()
             notificationDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnPatient.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val patientDialog = PatientDialog()
             patientDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnHospital.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val hospitalDialog = HospitalDialog()
             hospitalDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnIssue.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val issueMedicalDialog = IssueMedicalDialog()
             issueMedicalDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnLab.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val labDialog = LabDialog()
             labDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnDoctor.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val doctorDialog = DoctorDialog()
             doctorDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnTreatment.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val treatmentDialog = TreatmentDialog()
             treatmentDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnStrategies.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val strategiesDialog = StrategiesDialog()
             strategiesDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnArticles.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val articlesDialog = ArticlesDialog()
             articlesDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnConsult.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val consultDialog = ConsultDialog()
             consultDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnTransfer.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val transferDialog = TransferDialog()
             transferDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnResults.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
+            viewModel.setView(isView)
             val resultsDialog = ResultsDialog()
             resultsDialog.show(requireActivity().supportFragmentManager, tag)
         }
+
+
     }
 
     override fun finish(emergency: Emergency) {

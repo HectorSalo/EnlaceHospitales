@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:title="@string/text_update"
+        android:id="@+id/menu_update"/>
+    <item
         android:title="@string/text_finish_emergency"
         android:id="@+id/menu_finish"/>
 
