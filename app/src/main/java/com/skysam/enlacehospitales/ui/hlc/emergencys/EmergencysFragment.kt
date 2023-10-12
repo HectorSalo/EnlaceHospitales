@@ -186,6 +186,11 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
             btnResults.visibility = View.GONE
         }
 
+        if (!isView) {
+            btnLab.visibility = View.GONE
+            btnDoctor.visibility = View.GONE
+        }
+
         btnNotification.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
@@ -217,14 +222,12 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         btnLab.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
-            viewModel.setView(isView)
             val labDialog = LabDialog()
             labDialog.show(requireActivity().supportFragmentManager, tag)
         }
         btnDoctor.setOnClickListener {
             bottomSheetDialog.hide()
             viewModel.emergencyToView(emergency)
-            viewModel.setView(isView)
             val doctorDialog = DoctorDialog()
             doctorDialog.show(requireActivity().supportFragmentManager, tag)
         }
