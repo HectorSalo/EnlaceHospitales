@@ -176,4 +176,8 @@
     <!-- Soon -->
     <string name="title_soon">¡Próximamente!</string>>
     <string name="message_soon">Esta función estará disponible en una versión muy pronto</string>
+
+    <!-- PDF -->
+    <string name="title_pdf">Hoja de trabajo para emergencias médicas</string>>
+
 </resources>
