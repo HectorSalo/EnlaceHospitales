@@ -1,13 +1,22 @@
 package com.skysam.enlacehospitales.ui.hlc.emergencys
 
+import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -35,6 +44,9 @@ import com.skysam.enlacehospitales.ui.hlc.newHlc.NewDoctorDialog
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewHlcActivity
 import com.skysam.enlacehospitales.ui.hlc.newHlc.NewLabDialog
 import com.skysam.enlacehospitales.ui.main.MainActivity
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class EmergencysFragment : Fragment(), MenuProvider, OnClick {
 
@@ -278,7 +290,73 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     }
 
     override fun finish(emergency: Emergency) {
-        val builder = AlertDialog.Builder(requireActivity())
+        val inflater = LayoutInflater.from(requireContext())
+        val view = inflater.inflate(R.layout.layout_pdf_1, null)
+
+        val notif = view.findViewById<TextView>(R.id.tv_notification)
+        notif.text = emergency.notification?.personCall
+
+        val displayMetrics = DisplayMetrics()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireContext().display?.getRealMetrics(displayMetrics)
+            displayMetrics.densityDpi
+        }
+        else{
+            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        }
+        view.measure(
+            View.MeasureSpec.makeMeasureSpec(
+                displayMetrics.widthPixels, View.MeasureSpec.EXACTLY
+            ),
+            View.MeasureSpec.makeMeasureSpec(
+                displayMetrics.heightPixels, View.MeasureSpec.EXACTLY
+            )
+        )
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+
+        val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        Bitmap.createScaledBitmap(bitmap, 595, 842, true)
+
+        val pdfDocument = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
+
+        val page = pdfDocument.startPage(pageInfo)
+        page.canvas.drawBitmap(bitmap, 0F, 0F, null)
+        pdfDocument.finishPage(page)
+
+       /* val filePath = File(Environment.getExternalStorageDirectory(), "bitmapPdf.pdf")
+        pdfDocument.writeTo(FileOutputStream(filePath))*/
+
+        val values = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "myPDFfile.pdf")
+            put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, "${Environment.DIRECTORY_DOCUMENTS}/MyApp")
+        }
+
+        val uri = requireContext().contentResolver.insert(MediaStore.Files.getContentUri("external"), values)
+
+        try {
+            // Obtiene un OutputStream para la Uri
+            uri?.let {
+                val outputStream = requireContext().contentResolver.openOutputStream(it)
+                outputStream?.let { stream ->
+                    // Escribe el contenido del PdfDocument en el OutputStream
+                    pdfDocument.writeTo(stream)
+                    pdfDocument.close()
+                    stream.close()
+                }
+            } ?: throw IOException("No se pudo crear el archivo en el almacenamiento")
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // Manejar el error correctamente
+        }
+
+
+        pdfDocument.close()
+
+        /*val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(getString(R.string.title_confirmation_dialog))
             .setMessage(getString(R.string.msg_finish_dialog))
             .setPositiveButton(R.string.text_finish_emergency) { _, _ ->
@@ -287,6 +365,6 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
             .setNegativeButton(R.string.text_cancel, null)
 
         val dialog = builder.create()
-        dialog.show()
+        dialog.show()*/
     }
 }

@@ -13,4 +13,9 @@ object Permission {
         val result = ContextCompat.checkSelfPermission(EnlaceHospitales.EnlaceHospitales.getContext(), Manifest.permission.CALL_PHONE)
         return result == PackageManager.PERMISSION_GRANTED
     }
+
+    fun checkPermissionWriteFile(): Boolean {
+        val result = ContextCompat.checkSelfPermission(EnlaceHospitales.EnlaceHospitales.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return result == PackageManager.PERMISSION_GRANTED
+    }
 }

@@ -124,7 +124,7 @@
     <string name="text_date_call_item">Fecha de llamada: %1$s</string>
     <string name="text_date_updated_item">Fecha de última actualización: %1$s</string>
     <string name="text_finish_emergency">Finalizar emergencia</string>
-    <string name="msg_finish_dialog">Se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea continuar?</string>
+    <string name="msg_finish_dialog">Se descargará un archivo hlc-7-S y, luego, se borrarán todos los datos personales del paciente de este caso. Esta acción no se puede deshacer.\n¿Desea continuar?</string>
     <!-- Lab -->
     <string name="text_lab">Laboratorio</string>
     <string name="text_date_lab">Fecha/Hora en que se realizó</string>>
