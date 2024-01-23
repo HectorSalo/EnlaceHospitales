@@ -290,46 +290,12 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
     }
 
     override fun finish(emergency: Emergency) {
-        val inflater = LayoutInflater.from(requireContext())
-        val view = inflater.inflate(R.layout.layout_pdf_1, null)
 
-        val notif = view.findViewById<TextView>(R.id.tv_notification)
-        notif.text = emergency.notification?.personCall
-
-        val displayMetrics = DisplayMetrics()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireContext().display?.getRealMetrics(displayMetrics)
-            displayMetrics.densityDpi
-        }
-        else{
-            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        }
-        view.measure(
-            View.MeasureSpec.makeMeasureSpec(
-                displayMetrics.widthPixels, View.MeasureSpec.EXACTLY
-            ),
-            View.MeasureSpec.makeMeasureSpec(
-                displayMetrics.heightPixels, View.MeasureSpec.EXACTLY
-            )
-        )
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
-
-        val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.draw(canvas)
-        Bitmap.createScaledBitmap(bitmap, 595, 842, true)
-
-        val pdfDocument = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
-
-        val page = pdfDocument.startPage(pageInfo)
-        page.canvas.drawBitmap(bitmap, 0F, 0F, null)
-        pdfDocument.finishPage(page)
 
        /* val filePath = File(Environment.getExternalStorageDirectory(), "bitmapPdf.pdf")
         pdfDocument.writeTo(FileOutputStream(filePath))*/
 
-        val values = ContentValues().apply {
+        /*val values = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, "myPDFfile.pdf")
             put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
             put(MediaStore.MediaColumns.RELATIVE_PATH, "${Environment.DIRECTORY_DOCUMENTS}/MyApp")
@@ -354,7 +320,7 @@ class EmergencysFragment : Fragment(), MenuProvider, OnClick {
         }
 
 
-        pdfDocument.close()
+        pdfDocument.close()*/
 
         /*val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(getString(R.string.title_confirmation_dialog))
